@@ -2,6 +2,7 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+
 #include <string>
 #include "Body.h"
 
@@ -29,3 +30,5 @@ public:
     void setName(const std::string& name_) { name = name_; }
     void setOccupation(const std::string& occupation_) {occupation = occupation_;}
 };
+
+#endif /* CHARACTER_H */

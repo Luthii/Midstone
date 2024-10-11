@@ -34,8 +34,6 @@ bool Scene1::OnCreate() {
 	game->getPlayer()->setImage(image);
 	game->getPlayer()->setTexture(texture);
 
-	map = new Map(game);
-
 	return true;
 }
 
@@ -50,9 +48,6 @@ void Scene1::Update(const float deltaTime) {
 void Scene1::Render() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
-
-	// render the map
-	map->DrawMap();
 
 	// render the player
 	game->RenderPlayer(0.10f);

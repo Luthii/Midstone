@@ -4,6 +4,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#ifndef ENTITY_H
+#define ENTITY_H
 using namespace MATH;
 
 class Entity{
@@ -35,3 +37,4 @@ public:
 	);
 };
 
+#endif ENTITY_H

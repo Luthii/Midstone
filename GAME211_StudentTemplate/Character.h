@@ -22,6 +22,7 @@ public:
         float mass_, float radius_, float orientation_,
         float rotation_, float angular_) : Entity{ pos_, vel_, accel_, mass_, radius_, orientation_, rotation_, angular_ },name{ name_ }, type{ type_ } {}
 
+    ~Character();
 
     // Getters
     std::string getName() const { return name; }

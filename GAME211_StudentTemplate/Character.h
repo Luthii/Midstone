@@ -21,7 +21,8 @@ public:
         Vec3 pos_, Vec3 vel_, Vec3 accel_,
         float mass_, float radius_, float orientation_,
         float rotation_, float angular_) : Body{ pos_, vel_, accel_, mass_, radius_, orientation_, rotation_, angular_ },name{ name_ }, occupation{ occupation_ } {}
-
+    
+    ~Character();
 
     // Getters
     std::string getName() const { return name; }

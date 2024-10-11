@@ -1,7 +1,6 @@
 #pragma once
-
-#include "GameManager.h"
 #include "TextureManager.h"
+#include "SDL.h"
 
 class Map {
 private:
@@ -13,14 +12,13 @@ private:
 	SDL_Texture* wallTop;
 	SDL_Texture* wallBott;
 
-	int map[18][31];
+	SDL_Renderer* renderer;
 
-protected:
-	class GameManager* game;
+	int map[18][31];
 
 public:
 
-	Map(GameManager* game);
+	Map(SDL_Renderer* _renderer);
 	~Map();
 
 	void LoadMap(int arr[18][31]);

@@ -30,11 +30,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBody.cpp" />
     <ClCompile Include="Scene1.cpp" />
-<<<<<<< Updated upstream
-=======
-    <ClCompile Include="Test.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
->>>>>>> Stashed changes
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -50,11 +45,6 @@
     <ClInclude Include="PlayerBody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene1.h" />
-<<<<<<< Updated upstream
-=======
-    <ClInclude Include="Test.h" />
-    <ClInclude Include="TextureManager.h" />
->>>>>>> Stashed changes
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

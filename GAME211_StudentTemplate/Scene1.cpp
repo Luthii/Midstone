@@ -32,7 +32,7 @@ bool Scene1::OnCreate() {
 	image = IMG_Load("pacman.png");
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	
-	map = new Map(game);
+	map = new Map(renderer);
 
 	game->getPlayer()->setImage(image);
 	game->getPlayer()->setTexture(texture);

@@ -22,7 +22,7 @@ int test[18][31] = {
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-
+// Constructor
 Map::Map(SDL_Renderer* _renderer) {
 	renderer = _renderer;
 
@@ -43,6 +43,12 @@ Map::Map(SDL_Renderer* _renderer) {
 	dest.w = 32;
 }
 
+// Deconstructor
+Map::~Map() {
+
+}
+
+// initalize the map array with inputted array
 void Map::LoadMap(int arr[18][31]) {
 
 	for (int row = 0; row < 18; row++) {
@@ -52,17 +58,21 @@ void Map::LoadMap(int arr[18][31]) {
 	}
 }
 
+// run through the array and render each tile
 void Map::DrawMap() {
 
+	// int stores the current value of map[row][col]
 	int tileType = 0;
 
 	for (int row = 0; row < 18; row++) {
 		for (int col = 0; col < 31; col++) {
 			tileType = map[row][col];
 
+			// moves over to the next space
 			dest.x = col * 32;
 			dest.y = row * 32;
 
+			// earlier tileType int checks which texture to draw
 			switch (tileType) {
 			case 0:
 				TextureManager::Draw(renderer, floor, source, dest);

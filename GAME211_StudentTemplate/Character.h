@@ -34,6 +34,7 @@ public:
         pos.x += dx * speed;
         pos.y += dy * speed;
     }
+
     void healthCheck();
     virtual void interact() {}
 

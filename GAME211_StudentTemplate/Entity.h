@@ -24,6 +24,7 @@ protected:
 	Vec3 imageSizeWorldCoords;
 	SDL_Surface* image;
 	SDL_Texture* texture;
+	SDL_Renderer* sceneRenderer;
 
 public: 
 	Entity();
@@ -35,6 +36,33 @@ public:
 		float rotation_,
 		float angular_
 	);
+	~Entity();
+
+
+	// Graphics and Memory
+	virtual void Update(float deltaTime);
+	virtual bool onCreate();
+	virtual bool onDestroy();
+	virtual void setImageSizeWorldCoords(Vec3 imageSizeWorldCoords_){imageSizeWorldCoords = imageSizeWorldCoords_;}
+
+	virtual void setTexture(SDL_Texture* texture_) { texture = texture_; }
+	virtual SDL_Texture* getTexture() { return texture; }
+	virtual void setImage(SDL_Surface* image_) { image = image_; }
+	virtual SDL_Surface* getImage() { return image; }
+
+
+	// Physics
+	virtual void ApplyForce(Vec3 force_);
+	virtual Vec3 getPos() { return pos; }
+	virtual Vec3 getVel() { return vel; }
+	virtual Vec3 getAccel() { return accel; }
+	virtual float getMass() { return mass; }
+	virtual float getOrientation() { return orientation; }
+	virtual float getRotation() { return rotation; }
+	virtual float getAngular() { return angular; }
+
+	// User Interaction
+	virtual void HandleEvents(const SDL_Event& event);
 };
 
 #endif ENTITY_H

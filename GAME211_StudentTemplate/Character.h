@@ -3,14 +3,14 @@
 #define CHARACTER_H
 
 #include <string>
-#include "Entity.h" // to be replaced with entity
+#include "Entity.h"
 
-class Character :public Entity {
+class Character : public Entity {
 protected:
 	std::string name; //
 	std::string type; // Can be occupation like smith, cook, etc., alternatively monster type 
-    int health; // 100
-    int speed; // movement speed
+    int health = 100; // 100
+    int speed= 2; // movement speed
 
 public:
     // Constructors
@@ -30,11 +30,12 @@ public:
     // Setters
     void setName(const std::string& name_) { name = name_; }
     void setOccupation(const std::string& type_) { type = type_;}
+
+    // Character Functions
     void characterMove(int dx, int dy){
         pos.x += dx * speed;
         pos.y += dy * speed;
     }
-
     void healthCheck();
     virtual void interact() {}
 

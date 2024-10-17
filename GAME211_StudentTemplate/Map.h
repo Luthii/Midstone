@@ -39,6 +39,7 @@ private:
 	std::vector<std::vector<std::vector<int>>> tileMap;
 
 	bool ReadXMLTileMap();
+	void sliceStr(std::string str, int width, int height, int layer);
 
 public:
 

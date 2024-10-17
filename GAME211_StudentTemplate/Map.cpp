@@ -60,6 +60,8 @@ bool Map::ReadXMLTileMap()
 		}
 
 		str = xmlElement->GetText();
+
+		sliceStr(str, mapWidth, mapHeight, i);
 	}
 
 	return true;
@@ -110,6 +112,7 @@ bool Map::onCreate()
 	if (ReadXMLTileMap() != true) {
 		return false;
 	}
+
 }
 
 
@@ -158,5 +161,25 @@ void Map::DrawMap() {
 			}
 		}
 	}
+}
 
+void Map::sliceStr(std::string str, int width, int height, int layer) {
+	std::string str2;
+	int row = 0;
+	int col = -1;
+	for (int i = 0; i < str.length(); i++) {
+		if (str[i] == '\n') {
+			col++;
+			row = 0;
+			continue;
+		}
+		if (str[i] == ',') {
+			tileMap[row][col][layer] = std::stoi(str2);
+			row++;
+			std::cout << str2 << std::endl;
+			str2.clear();
+			continue;
+		}
+		str2 += str[i];
+	}
 }

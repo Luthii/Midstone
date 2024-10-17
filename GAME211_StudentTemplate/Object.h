@@ -5,7 +5,6 @@
 #include <string>
 
 #include "GameManager.h"
-#include "Vector.h"
 
 class Object
 {

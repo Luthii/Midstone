@@ -37,6 +37,31 @@ bool Map::ReadXMLTileMap()
 		return false;
 	}
 
+	int mapWidth;
+	int mapHeight;
+	int mapLayers;
+
+	root->ToElement()->QueryIntAttribute("width", &mapWidth);
+	root->ToElement()->QueryIntAttribute("height", &mapHeight);
+	root->ToElement()->QueryIntAttribute("nextlayerid", &mapLayers);
+	mapLayers--;
+
+	//creates the vector with the size of the tile map to be loaded
+	tileMap.assign(mapWidth, std::vector<std::vector<int>>(mapHeight, std::vector<int>(mapLayers, -1)));
+
+	XMLElement* xmlElement;
+	std::string str;
+	//we are going to loop over the layers of the map and feed our vector
+	for (int i = 0; i < mapLayers; i++) {
+		xmlElement = root->FirstChildElement("layer")->FirstChildElement("data");
+		if (xmlElement == nullptr) {
+			std::cout << "TinyXML2 error: " << tinyxml2::XML_ERROR_FILE_READ_ERROR << std::endl;
+			return false;
+		}
+
+		str = xmlElement->GetText();
+	}
+
 	return true;
 }
 

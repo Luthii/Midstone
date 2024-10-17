@@ -39,7 +39,7 @@ bool Scene1::OnCreate() {
 
 	//map = new Map(renderer);
 
-	map = new Map("xml/shopTileMap.xml", "textures/SuperTileSet.png", renderer);
+	map = new Map("xml/shopTileMap_.xml", "textures/SuperTileSet.png", renderer);
 	map->onCreate();
 
 	return true;

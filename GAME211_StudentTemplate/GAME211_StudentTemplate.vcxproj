@@ -35,7 +35,6 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="xmltest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Body.h" />

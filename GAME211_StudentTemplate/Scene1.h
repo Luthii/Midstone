@@ -1,7 +1,10 @@
 #ifndef SCENE1_H
 #define SCENE1_H
 
+//C++ includes
 #include <MMath.h>
+
+//project includes
 #include "Scene.h"
 #include "Map.h"
 

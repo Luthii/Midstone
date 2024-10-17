@@ -22,13 +22,31 @@ int test[18][31] = {
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
+bool Map::ReadXMLTileMap()
+{
+	XMLDocument tileMapXML;
+
+	if (tileMapXML.LoadFile(tileMapXmlPath.c_str()) != XML_SUCCESS) {
+		std::cerr << "Can't open the XML file: " << tileMapXmlPath.c_str() << std::endl;
+		return false;
+	}
+
+	XMLNode* root = tileMapXML.FirstChild();
+	if (root == nullptr) {
+		std::cout << "TinyXML2 error: " << tinyxml2::XML_ERROR_FILE_READ_ERROR << std::endl;
+		return false;
+	}
+
+	return true;
+}
+
 // Constructor
 Map::Map(SDL_Renderer* _renderer) {
-	renderer = _renderer;
+	sceneRender = _renderer;
 
-	floor = TextureManager::LoadTexture("Art/World/Caves/Backgrounds/tile_mines.png", renderer);
-	wallTop = TextureManager::LoadTexture("Art/World/Caves/Backgrounds/wall_tile_top.png", renderer);
-	wallBott = TextureManager::LoadTexture("Art/World/Caves/Backgrounds/wall_tile_bottom.png", renderer);
+	floor = TextureManager::LoadTexture("Art/World/Caves/Backgrounds/tile_mines.png", sceneRender);
+	wallTop = TextureManager::LoadTexture("Art/World/Caves/Backgrounds/wall_tile_top.png", sceneRender);
+	wallBott = TextureManager::LoadTexture("Art/World/Caves/Backgrounds/wall_tile_bottom.png", sceneRender);
 
 	LoadMap(test);
 
@@ -42,6 +60,33 @@ Map::Map(SDL_Renderer* _renderer) {
 	dest.h = 32;
 	dest.w = 32;
 }
+
+bool Map::onCreate()
+{
+	
+//load texture of tile map
+	SDL_Surface* SPR_tileMap;
+	SPR_tileMap = IMG_Load(tileMapTexturePath.c_str());
+
+	if (SPR_tileMap == nullptr) {
+		std::cerr << "Can't open the image" << tileMapTexturePath.c_str() << std::endl;
+		return false;
+	}
+
+	TXT_TileMap = SDL_CreateTextureFromSurface(sceneRender, SPR_tileMap);
+	if (TXT_TileMap == nullptr) {
+		std::cerr << "Erro creating texture from: " << tileMapTexturePath.c_str() << std::endl;
+		return false;
+	}
+
+	std::cout << "Tile map: " << tileMapTexturePath.c_str() << " loaded and ready to be used." << std::endl;
+
+//load and read XML of tile map information
+	if (ReadXMLTileMap() != true) {
+		return false;
+	}
+}
+
 
 // Deconstructor
 Map::~Map() {
@@ -75,13 +120,13 @@ void Map::DrawMap() {
 			// earlier tileType int checks which texture to draw
 			switch (tileType) {
 			case 0:
-				TextureManager::Draw(renderer, floor, source, dest);
+				TextureManager::Draw(sceneRender, floor, source, dest);
 				break;
 			case 1:
-				TextureManager::Draw(renderer, wallTop, source, dest);
+				TextureManager::Draw(sceneRender, wallTop, source, dest);
 				break;
 			case 2:
-				TextureManager::Draw(renderer, wallBott, source, dest);
+				TextureManager::Draw(sceneRender, wallBott, source, dest);
 				break;
 			default:
 				break;

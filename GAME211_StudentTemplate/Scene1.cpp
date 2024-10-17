@@ -32,12 +32,15 @@ bool Scene1::OnCreate() {
 	image = IMG_Load("pacman.png");
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	
-	map = new Map(renderer);
+	//map = new Map(renderer);
 
 	game->getPlayer()->setImage(image);
 	game->getPlayer()->setTexture(texture);
 
-	map = new Map(renderer);
+	//map = new Map(renderer);
+
+	map = new Map("xml/shopTileMap.xml", "textures/SuperTileSet.png", renderer);
+	map->onCreate();
 
 	return true;
 }

@@ -22,8 +22,8 @@ private:
 public:
 
 
-	Object(std::string filePath_, SDL_Renderer* sceneRenderer_);
-	~Object();
+	NewEntity(std::string filePath_, SDL_Renderer* sceneRenderer_);
+	~NewEntity();
 
 	bool OnCreate();
 	bool OnDestroy();

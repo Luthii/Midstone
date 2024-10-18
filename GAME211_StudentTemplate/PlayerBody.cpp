@@ -7,15 +7,21 @@
 
 #include "PlayerBody.h"
 
+
 bool PlayerBody::OnCreate()
 {
     image = IMG_Load( "Pacman.png" );
+    if (image == nullptr) {
+        std::cerr << "Can't open the image Pacman.png" << std::endl;
+        return false;
+    }
     SDL_Renderer *renderer = game->getRenderer();
     texture = SDL_CreateTextureFromSurface( renderer, image );
     if (image == nullptr) {
         std::cerr << "Can't open the image" << std::endl;
         return false;
     }
+
     return true;
 }
 
@@ -41,8 +47,10 @@ void PlayerBody::Render( float scale )
     // where SDL will draw the .png image.
     // The 0.5f * w/h offset is to place the .png so that pos represents the center
     // (Note the y axis for screen coords points downward, hence subtraction!!!!)
-    square.x = static_cast<int>(screenCoords.x - 0.5f * w);
-    square.y = static_cast<int>(screenCoords.y - 0.5f * h);
+    //square.x = static_cast<int>(screenCoords.x - 0.5f * w);
+    //square.y = static_cast<int>(screenCoords.y - 0.5f * h);
+    square.x = static_cast<int>(pos.x - 0.5f * w);
+    square.y = static_cast<int>(pos.y - 0.5f * h);
     square.w = static_cast<int>(w);
     square.h = static_cast<int>(h);
 
@@ -53,8 +61,33 @@ void PlayerBody::Render( float scale )
         orientationDegrees, nullptr, SDL_FLIP_NONE );
 }
 
-void PlayerBody::HandleEvents( const SDL_Event& event )
+void PlayerBody::HandleEvents( const SDL_Event& sdlEvent)
 {
+    if (sdlEvent.type == SDL_KEYDOWN)
+    {
+        //Select surfaces based on key press
+        switch (sdlEvent.key.keysym.sym)
+        {
+        case SDLK_UP:
+            pos += Vec3(0.0f, 1.0f, 0.0f);
+            break;
+
+        case SDLK_DOWN:
+            pos -= Vec3(0.0f, 1.0f, 0.0f);
+            break;
+
+        case SDLK_LEFT:
+            pos -= Vec3(1.0f, 0.0f, 0.0f);
+            break;
+
+        case SDLK_RIGHT:
+            pos += Vec3(1.0f, 0.0f, 0.0f);
+            break;
+
+        default:
+            break;
+        }
+    }
 }
 
 void PlayerBody::Update( float deltaTime )

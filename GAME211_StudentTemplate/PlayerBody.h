@@ -51,7 +51,7 @@ public:
 
     bool OnCreate();
     void Render( float scale = 1.0f );
-    void HandleEvents( const SDL_Event& event );
+    void HandleEvents( const SDL_Event& sdlEvent);
     void Update( float deltaTime );
     void setTexture( SDL_Texture* texture_ ) { texture = texture_; }
     

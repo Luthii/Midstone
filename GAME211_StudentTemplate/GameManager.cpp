@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Scene1.h"
+#include "ShopScene.h"
 
 GameManager::GameManager() {
 	windowPtr = nullptr;
@@ -36,7 +37,7 @@ bool GameManager::OnCreate() {
 
     // select scene for specific assignment
 
-    currentScene = new Scene1(windowPtr->GetSDL_Window(), this);
+    currentScene = new ShopScene(windowPtr->GetSDL_Window(), this);
     
     // create player
     float mass = 1.0f;
@@ -44,7 +45,8 @@ bool GameManager::OnCreate() {
     float orientation = 0.0f;
     float rotation = 0.0f;
     float angular = 0.0f;
-    Vec3 position(0.5f * currentScene->getxAxis(), 0.5f * currentScene->getyAxis(), 0.0f);
+    //Vec3 position(0.5f * currentScene->getxAxis(), 0.5f * currentScene->getyAxis(), 0.0f);
+    Vec3 position(0.0f, 0.0f, 0.0f);
     Vec3 velocity(0.0f, 0.0f, 0.0f);
     Vec3 acceleration(0.0f, 0.0f, 0.0f);
 

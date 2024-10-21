@@ -48,10 +48,14 @@ bool ShopScene::OnCreate() {
 	//map = new Map("xml/shopTileMap_.xml", "textures/SuperTileSet.png", renderer);
 	//map->onCreate();
 
-	testObj = new Object("textures/duck.png", renderer, &camera);
+	testObj = new Object("textures/duck.png", renderer);
 	testObj->OnCreate();
-	testObj2 = new Object("textures/cactus.png", renderer, &camera);
+	testObj->setPosition(Vec3(500.0f, 300.0f, 0.0f));
+	testObj2 = new Object("textures/cactus.png", renderer);
 	testObj2->OnCreate();
+
+	//testObj->getPosition().print();
+	//viewMatrix.print();
 
 	return true;
 }
@@ -67,8 +71,8 @@ void ShopScene::Update(const float deltaTime) {
 	//game->getPlayer()->Update(deltaTime);
 	testObj->Update(deltaTime);
 	testObj2->Update(deltaTime);
-	camera.x = (testObj->getPosition().x + 8) - 1000 / 2;
-	camera.y = (testObj->getPosition().y + 8) - 600 / 2;
+	Camera::cameraX = (testObj->getPosition().x + 8) - 1000 / 2;
+	Camera::cameraY = (testObj->getPosition().y + 8) - 600 / 2;
 }
 
 void ShopScene::Render() {
@@ -78,8 +82,8 @@ void ShopScene::Render() {
 	SDL_RenderClear(renderer);
 
 	// render the duck
-	testObj->Render(renderer, camera);
-	testObj2->Render(renderer, camera);
+	testObj->Render(renderer);
+	testObj2->Render(renderer);
 
 	//game->RenderPlayer(0.1f);
 

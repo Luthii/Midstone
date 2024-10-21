@@ -1,18 +1,21 @@
 #include "Object.h"
 
-Object::Object(std::string filePath_, SDL_Renderer* sceneRenderer_, Vec3* camera_)
+Object::Object(std::string filePath_, SDL_Renderer* sceneRenderer_)
 {
     filePath = filePath_;
     sceneRenderer = sceneRenderer_;
 
     TEX_object = nullptr;
     SPR_object = nullptr;
-    camera = camera_;
-
 }
 
 Object::~Object()
 {
+    SDL_DestroyTexture(TEX_object);
+    TEX_object = nullptr;
+
+    SDL_FreeSurface(SPR_object);
+    SPR_object = nullptr;
 }
 
 bool Object::OnCreate()
@@ -44,28 +47,7 @@ bool Object::OnDestroy()
 
 void Object::HandleEvents(const SDL_Event& sdlEvent)
 {
-    //const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
-    //if (currentKeyStates[SDL_SCANCODE_UP])
-    //{
-    //    position -= Vec3(0.0f, 1.0f, 0.0f);
-    //    if (currentKeyStates[SDL_SCANCODE_LEFT])
-    //        position -= Vec3(1.0f, 0.0f, 0.0f);
-    //}
-    //else if (currentKeyStates[SDL_SCANCODE_DOWN])
-    //{
-    //    position += Vec3(0.0f, 1.0f, 0.0f);
-    //}
-    //else if (currentKeyStates[SDL_SCANCODE_LEFT])
-    //{
-    //    position -= Vec3(1.0f, 0.0f, 0.0f);
-    //}
-    //else if (currentKeyStates[SDL_SCANCODE_RIGHT])
-    //{
-    //    position += Vec3(1.0f, 0.0f, 0.0f);
-    //}
-
-
-    if (sdlEvent.type == SDL_KEYDOWN)
+     if (sdlEvent.type == SDL_KEYDOWN)
     {
         switch (sdlEvent.key.keysym.sym)
         {
@@ -120,19 +102,17 @@ void Object::Update(float deltaTime)
     position += velocity * speed;
 }
 
-void Object::Render(SDL_Renderer* sceneRenderer, Vec3 camera)
+void Object::Render(SDL_Renderer* sceneRenderer)
 {
     SDL_Rect rect;
     Matrix4 projectionMatrix = Matrix4();//game->getProjectionMatrix();
-
-    Vec3 screenCoords = projectionMatrix * position;
 
     // The square's x and y values represent the top left corner of 
     // where SDL will draw the .png image.
     // The 0.5f * w/h offset is to place the .png so that pos represents the center
     // (Note the y axis for screen coords points downward, hence subtraction!!!!)
-    rect.x = static_cast<int>(position.x - camera.x);// -(0.5f * 16.0f));
-    rect.y = static_cast<int>(position.y - camera.y);// (0.5f * 16.0f));
+    rect.x = static_cast<int>(position.x - Camera::cameraX);// -(0.5f * 16.0f));
+    rect.y = static_cast<int>(position.y - Camera::cameraY);// (0.5f * 16.0f));
     rect.w = static_cast<int>(PIXEL_SIZE*2);
     rect.h = static_cast<int>(PIXEL_SIZE*2);
 

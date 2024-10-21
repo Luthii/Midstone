@@ -4,6 +4,9 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <MMath.h>
+
+//project includes
+#include "Camera.h"
 #include "GameManager.h"
 
 using namespace MATH;

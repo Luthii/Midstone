@@ -21,7 +21,6 @@ private:
 	Map* map;
 	Object* testObj;
 	Object* testObj2;
-	Vec3 camera = Vec3();
 
 public:
 	// This constructor may be different from what you've seen before

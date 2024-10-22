@@ -45,56 +45,34 @@ bool Object::OnDestroy()
     return true;
 }
 
-void Object::HandleEvents(const SDL_Event& sdlEvent)
+void Object::HandleEvents()
 {
-     if (sdlEvent.type == SDL_KEYDOWN)
-    {
-        switch (sdlEvent.key.keysym.sym)
-        {
-        case SDLK_w:
-            velocity = Vec3(0.0f, -1.0f, 0.0f);
-            break;
+    //key Down event -> movent character and play walking animation
+    if (InputManager::getInstance()->IsKeyDown(SDLK_w) || InputManager::getInstance()->IsKeyPressed(SDLK_w))
+        velocity.y = -1.0f;
 
-        case SDLK_s:
-            velocity = Vec3(0.0f, 1.0f, 0.0f);
-            break;
+    if (InputManager::getInstance()->IsKeyDown(SDLK_s) || InputManager::getInstance()->IsKeyPressed(SDLK_s))
+        velocity.y = 1.0f;
 
-        case SDLK_a:
-            velocity = Vec3(-1.0f, 0.0f, 0.0f);
-            break;
+    if (InputManager::getInstance()->IsKeyDown(SDLK_a) || InputManager::getInstance()->IsKeyPressed(SDLK_a))
+        velocity.x = -1.0f;
 
-        case SDLK_d:
-            velocity = Vec3(1.0f, 0.0f, 0.0f);
-            break;
-
-        default:
-            break;
-        }
-    }
+    if (InputManager::getInstance()->IsKeyDown(SDLK_d) || InputManager::getInstance()->IsKeyPressed(SDLK_d))
+        velocity.x = 1.0f;
     
-    if (sdlEvent.type == SDL_KEYUP) {
-        switch (sdlEvent.key.keysym.sym)
-        {
-        case SDLK_w:
-            velocity = Vec3(0.0f, 0.0f, 0.0f);
-            break;
 
-        case SDLK_s:
-            velocity = Vec3(0.0f, 0.0f, 0.0f);
-            break;
+    //key UP event -> set animation to stoped at direction
+    if (InputManager::getInstance()->IsKeyUp(SDLK_w))
+        velocity.y = 0.0f;
 
-        case SDLK_a:
-            velocity = Vec3(0.0f, 0.0f, 0.0f);
-            break;
+    if (InputManager::getInstance()->IsKeyUp(SDLK_s))
+       velocity.y = 0.0f;
 
-        case SDLK_d:
-            velocity = Vec3(0.0f, 0.0f, 0.0f);
-            break;
+    if (InputManager::getInstance()->IsKeyUp(SDLK_a))
+        velocity.x = 0.0f;
 
-        default:
-            break;
-        }
-    }
+    if (InputManager::getInstance()->IsKeyUp(SDLK_d))
+        velocity.x = 0.0f;
 }
 
 void Object::Update(float deltaTime)
@@ -105,13 +83,12 @@ void Object::Update(float deltaTime)
 void Object::Render(SDL_Renderer* sceneRenderer)
 {
     SDL_Rect rect;
-    Matrix4 projectionMatrix = Matrix4();//game->getProjectionMatrix();
-
+ 
     // The square's x and y values represent the top left corner of 
     // where SDL will draw the .png image.
     // The 0.5f * w/h offset is to place the .png so that pos represents the center
     // (Note the y axis for screen coords points downward, hence subtraction!!!!)
-    Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
+    MATH::Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
    
     rect.x = static_cast<int>(screenCoordinates.x);
     rect.y = static_cast<int>(screenCoordinates.y);

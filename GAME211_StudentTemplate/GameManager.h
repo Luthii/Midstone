@@ -7,8 +7,9 @@
 #include "DataCollection.h"
 #include "Window.h"
 #include "Timer.h"
-#include "Scene.h"
-#include "PlayerBody.h"
+//#include "Scene.h"
+#include "ShopScene.h"
+//#include "PlayerBody.h"
 
 
 class GameManager {
@@ -27,8 +28,8 @@ private:
 	bool isRunning;
 	class Scene *currentScene;
 
-	// This might be unfamiliar
-    class PlayerBody *player;
+	//// This might be unfamiliar
+ //   class PlayerBody *player;
 
 	void handleEvents();
 	void LoadScene(int i);
@@ -45,8 +46,8 @@ public:
 	// These might be unfamiliar
 	float getSceneHeight();
 	float getSceneWidth();
-	Matrix4 getProjectionMatrix();
-    PlayerBody* getPlayer(){ return player; }
+	//Matrix4 getProjectionMatrix();
+    //PlayerBody* getPlayer(){ return player; }
 	void RenderPlayer(float scale = 1.0f);
 	SDL_Renderer* getRenderer();
 

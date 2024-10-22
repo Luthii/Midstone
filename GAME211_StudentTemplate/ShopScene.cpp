@@ -3,9 +3,8 @@
 #include <VMath.h>
 
 // See notes about this constructor in Scene1.h.
-ShopScene::ShopScene(SDL_Window* sdlWindow_, GameManager* game_) {
+ShopScene::ShopScene(SDL_Window* sdlWindow_) {
 	window = sdlWindow_;
-	game = game_;
 	renderer = SDL_GetRenderer(window);
 	xAxis = 1000.0f;
 	yAxis = 600.0f;
@@ -85,21 +84,9 @@ void ShopScene::Render() {
 	SDL_RenderPresent(renderer);
 }
 
-void ShopScene::HandleEvents(const SDL_Event& sdlEvent)
+void ShopScene::HandleEvents()
 {
-	testObj->HandleEvents(sdlEvent);
-
-	if (sdlEvent.type == SDL_KEYDOWN)
-	{
-		switch (sdlEvent.key.keysym.sym)
-		{
-		case SDLK_z:
-			break;
-		case SDLK_x:
-			break;
-		default:
-			break;
-		}
-	}
+	//InputManager::getInstance()->Update();
+	testObj->HandleEvents();
 }
 

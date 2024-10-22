@@ -1,12 +1,16 @@
 #pragma once
-#include <SDL.h>
+//#include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
 #include <string>
 
+
+//third party includes
+#include "Vector.h"
+
 //project includes
+#include "InputManager.h"
 #include "Camera.h"
-#include "GameManager.h"
 #include "DataCollection.h"
 
 class Object
@@ -21,8 +25,8 @@ private:
 	int SPR_height = 16;
 	int SPR_scale = 1;
 
-	Vec3 position = Vec3(0,0,0); //initiate position to (0,0,0) -> x = 0, y = 0, layer, z = 0
-	Vec3 velocity = Vec3(0.0f, 0.0f, 0.0f);
+	MATH::Vec3 position = MATH::Vec3(0,0,0); //initiate position to (0,0,0) -> x = 0, y = 0, layer, z = 0
+	MATH::Vec3 velocity = MATH::Vec3(0.0f, 0.0f, 0.0f);
 	float speed = 3.0f; //3 pixel per movement
 	std::string filePath;
 
@@ -33,11 +37,11 @@ public:
 
 	bool OnCreate();
 	bool OnDestroy();
-	void HandleEvents(const SDL_Event& sdlEvent);
+	void HandleEvents();
 	void Update(float deltaTime);
 	void Render(SDL_Renderer* windowRender);
-	Vec3 getPosition() { return position; }
-	void setPosition(Vec3 newPosition) { position.x = newPosition.x; position.y = newPosition.y; position.z = newPosition.z; }
+	MATH::Vec3 getPosition() { return position; }
+	void setPosition(MATH::Vec3 newPosition) { position.x = newPosition.x; position.y = newPosition.y; position.z = newPosition.z; }
 
 };
 

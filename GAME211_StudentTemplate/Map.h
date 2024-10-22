@@ -6,6 +6,7 @@
 #include <iostream>
 
 //third party includes
+#include "SDL.h"
 #include "Vector.h"
 #include "tinyxml2.h"
 using namespace tinyxml2;
@@ -14,7 +15,7 @@ using namespace tinyxml2;
 #include "DataCollection.h"
 #include "Camera.h"
 #include "TextureManager.h"
-#include "SDL.h"
+
 
 
 class Map {

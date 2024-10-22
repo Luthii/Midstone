@@ -1,5 +1,5 @@
 #include "GameManager.h"
-#include "Scene1.h"
+//#include "Scene1.h"
 #include "ShopScene.h"
 
 GameManager::GameManager() {
@@ -7,7 +7,7 @@ GameManager::GameManager() {
 	timer = nullptr;
 	isRunning = true;
 	currentScene = nullptr;
-    player = nullptr;
+    //player = nullptr;
 }
 
 bool GameManager::OnCreate() {
@@ -30,35 +30,35 @@ bool GameManager::OnCreate() {
 
     // select scene for specific assignment
 
-    currentScene = new ShopScene(windowPtr->GetSDL_Window(), this);
+    currentScene = new ShopScene(windowPtr->GetSDL_Window());
     
-    // create player
-    float mass = 1.0f;
-    float radius = 0.5f;
-    float orientation = 0.0f;
-    float rotation = 0.0f;
-    float angular = 0.0f;
-    //Vec3 position(0.5f * currentScene->getxAxis(), 0.5f * currentScene->getyAxis(), 0.0f);
-    Vec3 position(0.0f, 0.0f, 0.0f);
-    Vec3 velocity(0.0f, 0.0f, 0.0f);
-    Vec3 acceleration(0.0f, 0.0f, 0.0f);
+    //// create player
+    //float mass = 1.0f;
+    //float radius = 0.5f;
+    //float orientation = 0.0f;
+    //float rotation = 0.0f;
+    //float angular = 0.0f;
+    ////Vec3 position(0.5f * currentScene->getxAxis(), 0.5f * currentScene->getyAxis(), 0.0f);
+    //Vec3 position(0.0f, 0.0f, 0.0f);
+    //Vec3 velocity(0.0f, 0.0f, 0.0f);
+    //Vec3 acceleration(0.0f, 0.0f, 0.0f);
 
-    player = new PlayerBody
-    (
-        position,
-        velocity,
-        acceleration,
-        mass,
-        radius,
-        orientation,
-        rotation,
-        angular,
-        this
-    );
-    if ( player->OnCreate() == false ) {
-        OnDestroy();
-        return false;
-    }
+    //player = new PlayerBody
+    //(
+    //    position,
+    //    velocity,
+    //    acceleration,
+    //    mass,
+    //    radius,
+    //    orientation,
+    //    rotation,
+    //    angular,
+    //    this
+    //);
+    //if ( player->OnCreate() == false ) {
+    //    OnDestroy();
+    //    return false;
+    //}
 
     // need to create Player before validating scene
     if (!ValidateCurrentScene()) {
@@ -75,7 +75,7 @@ void GameManager::Run() {
     
 	timer->Start();
     
-	while (isRunning) {
+	while (!InputManager::getInstance()->QuitGame()) {
         
         handleEvents();
 		timer->UpdateFrameTicks();
@@ -89,43 +89,8 @@ void GameManager::Run() {
 
 void GameManager::handleEvents() 
 {
-    SDL_Event event;
-
-    // Let's add mouse movement and position
-    // https://wiki.libsdl.org/SDL_GetMouseState
-
-    SDL_PumpEvents();  // make sure we have the latest mouse state.
-
-    //https://www.youtube.com/watch?v=SYrRMr4BaD4&list=PLM7LHX-clszBIGsrh7_3B2Pi74AhMpKhj&index=3
-
-    while (SDL_PollEvent(&event))
-    {
-        if (event.type == SDL_QUIT)
-        {
-            isRunning = false;
-        }
-        else if (event.type == SDL_KEYDOWN)
-        {
-            switch (event.key.keysym.scancode)
-            {
-            case SDL_SCANCODE_ESCAPE:
-                isRunning = false;
-                break;
-            case SDL_SCANCODE_Q:
-                isRunning = false;
-                break;
-            case SDL_SCANCODE_DELETE:
-                isRunning = false;
-                break;
-            case SDL_SCANCODE_1:
-                LoadScene(1);
-                break;
-            default:
-                break;
-            }
-        }
-        currentScene->HandleEvents(event);
-    }
+    InputManager::getInstance()->Update();
+    currentScene->HandleEvents();
 }
 
 GameManager::~GameManager() {}
@@ -143,8 +108,8 @@ float GameManager::getSceneHeight() { return currentScene->getyAxis(); }
 float GameManager::getSceneWidth() { return currentScene->getxAxis(); }
 
 // This might be unfamiliar
-Matrix4 GameManager::getProjectionMatrix()
-{ return currentScene->getProjectionMatrix(); }
+//Matrix4 GameManager::getProjectionMatrix()
+//{ return currentScene->getProjectionMatrix(); }
 
 // This might be unfamiliar
 SDL_Renderer* GameManager::getRenderer()
@@ -158,7 +123,7 @@ SDL_Renderer* GameManager::getRenderer()
 // This might be unfamiliar
 void GameManager::RenderPlayer(float scale)
 {
-    player->Render(scale);
+    //player->Render(scale);
 }
 
 void GameManager::LoadScene( int i )
@@ -170,10 +135,10 @@ void GameManager::LoadScene( int i )
     switch ( i )
     {
         case 1:
-            currentScene = new Scene1( windowPtr->GetSDL_Window(), this);
+            currentScene = new ShopScene( windowPtr->GetSDL_Window());
             break;
         default:
-            currentScene = new Scene1( windowPtr->GetSDL_Window(), this );
+            currentScene = new ShopScene( windowPtr->GetSDL_Window());
             break;
     }
 

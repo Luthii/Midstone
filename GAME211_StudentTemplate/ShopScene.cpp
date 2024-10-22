@@ -7,8 +7,8 @@ ShopScene::ShopScene(SDL_Window* sdlWindow_, GameManager* game_) {
 	window = sdlWindow_;
 	game = game_;
 	renderer = SDL_GetRenderer(window);
-	xAxis = 25.0f;
-	yAxis = 15.0f;
+	xAxis = 1000.0f;
+	yAxis = 600.0f;
 }
 
 ShopScene::~ShopScene() {
@@ -20,42 +20,24 @@ bool ShopScene::OnCreate() {
 
 	Matrix4 ndc = MMath::viewportNDC(w, h);
 	Matrix4 ortho = MMath::orthographic(0.0f, xAxis, 0.0f, yAxis, 0.0f, 1.0f);
-	projectionMatrix = ndc * ortho;
+	Matrix4 ortho2 = MMath::orthographic(-450.0, 550.0f, -250.0f, 350.0f, 0.0f, 1.0f);
 
-	//we can move the camera translatin the ortho matrix
-	/*ortho *= MMath::translate(5.0f, 0.0f, 0.0f);*/
-	//----------------------------------------------
+	projectionMatrix = ndc * ortho2;
 
 
 	/// Turn on the SDL imaging subsystem
 	IMG_Init(IMG_INIT_PNG);
-
-	// Set player image to PacMan
-
-	SDL_Surface* image;
-	SDL_Texture* texture;
-
-	image = IMG_Load("pacman.png");
-	texture = SDL_CreateTextureFromSurface(renderer, image);
-
-	//map = new Map(renderer);
-
-	game->getPlayer()->setImage(image);
-	game->getPlayer()->setTexture(texture);
-
-	//map = new Map(renderer);
-
-	//map = new Map("xml/shopTileMap_.xml", "textures/SuperTileSet.png", renderer);
-	//map->onCreate();
+	
+	//maybe use this for zoom?
+	//SDL_RenderSetLogicalSize(renderer, 500, 300);
 
 	testObj = new Object("textures/duck.png", renderer);
 	testObj->OnCreate();
 	testObj->setPosition(Vec3(500.0f, 300.0f, 0.0f));
 	testObj2 = new Object("textures/cactus.png", renderer);
+	testObj2->setPosition(Vec3(0.0f, 0.0f, 0.0f));
 	testObj2->OnCreate();
-
-	//testObj->getPosition().print();
-	//viewMatrix.print();
+	Camera::UpdateCenterCoordinates(testObj->getPosition().x, testObj->getPosition().y);
 
 	return true;
 }
@@ -67,35 +49,41 @@ void ShopScene::OnDestroy() {
 
 void ShopScene::Update(const float deltaTime) {
 
-	// Update player
-	//game->getPlayer()->Update(deltaTime);
 	testObj->Update(deltaTime);
 	testObj2->Update(deltaTime);
-	Camera::cameraX = (testObj->getPosition().x + 8) - 1000 / 2;
-	Camera::cameraY = (testObj->getPosition().y + 8) - 600 / 2;
+	//update the camera to follow the duck obj
+	Camera::UpdateCenterCoordinates(testObj->getPosition().x, testObj->getPosition().y);
 }
 
 void ShopScene::Render() {
 	//clear window with the bracl color
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(renderer, 100, 100, 100, 0);
 	//clear render
 	SDL_RenderClear(renderer);
 
 	// render the duck
 	testObj->Render(renderer);
+	//render cactus
 	testObj2->Render(renderer);
-
-	//game->RenderPlayer(0.1f);
 
 	SDL_RenderPresent(renderer);
 }
 
-void ShopScene::HandleEvents(const SDL_Event& event)
+void ShopScene::HandleEvents(const SDL_Event& sdlEvent)
 {
-	// send events to player as needed
-	//game->getPlayer()->setPos(game->getPlayer()->getPos() + Vec3(1.0f, 0.0f, 0.0f));
-	testObj->HandleEvents(event);
-	//camera.x = (testObj->getPosition().x + 8) - 1000 / 2;
-	//camera.y = (testObj->getPosition().y + 8) - 600 / 2;
+	testObj->HandleEvents(sdlEvent);
+
+	if (sdlEvent.type == SDL_KEYDOWN)
+	{
+		switch (sdlEvent.key.keysym.sym)
+		{
+		case SDLK_z:
+			break;
+		case SDLK_x:
+			break;
+		default:
+			break;
+		}
+	}
 }
 

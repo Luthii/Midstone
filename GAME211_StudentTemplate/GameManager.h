@@ -2,6 +2,9 @@
 #define GAMEMANAGER_H
 #include <SDL.h>
 #include <iostream>
+
+//project includes
+#include "DataCollection.h"
 #include "Window.h"
 #include "Timer.h"
 #include "Scene.h"

@@ -51,19 +51,19 @@ void Object::HandleEvents(const SDL_Event& sdlEvent)
     {
         switch (sdlEvent.key.keysym.sym)
         {
-        case SDLK_UP:
+        case SDLK_w:
             velocity = Vec3(0.0f, -1.0f, 0.0f);
             break;
 
-        case SDLK_DOWN:
+        case SDLK_s:
             velocity = Vec3(0.0f, 1.0f, 0.0f);
             break;
 
-        case SDLK_LEFT:
+        case SDLK_a:
             velocity = Vec3(-1.0f, 0.0f, 0.0f);
             break;
 
-        case SDLK_RIGHT:
+        case SDLK_d:
             velocity = Vec3(1.0f, 0.0f, 0.0f);
             break;
 
@@ -75,19 +75,19 @@ void Object::HandleEvents(const SDL_Event& sdlEvent)
     if (sdlEvent.type == SDL_KEYUP) {
         switch (sdlEvent.key.keysym.sym)
         {
-        case SDLK_UP:
+        case SDLK_w:
             velocity = Vec3(0.0f, 0.0f, 0.0f);
             break;
 
-        case SDLK_DOWN:
+        case SDLK_s:
             velocity = Vec3(0.0f, 0.0f, 0.0f);
             break;
 
-        case SDLK_LEFT:
+        case SDLK_a:
             velocity = Vec3(0.0f, 0.0f, 0.0f);
             break;
 
-        case SDLK_RIGHT:
+        case SDLK_d:
             velocity = Vec3(0.0f, 0.0f, 0.0f);
             break;
 
@@ -111,10 +111,12 @@ void Object::Render(SDL_Renderer* sceneRenderer)
     // where SDL will draw the .png image.
     // The 0.5f * w/h offset is to place the .png so that pos represents the center
     // (Note the y axis for screen coords points downward, hence subtraction!!!!)
-    rect.x = static_cast<int>(position.x - Camera::cameraX);// -(0.5f * 16.0f));
-    rect.y = static_cast<int>(position.y - Camera::cameraY);// (0.5f * 16.0f));
-    rect.w = static_cast<int>(PIXEL_SIZE*2);
-    rect.h = static_cast<int>(PIXEL_SIZE*2);
+    Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
+   
+    rect.x = static_cast<int>(screenCoordinates.x);
+    rect.y = static_cast<int>(screenCoordinates.y);
+    rect.w = static_cast<int>(PIXEL_SIZE);
+    rect.h = static_cast<int>(PIXEL_SIZE);
 
     SDL_RenderCopyEx(sceneRenderer, TEX_object, nullptr, &rect, 0.0, nullptr, SDL_FLIP_NONE);
 }

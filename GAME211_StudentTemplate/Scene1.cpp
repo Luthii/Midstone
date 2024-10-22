@@ -18,8 +18,11 @@ bool Scene1::OnCreate() {
 	SDL_GetWindowSize(window,&w,&h);
 
 	Matrix4 ndc = MMath::viewportNDC(w, h);
+	ndc.print();
 	Matrix4 ortho = MMath::orthographic(0.0f, xAxis, 0.0f, yAxis, 0.0f, 1.0f);
+	ortho.print();
 	projectionMatrix = ndc * ortho;
+	projectionMatrix.print();
 
 	/// Turn on the SDL imaging subsystem
 	IMG_Init(IMG_INIT_PNG);

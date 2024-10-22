@@ -9,6 +9,9 @@ ShopScene::ShopScene(SDL_Window* sdlWindow_, GameManager* game_) {
 	renderer = SDL_GetRenderer(window);
 	xAxis = 1000.0f;
 	yAxis = 600.0f;
+	shopMap = nullptr;
+	testObj = nullptr;
+	testObj2 = nullptr;
 }
 
 ShopScene::~ShopScene() {
@@ -29,15 +32,19 @@ bool ShopScene::OnCreate() {
 	IMG_Init(IMG_INIT_PNG);
 	
 	//maybe use this for zoom?
-	//SDL_RenderSetLogicalSize(renderer, 500, 300);
+	//SDL_RenderSetLogicalSize(renderer, 640, 400);
 
 	testObj = new Object("textures/duck.png", renderer);
 	testObj->OnCreate();
-	testObj->setPosition(Vec3(500.0f, 300.0f, 0.0f));
+	testObj->setPosition(Vec3(50.0f, 30.0f, 0.0f));
 	testObj2 = new Object("textures/cactus.png", renderer);
 	testObj2->setPosition(Vec3(0.0f, 0.0f, 0.0f));
 	testObj2->OnCreate();
 	Camera::UpdateCenterCoordinates(testObj->getPosition().x, testObj->getPosition().y);
+
+	shopMap = new Map("xml/TM_Shop.xml", "textures/SuperTileSetShop.png", renderer);
+	shopMap->onCreate();
+	testObj->setPosition(shopMap->getSpawnPosition());
 
 	return true;
 }
@@ -45,6 +52,12 @@ bool ShopScene::OnCreate() {
 void ShopScene::OnDestroy() {
 	testObj->OnDestroy();
 	delete testObj;
+
+	testObj2->OnDestroy();
+	delete testObj;
+
+	shopMap->onDestroy();
+	delete shopMap;
 }
 
 void ShopScene::Update(const float deltaTime) {
@@ -60,6 +73,9 @@ void ShopScene::Render() {
 	SDL_SetRenderDrawColor(renderer, 100, 100, 100, 0);
 	//clear render
 	SDL_RenderClear(renderer);
+
+	//render scene map
+	shopMap->Render(renderer);
 
 	// render the duck
 	testObj->Render(renderer);

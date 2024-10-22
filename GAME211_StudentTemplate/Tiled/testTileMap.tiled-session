@@ -1,0 +1,67 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/SuperTileSetShop.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml": {
+            "scale": 0.8772656249999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 296.3754564075163,
+                "y": 350.52097248196634
+            }
+        },
+        "SuperTileSet.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "SuperTileSetShop.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "testTileMap.tmx": {
+            "scale": 0.8465725806451613,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 441.78137651821856,
+                "y": 310.6644439152179
+            }
+        }
+    },
+    "last.exportedFilePath": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml",
+    "last.externalTilesetPath": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/Tiled",
+    "last.imagePath": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/textures",
+    "map.height": 37,
+    "map.lastUsedExportFilter": "All Files (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 62,
+    "openFiles": [
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml"
+    ],
+    "project": "testTileMap.tiled-project",
+    "recentFiles": [
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml",
+        "SuperTileSetShop.tsx",
+        "testTileMap.tmx",
+        "SuperTileSet.tsx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

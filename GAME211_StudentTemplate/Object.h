@@ -23,7 +23,7 @@ private:
 
 	Vec3 position = Vec3(0,0,0); //initiate position to (0,0,0) -> x = 0, y = 0, layer, z = 0
 	Vec3 velocity = Vec3(0.0f, 0.0f, 0.0f);
-	float speed = 1.0f; //3 pixel per movement
+	float speed = 3.0f; //3 pixel per movement
 	std::string filePath;
 
 

@@ -18,7 +18,7 @@ private:
 	Matrix4 projectionMatrix;	// set in OnCreate()
 	Matrix4     inverseProjection;	// set in OnCreate()
 
-	Map* map;
+	Map* shopMap;
 	Object* testObj;
 	Object* testObj2;
 

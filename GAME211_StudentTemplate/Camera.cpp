@@ -6,10 +6,10 @@ float Camera::cameraCenterX = (SCREEN_WIDTH / 2);
 float Camera::cameraCenterY = (SCREEN_HEIGHT / 2);
 
 void Camera::UpdateCenterCoordinates(float x, float y) {
-	cameraCenterX = x + PIXEL_SIZE / 2;
+	cameraCenterX = x + TILE_RENDER_SIZE / 2;
 	cameraX = cameraCenterX - (SCREEN_WIDTH) / 2;
 
-	cameraCenterY = y + PIXEL_SIZE / 2;
+	cameraCenterY = y + TILE_RENDER_SIZE / 2;
 	cameraY = cameraCenterY - (SCREEN_HEIGHT) / 2;
 
 	/*std::cout << "------------------------------------------\n";

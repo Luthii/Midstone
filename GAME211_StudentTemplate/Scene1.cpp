@@ -61,7 +61,7 @@ void Scene1::Render() {
 	SDL_RenderClear(renderer);
 
 	// render the map
-	map->DrawMap();
+
 
 	// render the player
 	game->RenderPlayer(0.10f);

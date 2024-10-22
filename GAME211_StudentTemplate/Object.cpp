@@ -115,8 +115,8 @@ void Object::Render(SDL_Renderer* sceneRenderer)
    
     rect.x = static_cast<int>(screenCoordinates.x);
     rect.y = static_cast<int>(screenCoordinates.y);
-    rect.w = static_cast<int>(PIXEL_SIZE);
-    rect.h = static_cast<int>(PIXEL_SIZE);
+    rect.w = TILE_RENDER_SIZE;
+    rect.h = TILE_RENDER_SIZE;
 
     SDL_RenderCopyEx(sceneRenderer, TEX_object, nullptr, &rect, 0.0, nullptr, SDL_FLIP_NONE);
 }

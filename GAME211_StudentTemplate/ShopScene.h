@@ -2,7 +2,6 @@
 
 //C++ includes
 
-
 //project includes
 #include "Scene.h"
 #include "Map.h"
@@ -20,6 +19,8 @@ private:
 	Map* shopMap;
 	Object* testObj;
 	Object* testObj2;
+
+	void testCollision();
 
 public:
 	// This constructor may be different from what you've seen before

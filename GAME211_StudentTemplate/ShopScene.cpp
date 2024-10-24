@@ -1,6 +1,79 @@
 #include "ShopScene.h"
 
+//third party includes
 #include <VMath.h>
+
+void ShopScene::testCollision()
+{
+	//test collision before moving character
+	/*/steps:
+		- Get player velocity to find out the direction of the player movement
+		- Get player position and transform to tile to find out the players next tile movements
+		- Calculate the tiles to be tested
+		- Query the map for the tiles
+			- Test each tile, and if colision, set the velocity on that direction to zero
+				(player->SetVelocity(player->getVelocity() - Vec3(0.0f, -1.0f, 0.0f)); for example.
+				this line sets the velocity to the Y vector to be zero in case the player is trying to move UP
+				but there is an obstacle
+	*/
+
+	//if the object is moving, its velocity is different from 0, so it's velocity vector magnitude is differentfrom zero
+	//in this case, test for colision
+	if (MATH::VMath::mag(testObj->getVelocity()) != 0) {
+		MATH::Vec3 vecAuxAdjancent; //test side
+		MATH::Vec3 vecAuxDiagonal; //test bottom or up
+		int tileValueAdjacent = -1;
+		int tileValueDiagonal = -1;
+
+		//object going righ -> +x
+		if (testObj->getVelocity().x > 0.0f)
+		{
+															//we have to use the speed because the object will move speed pixels
+			vecAuxAdjancent = testObj->getPosition() + Vec3(TILE_RENDER_SIZE + testObj->getSpeed(), 0.0f, 0.0f);
+			vecAuxDiagonal = testObj->getPosition() + Vec3(TILE_RENDER_SIZE + testObj->getSpeed(), (TILE_RENDER_SIZE - 1), 0.0f);
+		}
+		//object going left -> -x
+		else if (testObj->getVelocity().x < 0.0f)
+		{
+			vecAuxAdjancent = testObj->getPosition() + Vec3(-testObj->getSpeed(), 0.0f, 0.0f);
+			vecAuxDiagonal = testObj->getPosition() + Vec3(-testObj->getSpeed(), (TILE_RENDER_SIZE - 1), 0.0f);
+		}
+
+		tileValueAdjacent = shopMap->collisionAt(vecAuxAdjancent);
+		tileValueDiagonal = shopMap->collisionAt(vecAuxDiagonal);
+
+		//if tile is bigger than 0, it means there is a object in the map and we should stop our player
+		//so set the velocity to zero.
+		if (tileValueAdjacent > 0 || tileValueDiagonal > 0) {
+			testObj->setVelocity(testObj->getVelocity() + Vec3(-testObj->getVelocity().x, 0.0f, 0.0f));
+		}
+
+		//now for the Y axis
+		tileValueAdjacent = -1;
+		tileValueDiagonal = -1;
+		//object going righ -> +y (down the screen)
+		if (testObj->getVelocity().y > 0.0f)
+		{
+			vecAuxAdjancent = testObj->getPosition() + Vec3(0.0f, TILE_RENDER_SIZE + testObj->getSpeed(), 0.0f);
+			vecAuxDiagonal = testObj->getPosition() + Vec3((TILE_RENDER_SIZE - 1), TILE_RENDER_SIZE + testObj->getSpeed(), 0.0f);
+		}
+		//object going left -> -y (up on the screen)
+		else if (testObj->getVelocity().y < 0.0f)
+		{
+			vecAuxAdjancent = testObj->getPosition() + Vec3(0.0f, -testObj->getSpeed(), 0.0f);
+			vecAuxDiagonal = testObj->getPosition() + Vec3((TILE_RENDER_SIZE - 1), -testObj->getSpeed(), 0.0f);
+		}
+
+		tileValueAdjacent = shopMap->collisionAt(vecAuxAdjancent);
+		tileValueDiagonal = shopMap->collisionAt(vecAuxDiagonal);
+
+		//if tile is bigger than 0, it means there is a object in the map and we should stop our player
+		//so set the velocity to zero.
+		if (tileValueAdjacent > 0 || tileValueDiagonal > 0) {
+			testObj->setVelocity(testObj->getVelocity() + Vec3(0.0f, -testObj->getVelocity().y, 0.0f));
+		}
+	}
+}
 
 // See notes about this constructor in Scene1.h.
 ShopScene::ShopScene(SDL_Window* sdlWindow_) {
@@ -41,7 +114,7 @@ bool ShopScene::OnCreate() {
 	testObj2->OnCreate();
 	Camera::UpdateCenterCoordinates(testObj->getPosition().x, testObj->getPosition().y);
 
-	shopMap = new Map("xml/TM_Shop.xml", "textures/SuperTileSetShop.png", renderer);
+	shopMap = new Map("xml/TM_Shop_Collision.xml", "textures/SuperTileSetShop.png", renderer);
 	shopMap->onCreate();
 	testObj->setPosition(shopMap->getSpawnPosition());
 
@@ -61,6 +134,7 @@ void ShopScene::OnDestroy() {
 
 void ShopScene::Update(const float deltaTime) {
 
+	testCollision();
 	testObj->Update(deltaTime);
 	testObj2->Update(deltaTime);
 	//update the camera to follow the duck obj
@@ -69,7 +143,7 @@ void ShopScene::Update(const float deltaTime) {
 
 void ShopScene::Render() {
 	//clear window with the bracl color
-	SDL_SetRenderDrawColor(renderer, 100, 100, 100, 0);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	//clear render
 	SDL_RenderClear(renderer);
 
@@ -86,7 +160,10 @@ void ShopScene::Render() {
 
 void ShopScene::HandleEvents()
 {
-	//InputManager::getInstance()->Update();
+	//player moved
 	testObj->HandleEvents();
+	//test colission
+	Vec3 playerDirection = testObj->getVelocity();
+
 }
 

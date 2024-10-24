@@ -29,6 +29,7 @@ private:
 	int mapLayers = 0;
 	int tileSetWidth = 0;
 	int tileSetHeight = 0;
+	int collisionLayer = 0;
 	std::string tileMapTexturePath;
 	std::string tileMapXmlPath;
 	SDL_Texture* TEX_TileMap = nullptr;;
@@ -53,4 +54,5 @@ public:
 	void onDestroy();
 	void Render(SDL_Renderer* renderer);
 	MATH::Vec3 getSpawnPosition() { return spawnPosition; };
+	int collisionAt(MATH::Vec3 position);
 };

@@ -48,16 +48,16 @@ bool Object::OnDestroy()
 void Object::HandleEvents()
 {
     //key Down event -> movent character and play walking animation
-    if (InputManager::getInstance()->IsKeyDown(SDLK_w) || InputManager::getInstance()->IsKeyPressed(SDLK_w))
+    if (InputManager::getInstance()->IsKeyDown(SDLK_w))
         velocity.y = -1.0f;
 
-    if (InputManager::getInstance()->IsKeyDown(SDLK_s) || InputManager::getInstance()->IsKeyPressed(SDLK_s))
+    if (InputManager::getInstance()->IsKeyDown(SDLK_s))
         velocity.y = 1.0f;
 
-    if (InputManager::getInstance()->IsKeyDown(SDLK_a) || InputManager::getInstance()->IsKeyPressed(SDLK_a))
+    if (InputManager::getInstance()->IsKeyDown(SDLK_a))
         velocity.x = -1.0f;
 
-    if (InputManager::getInstance()->IsKeyDown(SDLK_d) || InputManager::getInstance()->IsKeyPressed(SDLK_d))
+    if (InputManager::getInstance()->IsKeyDown(SDLK_d))
         velocity.x = 1.0f;
     
 

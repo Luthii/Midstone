@@ -67,8 +67,8 @@ bool Map::ReadXMLTileMap()
 
 //------------------------------------------------------
 // CHANGE THIS TO READ FROM THE FILE
-	spawnPosition.x = 9 * TILE_RENDER_SIZE;
-	spawnPosition.y = 30 * TILE_RENDER_SIZE;
+	spawnPosition.x = 5 * TILE_RENDER_SIZE;
+	spawnPosition.y = 36 * TILE_RENDER_SIZE;
 
 
 	//Start to read the nodes with the tag "layer"
@@ -85,6 +85,7 @@ bool Map::ReadXMLTileMap()
 
 	//temp node to hold the information of the node with the tab "data"
 	XMLElement* layerData;
+	const char* layerName;
 	for(int layerNumber = 0; layerNumber < mapLayers; layerNumber++) {
 		layerData = layerNode->FirstChildElement("data");
 		if (layerData == nullptr) {
@@ -92,7 +93,11 @@ bool Map::ReadXMLTileMap()
 			std::cout << "Layer has no data node." << std::endl;
 			return false;
 		}
-
+		//checks if this is the layer with collision tiles
+		layerNode->QueryStringAttribute("name", &layerName);
+		if (!strcmp(layerName, "Collision"))
+			collisionLayer = layerNumber;
+		
 		str = layerData->GetText();
 
 		SliceStr(str, mapWidth, mapHeight, layerNumber);
@@ -112,6 +117,7 @@ bool Map::ReadXMLTileMap()
 //int layer: the current layer that is being processed
 void Map::SliceStr(std::string str, int width, int height, int layer) {
 	//string to hold the elements between two commas on the string
+
 	std::string str2;
 	int row = 0;
 	int col = -1;
@@ -175,4 +181,17 @@ void Map::Render(SDL_Renderer* renderer)
 			}
 		}
 	}
+}
+
+int Map::collisionAt(MATH::Vec3 position)
+{
+	int tileX = static_cast<int>(position.x / TILE_RENDER_SIZE);
+	int tileY = static_cast<int>(position.y / TILE_RENDER_SIZE);
+	//std::cout << "Map: " << tileX << "," << tileY << "\n";
+
+	if( (tileX >= 0 && tileX < mapWidth) && (tileY >= 0 && tileY < mapHeight))
+		return tileMap[tileX][tileY][collisionLayer];
+
+	return -1;
+
 }

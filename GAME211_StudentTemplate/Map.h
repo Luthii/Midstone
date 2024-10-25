@@ -6,7 +6,8 @@
 #include <iostream>
 
 //third party includes
-#include "SDL.h"
+#include <SDL.h>
+#include <SDL_image.h>
 #include "Vector.h"
 #include "tinyxml2.h"
 using namespace tinyxml2;
@@ -14,9 +15,8 @@ using namespace tinyxml2;
 //project includes
 #include "DataCollection.h"
 #include "Camera.h"
-#include "TextureManager.h"
 
-
+typedef std::vector<std::vector<int>> MapLayer;
 
 class Map {
 private:
@@ -34,11 +34,11 @@ private:
 	std::string tileMapXmlPath;
 	SDL_Texture* TEX_TileMap = nullptr;;
 	// this is a matrix to hold the tile map information.
-	//[x][y][layer]
-	std::vector<std::vector<std::vector<int>>> tileMap;
+	//[layer] [y][x]
+	std::vector<MapLayer*> tileMap;
 
 	bool ReadXMLTileMap();
-	void SliceStr(std::string str, int width, int height, int layer);
+	MapLayer* SliceStr(std::string str, int width, int height, int layer);
 	int CountLayer(XMLElement* mapNode);
 
 public:
@@ -54,5 +54,6 @@ public:
 	void onDestroy();
 	void Render(SDL_Renderer* renderer);
 	MATH::Vec3 getSpawnPosition() { return spawnPosition; };
-	int collisionAt(MATH::Vec3 position);
+	//int collisionAt(MATH::Vec3 position);
+	MapLayer* getCollisionLayer() { return tileMap.at(collisionLayer); }
 };

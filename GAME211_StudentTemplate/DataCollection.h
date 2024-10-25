@@ -7,3 +7,4 @@ const int TILE_RENDER_SIZE = TILE_SIZE * TILE_SCALE;
 // Use 1000x600 for less than full screen
 const int SCREEN_WIDTH = 960;
 const int SCREEN_HEIGHT = 600;
+

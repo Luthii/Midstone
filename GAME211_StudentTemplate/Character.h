@@ -2,43 +2,48 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+/*  ----------------- ABSTRACT CLASS --------------------------
+
+    The character class will define the common attributes of the following classes:
+    - Player: the one that the user can control
+    - NPC: non-playable characters, but they will move around and the player can interact with them
+    - Enemy: non-playable character that can attack the player and be attacked by the player
+*/
+
+
+//C++ includes
 #include <string>
+
+//project includes
 #include "Entity.h"
 
 class Character : public Entity {
 protected:
-	std::string name; //
-	std::string type; // Can be occupation like smith, cook, etc., alternatively monster type 
-    int health = 100; // 100
-    int speed= 2; // movement speed
+    Vec3 velocity = Vec3(0.0f, 0.0f, 0.0f);
+    float speed = 3.0f; // movement speed
+    float health = 100.0f;
 
 public:
     // Constructors
-	Character() : Entity{}, name{ "" }, type{ "" } {}
-    Character(
-        const std::string& name_, 
-        const std::string& type_,
-        Vec3 pos_, Vec3 vel_, Vec3 accel_,
-        float mass_, float radius_, float orientation_,
-        float rotation_, float angular_) : Entity{ pos_, vel_, accel_, mass_, radius_, orientation_, rotation_, angular_ },name{ name_ }, type{ type_ } {}
+    Character(Vec3 position_, std::string texFilePath_, SDL_Renderer* sceneRenderer_) : 
+        Entity(position_, texFilePath_, sceneRenderer_) {}
 
-    ~Character();
+    Character(Vec3 position_, Vec3 velocity_, float speed_ ,std::string texFilePath_, SDL_Renderer* sceneRenderer_) :
+        Entity(position_, texFilePath_, sceneRenderer_) { velocity = velocity_; speed = speed_; }
 
-    // Getters
-    std::string getName() const { return name; }
+    virtual ~Character() { std::cerr << "Calling Character destructor..." << std::endl; }
 
-    // Setters
-    void setName(const std::string& name_) { name = name_; }
-    void setOccupation(const std::string& type_) { type = type_;}
+ //HandleEvents will not be implemented in this Class. This class should remain abstract
+    //virtual void HandleEvents() = 0;
+    virtual void Update(float deltaTime);
 
-    // Character Functions
-    void characterMove(int dx, int dy){
-        pos.x += dx * speed;
-        pos.y += dy * speed;
-    }
-    void healthCheck();
-    virtual void interact() {}
-
+//setters and getters
+    void setVelocity(Vec3 newVelocity) { velocity = newVelocity; }
+    Vec3 getVelocity() { return velocity; }
+    void setSpeed(float newSpeed) { speed = newSpeed; }
+    float getSpeed() { return speed; }
+    void setHEalth(float newHealth) { health = newHealth; }
+    float getHealth() { return health; }
 };
 
 #endif CHARACTER_H

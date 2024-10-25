@@ -1,48 +1,52 @@
 #include "Entity.h"
 
-Entity::Entity(){
-    pos = Vec3(0, 0, 0);
-    vel = Vec3(0, 0, 0);
-    accel = Vec3(0, 0, 0);
-    mass = 1.0f;
-    radius = 1.0f;
-    orientation = 0.0f;
-    rotation = 0.0f;
-    angular = 0.0f;
-}
-
-Entity::Entity(Vec3 pos_, Vec3 vel_, Vec3 accel_, float mass_, float radius_, float orientation_, float rotation_, float angular_){
-    pos = pos_;
-    vel = vel_;
-    accel = accel_;
-    mass = mass_;
-    radius = radius_;
-    orientation = orientation_;
-    rotation = rotation_;
-    angular = angular_;
-}
-
-Entity::~Entity(){
-}
-
-void Entity::Update(float deltaTime)
+bool Entity::LoadTexture()
 {
+    SDL_Surface* SRF_Entity;
+    SRF_Entity = IMG_Load(texFilePath.c_str());
+
+    if (SRF_Entity == nullptr) {
+        std::cerr << "Can't open the image: " << texFilePath << std::endl;
+        return false;
+    }
+
+    texture = SDL_CreateTextureFromSurface(sceneRenderer, SRF_Entity);
+    if (texture == nullptr) {
+        std::cerr << "Erro creating texture from: " << texFilePath << std::endl;
+        return false;
+    }
+
+    SDL_FreeSurface(SRF_Entity);
+
+    return true;
+}
+
+Entity::~Entity()
+{
+    std::cerr << "Calling Entity destructor..." << std::endl;
+    SDL_DestroyTexture(texture);
+    texture = nullptr;
 }
 
 bool Entity::onCreate()
 {
-    return false;
+    if (!LoadTexture()) {
+        std::cerr << "Erro creating the entity." << std::endl;
+        return false;
+    }
+
+    return true;
 }
 
-bool Entity::onDestroy()
+void Entity::Render(SDL_Renderer* sceneRenderer)
 {
-    return false;
-}
+    SDL_Rect rect;
+    MATH::Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
 
-void Entity::ApplyForce(Vec3 force_)
-{
-}
+    rect.x = static_cast<int>(screenCoordinates.x);
+    rect.y = static_cast<int>(screenCoordinates.y);
+    rect.w = TILE_RENDER_SIZE;
+    rect.h = TILE_RENDER_SIZE;
 
-void Entity::HandleEvents(const SDL_Event& event)
-{
+    SDL_RenderCopyEx(sceneRenderer, texture, nullptr, &rect, 0.0, nullptr, SDL_FLIP_NONE);
 }

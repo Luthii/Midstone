@@ -46,6 +46,8 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectMap.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShopScene.h" />

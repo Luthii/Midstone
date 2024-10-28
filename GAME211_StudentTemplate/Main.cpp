@@ -6,6 +6,7 @@
 //create the InputManager singleton
 InputManager* InputManager::instance = nullptr;
 
+
 int main(int argc, char* args[]) { /// Standard C-style entry point, you need to use it
 
 	GameManager *ptr = new GameManager();

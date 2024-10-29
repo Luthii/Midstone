@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Object.h"
 #include "Map.h"
 #include "Character.h"
 
@@ -7,7 +8,10 @@ class Player : public Character
 {
 private:
 	MapLayer* collisionLayer;
+	std::map<TILE, ObjectScene*> interactedObjects;
 	void TestCollision();
+	bool Interact();
+	void checkObjectInteractionList(TILE key, unsigned int objectID);
 
 protected:
 

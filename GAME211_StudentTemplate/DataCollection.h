@@ -14,4 +14,15 @@ enum SCENES {
 	SHOP_SCENE
 };
 
+struct TILE {
+	int x = -1;
+	int y = -1;
+
+
+	bool operator <(const TILE& otherTile) const
+	{
+		return (x < otherTile.x && y < otherTile.y);
+	}
+};
+
 

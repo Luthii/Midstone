@@ -1,3 +1,4 @@
+#include "VMath.h"
 #include "Player.h"
 
 Player::~Player() {
@@ -21,7 +22,7 @@ Player::~Player() {
 void Player::TestCollision()
 {
 
-	if (MATH::VMath::mag(velocity) != 0) {
+	if (VMath::mag(velocity) != 0) {
 		MATH::Vec3 vecAuxAdjancent; //test side
 		MATH::Vec3 vecAuxDiagonal; //test bottom or up
 		int tileValueAdjacent = -1;
@@ -78,6 +79,85 @@ void Player::TestCollision()
 	}
 }
 
+
+bool Player::Interact()
+{
+	std::cout << "Player orientation: ";
+	orientation.print();
+
+	if (VMath::mag(orientation) == 0)
+		return false;
+
+
+	std::cout << "Test interaction!\n";
+	//player is facing left or right
+	if (orientation.x != 0) {
+		std::cout << "Interaction on X axis\n";
+		MATH::Vec3 vecAuxAdjancent; //test side
+		MATH::Vec3 vecAuxDiagonal; //test bottom or up
+		int tileValueAdjacent = -1;
+		int tileValueDiagonal = -1;
+
+		//object going righ -> +x
+		if (orientation.x > 0.0f)
+		{
+			std::cout << "Interaction on +X\n";
+			//we have to use the speed because the object will move speed pixels
+			vecAuxAdjancent = position + Vec3(TILE_RENDER_SIZE + speed, 0.0f, 0.0f);
+			vecAuxDiagonal = position + Vec3(TILE_RENDER_SIZE + speed, (TILE_RENDER_SIZE - 1), 0.0f);
+		}
+		//object going left -> -x
+		else if (orientation.x < 0.0f)
+		{
+			std::cout << "Interaction on -X\n";
+			vecAuxAdjancent = position + Vec3(-speed, 0.0f, 0.0f);
+			vecAuxDiagonal = position + Vec3(-speed, (TILE_RENDER_SIZE - 1), 0.0f);
+		}
+
+		TILE tileCoords;
+		unsigned int tileID;
+		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
+		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
+		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
+		std::cout << "Tile ID: " << tileID << std::endl;
+		//priority to the top collision - if no object in the top corner, test the one below it
+		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
+			tileCoords.x = vecAuxDiagonal.y / TILE_RENDER_SIZE;
+			tileCoords.y = vecAuxDiagonal.x / TILE_RENDER_SIZE;
+			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
+			std::cout << "Tile ID: " << tileID << std::endl;
+
+			//no objects on the MAP or in the collision layer
+			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)
+				return false;
+		}
+
+		checkObjectInteractionList(tileCoords, tileID);
+	}
+	//player if facing up or down
+	else {
+		std::cout << "Player facing up or down\n";
+	}
+
+	return true;
+}
+
+void Player::checkObjectInteractionList(TILE key, unsigned int objectID)
+{
+	interactedObjects.find(key);
+	if (interactedObjects.find(key) != interactedObjects.end()) {
+		//the object was found
+		interactedObjects.at(key)->numberInteractions++;
+		std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber;
+	}
+	else {
+		//first interaction. Creates a new object on the map
+		ObjectScene* newObj = new ObjectScene{ 1, objectID };
+		interactedObjects.insert(std::pair<TILE, ObjectScene*>(key, newObj));
+		std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber;
+	}
+}
+
 void Player::HandleEvents()
 {
     //key Down event -> movent character and play walking animation
@@ -93,6 +173,8 @@ void Player::HandleEvents()
     if (InputManager::getInstance()->IsKeyDown(SDLK_d))
         velocity.x = 1.0f;
 
+	if(VMath::mag(velocity) != 0)
+		orientation = velocity; //saves the orientation of the character
 
     //key UP event -> set animation to stoped at direction
     if (InputManager::getInstance()->IsKeyUp(SDLK_w))
@@ -104,8 +186,16 @@ void Player::HandleEvents()
     if (InputManager::getInstance()->IsKeyUp(SDLK_a))
         velocity.x = 0.0f;
 
-    if (InputManager::getInstance()->IsKeyUp(SDLK_d))
-        velocity.x = 0.0f;
+	if (InputManager::getInstance()->IsKeyUp(SDLK_d))
+		velocity.x = 0.0f;
 
 	TestCollision();
+
+	if (InputManager::getInstance()->IsKeyDown(SDLK_SPACE)) {
+		std::cout << "\n-------------------------------------------------------\n";
+		std::cout << "Space bar pressed\n";
+		Interact();
+		std::cout << "\n-------------------------------------------------------\n";
+	}
+
 }

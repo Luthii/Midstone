@@ -20,6 +20,7 @@
 class Character : public Entity {
 protected:
     Vec3 velocity = Vec3(0.0f, 0.0f, 0.0f);
+    Vec3 orientation = Vec3(0.0f, 1.0f, 0.0f); // character will star looking to the top of the screen
     float speed = 3.0f; // movement speed
     float health = 100.0f;
 

@@ -82,26 +82,28 @@ void Player::TestCollision()
 
 bool Player::Interact()
 {
-	std::cout << "Player orientation: ";
-	orientation.print();
+	//std::cout << "Player orientation: ";
+	//orientation.print();
 
 	if (VMath::mag(orientation) == 0)
 		return false;
 
 
-	std::cout << "Test interaction!\n";
+	//std::cout << "Test interaction!\n";
+
+	MATH::Vec3 vecAuxAdjancent; //test side
+	MATH::Vec3 vecAuxDiagonal; //test bottom or up
+	int tileValueAdjacent = -1;
+	int tileValueDiagonal = -1;
+	TILE tileCoords;
+	unsigned int tileID;
 	//player is facing left or right
 	if (orientation.x != 0) {
-		std::cout << "Interaction on X axis\n";
-		MATH::Vec3 vecAuxAdjancent; //test side
-		MATH::Vec3 vecAuxDiagonal; //test bottom or up
-		int tileValueAdjacent = -1;
-		int tileValueDiagonal = -1;
-
+		//std::cout << "Interaction on X axis\n";
 		//object going righ -> +x
 		if (orientation.x > 0.0f)
 		{
-			std::cout << "Interaction on +X\n";
+			//std::cout << "Interaction on +X\n";
 			//we have to use the speed because the object will move speed pixels
 			vecAuxAdjancent = position + Vec3(TILE_RENDER_SIZE + speed, 0.0f, 0.0f);
 			vecAuxDiagonal = position + Vec3(TILE_RENDER_SIZE + speed, (TILE_RENDER_SIZE - 1), 0.0f);
@@ -109,53 +111,92 @@ bool Player::Interact()
 		//object going left -> -x
 		else if (orientation.x < 0.0f)
 		{
-			std::cout << "Interaction on -X\n";
+			//std::cout << "Interaction on -X\n";
 			vecAuxAdjancent = position + Vec3(-speed, 0.0f, 0.0f);
 			vecAuxDiagonal = position + Vec3(-speed, (TILE_RENDER_SIZE - 1), 0.0f);
 		}
 
-		TILE tileCoords;
-		unsigned int tileID;
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
 		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
 		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-		std::cout << "Tile ID: " << tileID << std::endl;
+		//std::cout << "Tile ID: " << tileID << std::endl;
 		//priority to the top collision - if no object in the top corner, test the one below it
 		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
 			tileCoords.x = vecAuxDiagonal.y / TILE_RENDER_SIZE;
 			tileCoords.y = vecAuxDiagonal.x / TILE_RENDER_SIZE;
 			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-			std::cout << "Tile ID: " << tileID << std::endl;
+			//std::cout << "Tile ID: " << tileID << std::endl;
 
 			//no objects on the MAP or in the collision layer
 			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)
 				return false;
 		}
-
-		checkObjectInteractionList(tileCoords, tileID);
 	}
 	//player if facing up or down
 	else {
-		std::cout << "Player facing up or down\n";
+		//std::cout << "Player facing up or down\n";
+		//object going righ -> +x
+		if (orientation.y > 0.0f)
+		{
+			//std::cout << "Interaction on +Y\n";
+			//we have to use the speed because the object will move speed pixels
+			vecAuxAdjancent = position + Vec3(0.0f, TILE_RENDER_SIZE + speed, 0.0f);
+			vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), TILE_RENDER_SIZE + speed, 0.0f);
+		}
+		//object going left -> -x
+		else if (orientation.y < 0.0f)
+		{
+			//std::cout << "Interaction on -Y\n";
+			vecAuxAdjancent = position + Vec3(0.0f, -speed, 0.0f);
+			vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), -speed, 0.0f);
+		}
+
+		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
+		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
+		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
+		//std::cout << "Tile ID: " << tileID << std::endl;
+		//priority to the top collision - if no object in the top corner, test the one below it
+		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
+			tileCoords.x = vecAuxDiagonal.y / TILE_RENDER_SIZE;
+			tileCoords.y = vecAuxDiagonal.x / TILE_RENDER_SIZE;
+			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
+			//std::cout << "Tile ID: " << tileID << std::endl;
+
+			//no objects on the MAP or in the collision layer
+			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)
+				return false;
+		}
 	}
+
+	checkObjectInteractionList(tileCoords, tileID);
 
 	return true;
 }
 
 void Player::checkObjectInteractionList(TILE key, unsigned int objectID)
 {
-	interactedObjects.find(key);
-	if (interactedObjects.find(key) != interactedObjects.end()) {
-		//the object was found
-		interactedObjects.at(key)->numberInteractions++;
-		std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber;
+	//if the code reached here, it means that there is a collidiable object and this object exist in the OBJECT MAP
+	//1. lets test if this object is an object that should give an interaction, for example, the anvil should open a craft window
+	switch (OBJECT_MAP.at(objectID).type) {
+	case OBJECT_TYPE::ANVIL:
+		std::cout << "You interacted with the anvil!! In the future you will be able to craft objectes in the future! :)\n";
+			break;
+	default:
+		interactedObjects.find(key);
+		if (interactedObjects.find(key) != interactedObjects.end()) {
+			//the object was found
+			interactedObjects.at(key)->numberInteractions++;
+			std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber;
+		}
+		else {
+			//first interaction. Creates a new object on the map
+			ObjectScene* newObj = new ObjectScene{ 1, objectID };
+			interactedObjects.insert(std::pair<TILE, ObjectScene*>(key, newObj));
+			std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber;
+		}
 	}
-	else {
-		//first interaction. Creates a new object on the map
-		ObjectScene* newObj = new ObjectScene{ 1, objectID };
-		interactedObjects.insert(std::pair<TILE, ObjectScene*>(key, newObj));
-		std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber;
-	}
+
+
 }
 
 void Player::HandleEvents()
@@ -193,10 +234,10 @@ void Player::HandleEvents()
 
 	// changed from ->IsKeyDown to ->IsKeyUp
 	if (InputManager::getInstance()->IsKeyUp(SDLK_SPACE)) {
-		std::cout << "\n-------------------------------------------------------\n";
-		std::cout << "Space bar pressed\n";
+		//std::cout << "\n-------------------------------------------------------\n";
+		//std::cout << "Space bar pressed\n";
 		Interact();
-		std::cout << "\n-------------------------------------------------------\n";
+		//std::cout << "\n-------------------------------------------------------\n";
 	}
 
 }

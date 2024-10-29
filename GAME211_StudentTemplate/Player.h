@@ -8,10 +8,12 @@ class Player : public Character
 {
 private:
 	MapLayer* collisionLayer;
-	std::map<TILE, ObjectScene*> interactedObjects;
+	std::map<TILE, ObjectScene*, TILE_Comparator> interactedObjects;
+	std::map<OBJECT_TYPE, ObjectLoot*> playerBag;
 	void TestCollision();
 	bool Interact();
-	void checkObjectInteractionList(TILE key, unsigned int objectID);
+	void CheckObjectInteractionList(TILE key, unsigned int objectID);
+	void AddItemBag(OBJECT_TYPE objType, unsigned int quantity);
 
 protected:
 

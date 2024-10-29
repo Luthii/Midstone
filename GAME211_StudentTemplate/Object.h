@@ -32,3 +32,10 @@ struct ObjectScene {
 	unsigned int numberInteractions;
 	unsigned int objNumber;
 };
+
+
+struct ObjectLoot {
+	//OBJECT_TYPE lootType;
+	unsigned int quatity;
+	unsigned int maxQuatity = 10;
+};

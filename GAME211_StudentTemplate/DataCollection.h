@@ -17,11 +17,11 @@ enum SCENES {
 struct TILE {
 	int x = -1;
 	int y = -1;
+};
 
-
-	bool operator <(const TILE& otherTile) const
-	{
-		return (x < otherTile.x && y < otherTile.y);
+struct TILE_Comparator {
+	bool operator()(const TILE& tile, const TILE& otherTile) const {
+		return  (tile.x < otherTile.x) || (!(otherTile.x < tile.x) && (tile.y < otherTile.y));
 	}
 };
 

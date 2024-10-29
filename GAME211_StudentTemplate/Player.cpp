@@ -90,7 +90,10 @@ bool Player::Interact()
 
 
 	//std::cout << "Test interaction!\n";
-
+	TILE playerTile;
+	playerTile.x = position.y / TILE_RENDER_SIZE;
+	playerTile.y = position.x / TILE_RENDER_SIZE;
+	std::cout << "Player tile coordinates: " << playerTile.x << "," << playerTile.y << "\n";
 	MATH::Vec3 vecAuxAdjancent; //test side
 	MATH::Vec3 vecAuxDiagonal; //test bottom or up
 	int tileValueAdjacent = -1;
@@ -168,12 +171,13 @@ bool Player::Interact()
 		}
 	}
 
-	checkObjectInteractionList(tileCoords, tileID);
+	std::cout << "Tile coordinates: " << tileCoords.x << "," << tileCoords.y << "\n";
+	CheckObjectInteractionList(tileCoords, tileID);
 
 	return true;
 }
 
-void Player::checkObjectInteractionList(TILE key, unsigned int objectID)
+void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 {
 	//if the code reached here, it means that there is a collidiable object and this object exist in the OBJECT MAP
 	//1. lets test if this object is an object that should give an interaction, for example, the anvil should open a craft window
@@ -182,7 +186,7 @@ void Player::checkObjectInteractionList(TILE key, unsigned int objectID)
 		std::cout << "You interacted with the anvil!! In the future you will be able to craft objectes in the future! :)\n";
 			break;
 	default:
-		interactedObjects.find(key);
+		//interactedObjects.find(key);
 		if (interactedObjects.find(key) != interactedObjects.end()) {
 			//the object was found
 			interactedObjects.at(key)->numberInteractions++;
@@ -199,13 +203,26 @@ void Player::checkObjectInteractionList(TILE key, unsigned int objectID)
 		if (interactedObjects.at(key)->numberInteractions >= OBJECT_MAP.at(objectID).interactionNumber)
 		{
 			(*collisionLayer)[key.x][key.y] = 0;
+			AddItemBag(OBJECT_MAP.at(objectID).loot, OBJECT_MAP.at(objectID).lootQuantity);
 			interactedObjects.erase(key);
 		}
 
 		break;
 	}
 
+}
 
+void Player::AddItemBag(OBJECT_TYPE objType, unsigned int quantity) {
+
+	//player already has type of item in the bag
+	if (playerBag.find(objType) != playerBag.end()) {
+		playerBag.at(objType)->quatity += quantity;
+	}
+	//player has none of the item in the bag
+	else {
+		ObjectLoot* newObj = new ObjectLoot{ quantity };
+		playerBag.insert(std::pair<OBJECT_TYPE, ObjectLoot*>(objType, newObj));
+	}
 }
 
 void Player::HandleEvents()

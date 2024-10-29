@@ -13,6 +13,7 @@
 static const Object anvilLeft{5862, OBJECT_TYPE::ANVIL, OBJECT_TYPE::UNDEFINED, 0, 1};
 static const Object anvilRight{5863, OBJECT_TYPE::ANVIL, OBJECT_TYPE::UNDEFINED, 0, 1};
 static const Object iron{5713, OBJECT_TYPE::IRON, OBJECT_TYPE::IRON_ORE, 3, 9};
+static const Object iron_ore{ 5230, OBJECT_TYPE::IRON_ORE, OBJECT_TYPE::UNDEFINED, 0, 2 };
 
 static const std::map<unsigned int, Object> OBJECT_MAP{
 	{anvilLeft.number, anvilLeft},

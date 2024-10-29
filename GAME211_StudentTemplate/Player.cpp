@@ -191,7 +191,8 @@ void Player::HandleEvents()
 
 	TestCollision();
 
-	if (InputManager::getInstance()->IsKeyDown(SDLK_SPACE)) {
+	// changed from ->IsKeyDown to ->IsKeyUp
+	if (InputManager::getInstance()->IsKeyUp(SDLK_SPACE)) {
 		std::cout << "\n-------------------------------------------------------\n";
 		std::cout << "Space bar pressed\n";
 		Interact();

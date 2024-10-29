@@ -186,14 +186,23 @@ void Player::checkObjectInteractionList(TILE key, unsigned int objectID)
 		if (interactedObjects.find(key) != interactedObjects.end()) {
 			//the object was found
 			interactedObjects.at(key)->numberInteractions++;
-			std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber;
+			std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber << std::endl;
 		}
 		else {
 			//first interaction. Creates a new object on the map
 			ObjectScene* newObj = new ObjectScene{ 1, objectID };
 			interactedObjects.insert(std::pair<TILE, ObjectScene*>(key, newObj));
-			std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber;
+			std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber << std::endl;
 		}
+
+		//if the object being interacted with reached the number of interactions necessary to be deleted, remove from map
+		if (interactedObjects.at(key)->numberInteractions >= OBJECT_MAP.at(objectID).interactionNumber)
+		{
+			(*collisionLayer)[key.x][key.y] = 0;
+			interactedObjects.erase(key);
+		}
+
+		break;
 	}
 
 

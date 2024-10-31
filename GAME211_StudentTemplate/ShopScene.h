@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Player.h"
+#include "Animation.h"
 
 class ShopScene : public Scene {
 private:
@@ -14,6 +15,7 @@ private:
 
 	Map* shopMap;
 	Player* player;
+	Animation* testAnimation;
 
 public:
 	ShopScene(SDL_Window* sdlWindow);

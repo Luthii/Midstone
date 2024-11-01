@@ -1,50 +1,41 @@
 #pragma once
-//#include <SDL.h>
-#include <SDL_image.h>
-#include <iostream>
-#include <string>
-
 
 //third party includes
-#include "Vector.h"
 
-//project includes
-#include "InputManager.h"
-#include "Camera.h"
-#include "DataCollection.h"
-
-class Object
-{
-private:
-	SDL_Texture* TEX_object; //to start simple, only a single sprite, no animation right now
-	SDL_Surface* SPR_object;
-	SDL_Renderer* sceneRenderer;
-
-	////initiate the variables of the sprite to be 16x16 pixels and scale of 1
-	//int SPR_width = 16;
-	//int SPR_height = 16;
-	//int SPR_scale = 1;
-
-	MATH::Vec3 position = MATH::Vec3(0,0,0); //initiate position to (0,0,0) -> x = 0, y = 0, layer, z = 0
-	MATH::Vec3 velocity = MATH::Vec3(0.0f, 0.0f, 0.0f);
-	float speed = 3.0f; //3 pixel per movement
-	std::string filePath;
-
-
-public:
-	Object(std::string filePath_, SDL_Renderer* sceneRenderer_);
-	~Object();
-
-	bool OnCreate();
-	bool OnDestroy();
-	void HandleEvents();
-	void Update(float deltaTime);
-	void Render(SDL_Renderer* windowRender);
-	float getSpeed() { return speed; }
-	MATH::Vec3 getPosition() { return position; }
-	MATH::Vec3 getVelocity() { return velocity; }
-	void setVelocity(MATH::Vec3 newVelocity) { velocity = newVelocity; }
-	void setPosition(MATH::Vec3 newPosition) { position.x = newPosition.x; position.y = newPosition.y; position.z = newPosition.z; }
-
+// DEFINITION OF OBJECT TYPES
+enum class OBJECT_TYPE {
+	UNDEFINED = 0,
+	// SHOP ITEMS
+	ANVIL,
+	// MINES ITEMS
+	IRON,
+	IRON_ORE
 };
 
+//DEFINITION OF THE OBJECT STRUCT
+/*
+	This structure will be used on ObjectMap.h to define ALL the object elements in the game
+*/
+struct Object {
+	unsigned int number;
+	OBJECT_TYPE type;
+	OBJECT_TYPE loot;
+	unsigned int lootQuantity;
+	unsigned int interactionNumber;
+};
+
+//definition of the struct that will be used to keep track of the objects interacted with on the scene
+/*
+	This structure should be used in a MAP where the key is a Vec2 and the item is a ObjectScene struct
+*/
+struct ObjectScene {
+	unsigned int numberInteractions;
+	unsigned int objNumber;
+};
+
+
+struct ObjectLoot {
+	//OBJECT_TYPE lootType;
+	unsigned int quatity;
+	unsigned int maxQuatity = 10;
+};

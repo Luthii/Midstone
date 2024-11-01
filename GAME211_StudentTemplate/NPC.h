@@ -1,5 +1,8 @@
 #pragma once
-class NPC
-{
-};
+
+#include "Character.h"
+
+//class NPC : public Character
+//{
+//};
 

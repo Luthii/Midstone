@@ -7,9 +7,10 @@
 #include "DataCollection.h"
 #include "Window.h"
 #include "Timer.h"
-//#include "Scene.h"
+#include "Scene.h"
 #include "ShopScene.h"
-//#include "PlayerBody.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 class GameManager {
@@ -27,6 +28,8 @@ private:
 	class Timer *timer;
 	bool isRunning;
 	class Scene *currentScene;
+	Player* player;
+	Enemy* enemy;
 
 	//// This might be unfamiliar
  //   class PlayerBody *player;

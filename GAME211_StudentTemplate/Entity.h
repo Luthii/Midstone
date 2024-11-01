@@ -1,68 +1,54 @@
 #pragma once
+
+//third party includes
 #include <MMath.h>
 #include <VMath.h>
 #include <SDL.h>
 #include <SDL_image.h>
 
-#ifndef ENTITY_H
-#define ENTITY_H
+//project includes
+#include "Camera.h"
+#include "InputManager.h"
+
 using namespace MATH;
+
+/*  	----------------- ABSTRACT CLASS --------------------------
+
+	The entity class will define the common attributes of:
+	- Character ins the world
+	- Objects in the world
+
+*/
+
 
 class Entity{
 
+//protected because the childs will need access to it
 protected:
-	// Copied from Body.h
-	Vec3 pos;
-	Vec3 vel;
-	Vec3 accel;
-	float mass;
-	float orientation;		// facing this direction
-	float rotation;			// rotating at this speed
-	float angular;          // angular acceleration
-	float radius;           // for getting near walls
-
-	Vec3 imageSizeWorldCoords;
-	SDL_Surface* image;
+	Vec3 position;
 	SDL_Texture* texture;
+	std::string texFilePath;
 	SDL_Renderer* sceneRenderer;
 
+	bool LoadTexture();
+
 public: 
-	Entity();
-	Entity(
-		Vec3 pos_, Vec3 vel_, Vec3 accel_,
-		float mass_,
-		float radius_,
-		float orientation_,
-		float rotation_,
-		float angular_
-	);
-	~Entity();
+//ALL entities must have a texture(needs a render to be created) and a position on the scene,
+//	so there is no default constructor with no paramenters
+	Entity(Vec3 position_, std::string texFilePath_, SDL_Renderer* sceneRenderer_) :
+		position{ position_ }, texFilePath{ texFilePath_ }, sceneRenderer{ sceneRenderer_ } {}
+	virtual ~Entity();
 
-
-	// Graphics and Memory
-	virtual void Update(float deltaTime);
 	virtual bool onCreate();
-	virtual bool onDestroy();
-	virtual void setImageSizeWorldCoords(Vec3 imageSizeWorldCoords_){imageSizeWorldCoords = imageSizeWorldCoords_;}
 
+//to be called in order in the game loop
+	virtual void HandleEvents() = 0;
+	virtual void Update(float deltaTime) = 0;
+	virtual void Render(SDL_Renderer* sceneRenderer);
+
+//proteced members setters and getters
 	virtual void setTexture(SDL_Texture* texture_) { texture = texture_; }
 	virtual SDL_Texture* getTexture() { return texture; }
-	virtual void setImage(SDL_Surface* image_) { image = image_; }
-	virtual SDL_Surface* getImage() { return image; }
-
-
-	// Physics
-	virtual void ApplyForce(Vec3 force_);
-	virtual Vec3 getPos() { return pos; }
-	virtual Vec3 getVel() { return vel; }
-	virtual Vec3 getAccel() { return accel; }
-	virtual float getMass() { return mass; }
-	virtual float getOrientation() { return orientation; }
-	virtual float getRotation() { return rotation; }
-	virtual float getAngular() { return angular; }
-
-	// User Interaction
-	virtual void HandleEvents(const SDL_Event& event);
+	virtual void setPosition(Vec3 newPosition) { position = newPosition; }
+	virtual Vec3 getPosition() { return position; }
 };
-
-#endif ENTITY_H

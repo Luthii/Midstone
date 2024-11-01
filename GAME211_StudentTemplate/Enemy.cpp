@@ -1,17 +1,12 @@
 #include "Enemy.h"
 
-Enemy::Enemy()
-{
+Enemy::~Enemy() { 
+	std::cout << "Calling Enemy Deconstructor" << std::endl; 
 }
 
-Enemy::~Enemy()
-{
-}
 
-void Enemy::attackPlayer()
-{
-}
 
-void Enemy::deathDrops()
-{
+
+void Enemy::HandleEvents() {
+	std::cout << "hello !";
 }

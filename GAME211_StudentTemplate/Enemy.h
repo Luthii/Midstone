@@ -1,20 +1,18 @@
 #pragma once
-#ifndef ENEMY_H
-#define ENEMY_H
 
-
-#include <string>
 #include "Character.h"
 
 class Enemy : public Character{
 private: 
-	int attack = 1;
+	int damage;
+
 public: 
-	Enemy();
+	// Constructor / Deconstructor
+	Enemy(Vec3 position_, Vec3 velocity_, float speed_, int damage, std::string texFilePath_, SDL_Renderer* sceneRenderer_) :
+		Character(position_, velocity_, speed_, texFilePath_, sceneRenderer_) {}
 	~Enemy();
 
-	void attackPlayer();
-	void deathDrops();
+	// Methods
+	void HandleEvents() override;
 };
 
-#endif ENEMY_H

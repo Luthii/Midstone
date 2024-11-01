@@ -40,6 +40,8 @@ void Map::onDestroy()
 {
 	SDL_DestroyTexture(TEX_TileMap);
 	TEX_TileMap = nullptr;
+
+	tileMap.clear();
 }
 
 bool Map::ReadXMLTileMap()
@@ -79,9 +81,6 @@ bool Map::ReadXMLTileMap()
 	//present in the final version of the map, we chose to create this functions.
 	mapLayers = CountLayer(layerNode);
 
-	//creates the vector with the size of the tile map to be loaded
-	//3D "matrix", x is the number of collumns, y the number of rows, z the number of layers
-	tileMap.assign(mapWidth, std::vector<std::vector<int>>(mapHeight, std::vector<int>(mapLayers, -1)));
 
 	//temp node to hold the information of the node with the tab "data"
 	XMLElement* layerData;
@@ -100,7 +99,7 @@ bool Map::ReadXMLTileMap()
 		
 		str = layerData->GetText();
 
-		SliceStr(str, mapWidth, mapHeight, layerNumber);
+		tileMap.push_back(SliceStr(str, mapWidth, mapHeight, layerNumber));
 		//next node with "layer" tag
 		layerNode = layerNode->NextSiblingElement("layer");
 	}
@@ -115,12 +114,18 @@ bool Map::ReadXMLTileMap()
 //int widht: number of columns in the map
 //int height: number of rows in the map
 //int layer: the current layer that is being processed
-void Map::SliceStr(std::string str, int width, int height, int layer) {
+MapLayer* Map::SliceStr(std::string str, int width, int height, int layer) {
 	//string to hold the elements between two commas on the string
 
 	std::string str2;
-	int row = 0;
+	MapLayer* newLayer = new std::vector<std::vector<int>>();
+	int row = 0;//------------------------------------------------------------------- <-swap names
 	int col = -1;
+	std::vector<int> test;
+	
+	//				# of rows					# of columns
+	newLayer->assign(mapHeight, std::vector<int>(mapWidth, -1));
+
 	for (unsigned int i = 0; i < str.length(); i++) {
 		if (str[i] == '\n') {
 			col++;
@@ -128,7 +133,8 @@ void Map::SliceStr(std::string str, int width, int height, int layer) {
 			continue;
 		}
 		if (str[i] == ',') {
-			tileMap[row][col][layer] = std::stoi(str2);
+			//std::cout << std::stoi(str2) << std::endl;
+			newLayer->at(col).at(row) = std::stoi(str2);
 			row++;
 			//std::cout << str2 << std::endl;
 			str2.clear();
@@ -136,6 +142,8 @@ void Map::SliceStr(std::string str, int width, int height, int layer) {
 		}
 		str2 += str[i];
 	}
+
+	return newLayer;
 }
 
 int Map::CountLayer(XMLElement* layerNode_)
@@ -161,7 +169,8 @@ void Map::Render(SDL_Renderer* renderer)
 	for (int i = 0; i < mapLayers; i++) {
 		for (int j = 0; j < mapHeight; j++) {
 			for (int k = 0; k < mapWidth; k++) {
-				tileNumber = tileMap[k][j][i] - 1;
+				tileNumber = tileMap.at(i)->at(j).at(k) - 1;
+
 				row = tileNumber / tileSetWidth; // y
 				col = tileNumber % tileSetWidth; // x
 
@@ -181,17 +190,18 @@ void Map::Render(SDL_Renderer* renderer)
 			}
 		}
 	}
-}
-
-int Map::collisionAt(MATH::Vec3 position)
-{
-	int tileX = static_cast<int>(position.x / TILE_RENDER_SIZE);
-	int tileY = static_cast<int>(position.y / TILE_RENDER_SIZE);
-	//std::cout << "Map: " << tileX << "," << tileY << "\n";
-
-	if( (tileX >= 0 && tileX < mapWidth) && (tileY >= 0 && tileY < mapHeight))
-		return tileMap[tileX][tileY][collisionLayer];
-
-	return -1;
 
 }
+
+//int Map::collisionAt(MATH::Vec3 position)
+//{
+//	int tileX = static_cast<int>(position.x / TILE_RENDER_SIZE);
+//	int tileY = static_cast<int>(position.y / TILE_RENDER_SIZE);
+//	//std::cout << "Map: " << tileX << "," << tileY << "\n";
+//
+//	if( (tileX >= 0 && tileX < mapWidth) && (tileY >= 0 && tileY < mapHeight))
+//		return tileMap[tileX][tileY][collisionLayer];
+//
+//	return -1;
+//
+//}

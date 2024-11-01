@@ -5,8 +5,6 @@ Enemy::~Enemy() {
 }
 
 
-
-
 void Enemy::HandleEvents() {
 	std::cout << "hello !";
 }

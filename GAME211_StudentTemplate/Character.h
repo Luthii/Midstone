@@ -43,7 +43,7 @@ public:
     Vec3 getVelocity() { return velocity; }
     void setSpeed(float newSpeed) { speed = newSpeed; }
     float getSpeed() { return speed; }
-    void setHEalth(float newHealth) { health = newHealth; }
+    void setHealth(float newHealth) { health = newHealth; }
     float getHealth() { return health; }
 };
 

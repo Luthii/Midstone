@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "ShopScene.h"
 #include "Player.h"
+#include "Enemy.h"
 
 
 class GameManager {
@@ -28,6 +29,7 @@ private:
 	bool isRunning;
 	class Scene *currentScene;
 	Player* player;
+	Enemy* enemy;
 
 	//// This might be unfamiliar
  //   class PlayerBody *player;

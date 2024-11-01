@@ -43,12 +43,23 @@ bool GameManager::OnCreate() {
         Vec3(50.0f, 30.0f, 0.0f),		//position
         Vec3(0.0f, 0.0f, 0.0f),			//velocity
         3.0f,							//speed
-        "textures/cactus.png",			//texture file path
-        currentScene->getRenderer()	//scene renderer
+        "textures/duck.png",			//texture file path
+        currentScene->getRenderer() 	//scene renderer
     );
     player->onCreate();
     currentScene->setPlayer(player);
-           
+      
+    //// create an Enemy
+    enemy = new Enemy(
+        Vec3(50.0f, 30.0f, 0.0f),       //position
+        Vec3(0.0f, 0.0f, 0.0f),         //velocity
+        1.0f,                           //speed
+        20,                             //damage
+        "textures/cactus.png",          //texture file path
+        currentScene->getRenderer()     //scene renderer
+    );
+    enemy->onCreate();
+
 	return true;
 }
 

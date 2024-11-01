@@ -17,7 +17,7 @@ Player::~Player() {
 			but there is an obstacle
 */
 
-//if the object is moving, its velocity is different from 0, so it's velocity vector magnitude is differentfrom zero
+//if the object is moving, its velocity is different from 0, so it's velocity vector magnitude is different from zero
 //in this case, test for colision
 void Player::TestCollision()
 {
@@ -78,7 +78,6 @@ void Player::TestCollision()
 		}
 	}
 }
-
 
 bool Player::Interact()
 {
@@ -265,5 +264,8 @@ void Player::HandleEvents()
 		Interact();
 		//std::cout << "\n-------------------------------------------------------\n";
 	}
+
+
+	std::cout << position.x << ", " << position.y << ", " << position.z << std::endl;
 
 }

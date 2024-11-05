@@ -64,6 +64,9 @@ void ShopScene::Render() {
 void ShopScene::HandleEvents()
 {
 	player->HandleEvents();
+	//Test for event
+	//if (InputManager::getInstance()->IsKeyUp(SDLK_p))
+	//	EventHandler::GetInstance()->Broadcast(ScreamEvent());
 }
 
 void ShopScene::setPlayer(Player* player_)

@@ -266,6 +266,11 @@ void Player::HandleEvents()
 	}
 
 
+	//Test for event
+	//if (InputManager::getInstance()->IsKeyUp(SDLK_l))
+	//	EventHandler::GetInstance()->Unsubscribe(ScreamEvent::eventType, "Player5");
+
+
 	std::cout << position.x << ", " << position.y << ", " << position.z << std::endl;
 
 }

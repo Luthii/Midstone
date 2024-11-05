@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Map.h"
 #include "Character.h"
+#include "EventHandler.h"
 
 class Player : public Character
 {
@@ -19,12 +20,19 @@ protected:
 
 public:
 	Player(Vec3 position_, Vec3 velocity_, float speed_, std::string texFilePath_, SDL_Renderer* sceneRenderer_) :
-		Character(position_, velocity_, speed_, texFilePath_, sceneRenderer_) {}
+		Character(position_, velocity_, speed_, texFilePath_, sceneRenderer_) 
+	{
+		//Test for event
+		//EventHandler::GetInstance()->Subscribe(ScreamEvent::eventType, std::bind(&Player::tempFunction, this, std::placeholders::_1), "Player5");
+	}
 
 	~Player();
 
 	void HandleEvents() override;
 	void setCollisionLayer(MapLayer* collisionLayer_) { collisionLayer = collisionLayer_; }
+
+	//test for event
+	//void tempFunction(const Event& event) { std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!!!\n"; }
 
 };
 

@@ -47,7 +47,8 @@ public:
 	bool IsKeyDown(const int key) const { return keyDown[key]; }
 	bool IsKeyUp(const int key) const { return keyUp[key]; }
 	//bool IsKeyPressed(const int key) const;
-	bool QuitGame() const { return quitGame; }
+	void QuitGame() { quitGame = true; }
+	bool IsQuitGame() { return quitGame; }
 	
 };
 

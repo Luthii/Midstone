@@ -1,34 +1,27 @@
 #pragma once
-
-//C++ includes
-
-//project includes
 #include "Scene.h"
-#include "Map.h"
-#include "Player.h"
-#include "Animation.h"
 #include "Button.h"
 
-class ShopScene : public Scene {
+class MainMenuScene : public Scene {
 private:
 	SDL_Window* window;		// an SDL window with a SDL renderer
-	SDL_Renderer* renderer;	// the renderer associated with SDL window
-
-	Map* shopMap;
+	SDL_Renderer* renderer;
 	Player* player;
+
 	Button* btPlay;
-	//Animation* testAnimation;
+	Button* btQuit;
 
 public:
-	ShopScene(SDL_Window* sdlWindow);
-	~ShopScene();
+	MainMenuScene(SDL_Window* sdl_Window);
+	~MainMenuScene();
 	bool OnCreate();
 	void OnDestroy();
 	void Update(const float time);
 	void Render();
 	void HandleEvents();
-	void setPlayer(Player* player_);
 	SDL_Window* getWindow() { return window; }
 	SDL_Renderer* getRenderer() { return renderer; }
+	virtual void setPlayer(Player* player_) { player = player_; }
+
 };
 

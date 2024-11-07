@@ -11,6 +11,8 @@
 #include "ShopScene.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "ShopScene.h"
+#include "MainMenuScene.h"
 
 
 class GameManager {
@@ -28,6 +30,8 @@ private:
 	class Timer *timer;
 	bool isRunning;
 	class Scene *currentScene;
+	Scene* mainMenuScene;
+	Scene* shopScene;
 	Player* player;
 	Enemy* enemy;
 

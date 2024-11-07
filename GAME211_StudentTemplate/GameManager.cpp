@@ -1,12 +1,14 @@
 #include "GameManager.h"
 //#include "Scene1.h"
-#include "ShopScene.h"
+
 
 GameManager::GameManager() {
 	windowPtr = nullptr;
 	timer = nullptr;
 	isRunning = true;
 	currentScene = nullptr;
+    shopScene = nullptr;
+    shopScene = nullptr;
     //player = nullptr;
 }
 
@@ -29,8 +31,13 @@ bool GameManager::OnCreate() {
 	}
 
     // select scene for specific assignment
+    shopScene = new ShopScene(windowPtr->GetSDL_Window());
+    shopScene->OnCreate();
 
-    currentScene = new ShopScene(windowPtr->GetSDL_Window());
+    mainMenuScene = new MainMenuScene(windowPtr->GetSDL_Window());
+    mainMenuScene->OnCreate();
+
+    currentScene = mainMenuScene;
     // need to create Player before validating scene
     if (!ValidateCurrentScene()) {
         std::cerr << "Error creating the default scene." << std::endl;
@@ -59,6 +66,7 @@ bool GameManager::OnCreate() {
         currentScene->getRenderer()     //scene renderer
     );
     enemy->onCreate();
+    shopScene->setPlayer(player);
 
 	return true;
 }
@@ -69,7 +77,7 @@ void GameManager::Run() {
     
 	timer->Start();
     
-	while (!InputManager::getInstance()->QuitGame()) {
+	while (!InputManager::getInstance()->IsQuitGame()) {
         
         handleEvents();
 		timer->UpdateFrameTicks();

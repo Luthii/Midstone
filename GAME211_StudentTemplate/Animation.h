@@ -1,9 +1,15 @@
 #pragma once
 
+//C++ includes
 #include <string>
 #include <vector>
 #include <SDL.h>
+
+//Third party includes
 #include "Vector.h"
+#include "tinyxml2.h"
+
+//Project includes
 #include "DataCollection.h"
 #include "Camera.h"
 
@@ -26,6 +32,8 @@ private:
 	AnimationInfo{"walk_left", TILE{0,32}, 6},
 	AnimationInfo{"walk_right", TILE{0,48}, 6}
 	};
+
+	std::vector<AnimationInfo> animation;
 	AnimationInfo currentAnimation = walkAnimation[0];
 	int currentFrame = 0;
 	float elapsedTime = 0.0f;

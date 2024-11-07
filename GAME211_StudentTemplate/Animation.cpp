@@ -1,7 +1,34 @@
 #include "Animation.h"
+using namespace tinyxml2;
 
 Animation::Animation(std::string fileName)
 {
+
+	XMLDocument animXML;
+	if (animXML.LoadFile(fileName.c_str()) != XML_SUCCESS) {
+		std::cerr << "Can't open the xml file: " << fileName.c_str() << "\n";
+		return;
+	}
+
+	// gets the root element of the xml file
+	XMLNode* root = animXML.FirstChild();
+
+	XMLElement* animData;
+	AnimationInfo animInfo;
+
+	animData = root->FirstChildElement("Animation");
+
+	while (animData != nullptr) {
+		animInfo.name = animData->FirstChildElement("name")->GetText();
+		animInfo.beginTile.x = std::stoi(animData->FirstChildElement("x")->GetText());
+		animInfo.beginTile.y = std::stoi(animData->FirstChildElement("y")->GetText());
+		animInfo.numberSprites = std::stoi(animData->FirstChildElement("number_of_sprites")->GetText());
+
+		animation.push_back(animInfo);
+
+		animData = animData->NextSiblingElement("Animation");
+	}
+
 	//open and xml file and read through it
 	std::cout << "Creating animation!\n";
 }

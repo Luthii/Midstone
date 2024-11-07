@@ -72,7 +72,7 @@ bool Map::ReadXMLTileMap()
 	spawnPosition.x = 5 * TILE_RENDER_SIZE;
 	spawnPosition.y = 36 * TILE_RENDER_SIZE;
 
-
+	
 	//Start to read the nodes with the tag "layer"
 	XMLElement* layerNode;
 	std::string str;

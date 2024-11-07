@@ -1,0 +1,24 @@
+<Animation>
+    <name>walk_up</name>
+    <x>0</x>
+    <y>0</y>
+    <number_of_sprites>6</number_of_sprites>
+</Animation>
+<Animation>
+    <name>walk_down</name>
+    <x>0</x>
+    <y>16</y>
+    <number_of_sprites>6</number_of_sprites>
+</Animation>
+<Animation>
+    <name>walk_left</name>
+    <x>0</x>
+    <y>32</y>
+    <number_of_sprites>6</number_of_sprites>
+</Animation>
+<Animation>
+    <name>walk_right</name>
+    <x>0</x>
+    <y>43</y>
+    <number_of_sprites>6</number_of_sprites>
+</Animation>

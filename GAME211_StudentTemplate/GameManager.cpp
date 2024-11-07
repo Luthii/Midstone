@@ -43,7 +43,7 @@ bool GameManager::OnCreate() {
         Vec3(50.0f, 30.0f, 0.0f),		//position
         Vec3(0.0f, 0.0f, 0.0f),			//velocity
         3.0f,							//speed
-        "textures/duck.png",			//texture file path
+        "textures/charlie_walk.png",	//texture file path
         currentScene->getRenderer() 	//scene renderer
     );
     player->onCreate();

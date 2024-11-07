@@ -15,7 +15,7 @@ private:
 
 	Map* shopMap;
 	Player* player;
-	Animation* testAnimation;
+	//Animation* testAnimation;
 
 public:
 	ShopScene(SDL_Window* sdlWindow);

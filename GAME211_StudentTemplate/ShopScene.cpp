@@ -9,7 +9,7 @@ ShopScene::ShopScene(SDL_Window* sdlWindow_) {
 	renderer = SDL_GetRenderer(window);
 	shopMap = nullptr;
 	player = nullptr;
-	testAnimation = nullptr;
+	//testAnimation = nullptr;
 }
 
 ShopScene::~ShopScene() {
@@ -29,12 +29,13 @@ bool ShopScene::OnCreate() {
 	shopMap = new Map("xml/TM_Shop_Collision.xml", "textures/SuperTileSetShop.png", renderer);
 	shopMap->onCreate();
 
+	std::cout << "Finished creating the shop scene!\n";
 	return true;
 }
 
 void ShopScene::OnDestroy() {
 	shopMap->onDestroy();
-	delete testAnimation;
+	//delete testAnimation;
 	delete shopMap;
 }
 
@@ -42,7 +43,7 @@ void ShopScene::Update(const float deltaTime) {
 
 	player->Update(deltaTime);
 	Camera::UpdateCenterCoordinates(player->getPosition().x, player->getPosition().y);
-	testAnimation->Update(deltaTime);
+	//testAnimation->Update(deltaTime);
 }
 
 void ShopScene::Render() {
@@ -56,7 +57,7 @@ void ShopScene::Render() {
 
 	//render player
 	player->Render(renderer);
-	testAnimation->Render(renderer);
+	//testAnimation->Render(renderer);
 
 	SDL_RenderPresent(renderer);
 }
@@ -76,7 +77,7 @@ void ShopScene::setPlayer(Player* player_)
 	player->setPosition(shopMap->getSpawnPosition());
 	Camera::UpdateCenterCoordinates(player->getPosition().x, player->getPosition().y);
 
-	testAnimation = new Animation(renderer, player->getPosition());
-	testAnimation->onCreate();
+	//testAnimation = new Animation(renderer, player->getPosition());
+	//testAnimation->onCreate();
 }
 

@@ -224,6 +224,24 @@ void Player::AddItemBag(OBJECT_TYPE objType, unsigned int quantity) {
 	}
 }
 
+void Player::Update(float deltaTime) {
+	position += velocity * speed;
+	playerAnimation->Update(deltaTime);
+}
+
+void Player::Render(SDL_Renderer* sceneRender) {
+	SDL_Rect rect;
+	SDL_Rect clip = playerAnimation->getCurrentFrameSprite();
+	MATH::Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
+
+	rect.x = static_cast<int>(screenCoordinates.x);
+	rect.y = static_cast<int>(screenCoordinates.y);
+	rect.w = TILE_RENDER_SIZE;
+	rect.h = TILE_RENDER_SIZE;
+
+	SDL_RenderCopyEx(sceneRenderer, texture, &clip, &rect, 0.0, nullptr, SDL_FLIP_NONE);
+}
+
 void Player::HandleEvents()
 {
     //key Down event -> movent character and play walking animation

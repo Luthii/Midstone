@@ -9,7 +9,7 @@ GameManager::GameManager() {
 	currentScene = nullptr;
     //player = nullptr;
 }
-
+ 
 bool GameManager::OnCreate() {
 
     windowPtr = new Window(SCREEN_WIDTH, SCREEN_HEIGHT);

@@ -27,7 +27,7 @@ bool MainMenuScene::OnCreate() {
 	btQuit = new Button(Vec3(500, 100, 0), "textures/bt_Quit.png", renderer);
 	btQuit->onCreate();
 
-	std::cout << "Finished creating the shop scene!\n";
+	std::cout << "Finished creating the main menu scene!\n";
 	return true;
 }
 

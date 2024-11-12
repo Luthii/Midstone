@@ -235,6 +235,30 @@ void Player::AddItemBag(OBJECT_TYPE objType, unsigned int quantity) {
 
 void Player::Update(float deltaTime) {
 	position += velocity * speed;
+
+	//set animation
+	std::string animationName;
+	if (VMath::mag(velocity) == 0) {//player is not moving - select idle animation
+		animationName = "idle_";
+	}
+	else { //player is moving - select walk animation
+		animationName = "walk_";
+	}
+
+	if (orientation.x > 0) {//player is going right - priorize side movement
+		animationName += "right";
+	}
+	else if (orientation.x < 0) {
+		animationName += "left";
+	}
+	else if (orientation.y > 0) {
+		animationName += "down";
+	}
+	else if (orientation.y < 0) {
+		animationName += "up";
+	}
+
+	playerAnimation->ChangeAnimation(animationName);
 	playerAnimation->Update(deltaTime);
 }
 
@@ -243,10 +267,10 @@ void Player::Render(SDL_Renderer* sceneRender) {
 	SDL_Rect clip = playerAnimation->getCurrentFrameSprite();
 	MATH::Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
 
-	rect.x = static_cast<int>(screenCoordinates.x);
-	rect.y = static_cast<int>(screenCoordinates.y);
-	rect.w = TILE_RENDER_SIZE;
-	rect.h = TILE_RENDER_SIZE;
+	rect.x = static_cast<int>(screenCoordinates.x + (playerAnimation->getCurrentAnimationInfo().anchor_x * TILE_SCALE));
+	rect.y = static_cast<int>(screenCoordinates.y + (playerAnimation->getCurrentAnimationInfo().anchor_y * TILE_SCALE));
+	rect.w = clip.w * TILE_SCALE;
+	rect.h = clip.h * TILE_SCALE;
 
 	SDL_RenderCopyEx(sceneRenderer, texture, &clip, &rect, 0.0, nullptr, SDL_FLIP_NONE);
 }

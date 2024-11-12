@@ -32,28 +32,34 @@ bool GameManager::OnCreate() {
 
     // select scene for specific assignment
     shopScene = new ShopScene(windowPtr->GetSDL_Window());
-    shopScene->OnCreate();
-
-    mainMenuScene = new MainMenuScene(windowPtr->GetSDL_Window());
-    mainMenuScene->OnCreate();
-
-    currentScene = shopScene;
-    // need to create Player before validating scene
-    if (!ValidateCurrentScene()) {
-        std::cerr << "Error creating the default scene." << std::endl;
+    if (!shopScene->OnCreate()) {
+        std::cerr << "Error creating the Shop scene." << std::endl;
         OnDestroy();
         return false;
     }
+
+    mainMenuScene = new MainMenuScene(windowPtr->GetSDL_Window());
+    if (!mainMenuScene->OnCreate()) {
+        std::cerr << "Error creating the Main Menu scene." << std::endl;
+        OnDestroy();
+        return false;
+    }
+
+    currentScene = shopScene;
     
     //// create player
     player = new Player(
         Vec3(50.0f, 30.0f, 0.0f),		//position
         Vec3(0.0f, 0.0f, 0.0f),			//velocity
         3.0f,							//speed
-        "textures/charlie_walk.png",	//texture file path
+        "textures/player_spritesheet.png",	//texture file path
         currentScene->getRenderer() 	//scene renderer
     );
-    player->onCreate();
+    if (!player->onCreate()) {
+        std::cerr << "Error creating the player." << std::endl;
+        OnDestroy();
+        return false;
+    }
     currentScene->setPlayer(player);
       
     //// create an Enemy
@@ -161,21 +167,4 @@ void GameManager::LoadScene( int i )
             currentScene = new ShopScene( windowPtr->GetSDL_Window());
             break;
     }
-
-    // using ValidateCurrentScene() to safely run OnCreate
-    if (!ValidateCurrentScene())
-    {
-        isRunning = false;
-    }
-}
-
-bool GameManager::ValidateCurrentScene()
-{
-    if (currentScene == nullptr) {
-        return false;
-    }
-    if (currentScene->OnCreate() == false) {
-        return false;
-    }
-    return true;
 }

@@ -25,6 +25,10 @@ Animation::Animation(std::string fileName)
 		animInfo.name = animData->FirstChildElement("name")->GetText();
 		animInfo.beginTile.x = std::stoi(animData->FirstChildElement("x")->GetText());
 		animInfo.beginTile.y = std::stoi(animData->FirstChildElement("y")->GetText());
+		animInfo.width = std::stoi(animData->FirstChildElement("w")->GetText());
+		animInfo.height = std::stoi(animData->FirstChildElement("h")->GetText());
+		animInfo.anchor_x = std::stoi(animData->FirstChildElement("anchor_x")->GetText());
+		animInfo.anchor_y = std::stoi(animData->FirstChildElement("anchor_y")->GetText());
 		animInfo.numberSprites = std::stoi(animData->FirstChildElement("number_of_sprites")->GetText());
 
 		animation.push_back(animInfo);
@@ -33,7 +37,13 @@ Animation::Animation(std::string fileName)
 	}
 
 	//set the current animation to be the first one on the sprite sheet
-	currentAnimation = animation[0];
+	currentAnimation = animation.back();
+	//currentAnimation = animation[9];
+
+	currentFrameSprite.x = currentAnimation.beginTile.x + (currentFrame * currentAnimation.width);
+	currentFrameSprite.y = currentAnimation.beginTile.y * TILE_SIZE;
+	currentFrameSprite.w = currentAnimation.width;
+	currentFrameSprite.h = currentAnimation.height;
 
 }
 
@@ -51,12 +61,22 @@ void Animation::Update(float deltaTime)
 
 		//clips the tile map texture. It defines the tile to be rendered.
 		//updates the date if the frame has changed
-		currentFrameSprite.x = currentAnimation.beginTile.x + (currentFrame * TILE_SIZE);
+		currentFrameSprite.x = currentAnimation.beginTile.x + (currentFrame * currentAnimation.width);
 		currentFrameSprite.y = currentAnimation.beginTile.y * TILE_SIZE;
-		currentFrameSprite.w = TILE_SIZE;
-		currentFrameSprite.h = TILE_SIZE;
+		currentFrameSprite.w = currentAnimation.width;
+		currentFrameSprite.h = currentAnimation.height;
 
 		//reset elapsed time
 		elapsedTime = 0.0f;
+	}
+}
+
+void Animation::ChangeAnimation(std::string animationName)
+{
+	for (AnimationInfo animationInfo : animation) {
+		if (animationInfo.name == animationName) {
+			currentAnimation = animationInfo;
+			break;
+		}
 	}
 }

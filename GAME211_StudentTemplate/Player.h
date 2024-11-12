@@ -31,8 +31,7 @@ public:
 		collisionBox.bottomRightCorner.x = 14 * TILE_SCALE;
 		collisionBox.bottomRightCorner.y = 16 * TILE_SCALE;
 		playerAnimation = new Animation("xml/player_animation.xml");
-		//Test for event
-		//EventHandler::GetInstance()->Subscribe(ScreamEvent::eventType, std::bind(&Player::tempFunction, this, std::placeholders::_1), "Player5");
+		std::cout << "Player created!\n";
 	}
 
 	~Player();
@@ -41,9 +40,6 @@ public:
 	void Render(SDL_Renderer* sceneRender);
 	void HandleEvents() override;
 	void setCollisionLayer(MapLayer* collisionLayer_) { collisionLayer = collisionLayer_; }
-
-	//test for event
-	//void tempFunction(const Event& event) { std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!!!!!\n"; }
 
 };
 

@@ -30,7 +30,6 @@ private:
 //------------ PRIVATE METHODS --------------------
 	void handleEvents();
 	void LoadScene(int i);
-	bool ValidateCurrentScene();
 
 //------------ SINGLETON SETUP --------------------
 	//only instance of GameManager

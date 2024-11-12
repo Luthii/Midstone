@@ -19,6 +19,10 @@
 struct AnimationInfo {
 	std::string name;
 	TILE beginTile;
+	int width;
+	int height;
+	int anchor_x;
+	int anchor_y;
 	unsigned int numberSprites;
 };
 
@@ -26,15 +30,8 @@ class Animation
 {
 private:
 	SDL_Rect currentFrameSprite;
-	//std::vector<AnimationInfo> walkAnimation = {
-	//AnimationInfo{"walk_up", TILE{0,0}, 6},
-	//AnimationInfo{"walk_down", TILE{0,16}, 6},
-	//AnimationInfo{"walk_left", TILE{0,32}, 6},
-	//AnimationInfo{"walk_right", TILE{0,48}, 6}
-	//};
-
 	std::vector<AnimationInfo> animation;
-	AnimationInfo currentAnimation;// = walkAnimation[0];
+	AnimationInfo currentAnimation;
 	int currentFrame = 0;
 	float elapsedTime = 0.0f;
 	//initiates with the animation of the charlie walk sprite sheet
@@ -44,5 +41,7 @@ public:
 	Animation(std::string fileName);
 
 	void Update(float deltaTime);
-	SDL_Rect getCurrentFrameSprite() { return currentFrameSprite; }
+	SDL_Rect getCurrentFrameSprite() const { return currentFrameSprite; }
+	AnimationInfo getCurrentAnimationInfo() const { return currentAnimation; }
+	void ChangeAnimation(std::string animationName);
 };

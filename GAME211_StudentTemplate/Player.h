@@ -13,6 +13,7 @@ private:
 	std::map<TILE, ObjectScene*, TILE_Comparator> interactedObjects;
 	std::map<OBJECT_TYPE, ObjectLoot*> playerBag;
 	Animation* playerAnimation;
+	CollisionBox collisionBox;
 
 	void TestCollision();
 	bool Interact();
@@ -25,6 +26,10 @@ public:
 	Player(Vec3 position_, Vec3 velocity_, float speed_, std::string texFilePath_, SDL_Renderer* sceneRenderer_) :
 		Character(position_, velocity_, speed_, texFilePath_, sceneRenderer_) 
 	{
+		collisionBox.topLeftCorner.x = 2;
+		collisionBox.topLeftCorner.y = 6;
+		collisionBox.bottomRightCorner.x = 14 * TILE_SCALE;
+		collisionBox.bottomRightCorner.y = 16 * TILE_SCALE;
 		playerAnimation = new Animation("xml/player_animation.xml");
 		//Test for event
 		//EventHandler::GetInstance()->Subscribe(ScreamEvent::eventType, std::bind(&Player::tempFunction, this, std::placeholders::_1), "Player5");

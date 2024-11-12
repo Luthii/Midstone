@@ -19,6 +19,11 @@ struct TILE {
 	int y = -1;
 };
 
+struct CollisionBox {
+	TILE topLeftCorner;
+	TILE bottomRightCorner;
+};
+
 struct TILE_Comparator {
 	bool operator()(const TILE& tile, const TILE& otherTile) const {
 		return  (tile.x < otherTile.x) || (!(otherTile.x < tile.x) && (tile.y < otherTile.y));

@@ -26,15 +26,15 @@ class Animation
 {
 private:
 	SDL_Rect currentFrameSprite;
-	std::vector<AnimationInfo> walkAnimation = {
-	AnimationInfo{"walk_up", TILE{0,0}, 6},
-	AnimationInfo{"walk_down", TILE{0,16}, 6},
-	AnimationInfo{"walk_left", TILE{0,32}, 6},
-	AnimationInfo{"walk_right", TILE{0,48}, 6}
-	};
+	//std::vector<AnimationInfo> walkAnimation = {
+	//AnimationInfo{"walk_up", TILE{0,0}, 6},
+	//AnimationInfo{"walk_down", TILE{0,16}, 6},
+	//AnimationInfo{"walk_left", TILE{0,32}, 6},
+	//AnimationInfo{"walk_right", TILE{0,48}, 6}
+	//};
 
 	std::vector<AnimationInfo> animation;
-	AnimationInfo currentAnimation = walkAnimation[0];
+	AnimationInfo currentAnimation;// = walkAnimation[0];
 	int currentFrame = 0;
 	float elapsedTime = 0.0f;
 	//initiates with the animation of the charlie walk sprite sheet

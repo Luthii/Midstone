@@ -3,7 +3,10 @@ using namespace tinyxml2;
 
 Animation::Animation(std::string fileName)
 {
+	//initializing variables
+	currentFrameSprite = { 0,0,TILE_RENDER_SIZE, TILE_RENDER_SIZE };
 
+	//reading the xml file of the animation information
 	XMLDocument animXML;
 	if (animXML.LoadFile(fileName.c_str()) != XML_SUCCESS) {
 		std::cerr << "Can't open the xml file: " << fileName.c_str() << "\n";
@@ -29,8 +32,9 @@ Animation::Animation(std::string fileName)
 		animData = animData->NextSiblingElement("Animation");
 	}
 
-	//open and xml file and read through it
-	std::cout << "Creating animation!\n";
+	//set the current animation to be the first one on the sprite sheet
+	currentAnimation = animation[0];
+
 }
 
 void Animation::Update(float deltaTime)

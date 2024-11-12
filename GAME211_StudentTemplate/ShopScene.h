@@ -16,7 +16,6 @@ private:
 
 	Map* shopMap;
 	Player* player;
-	Button* btPlay;
 	//Animation* testAnimation;
 
 public:

@@ -10,7 +10,6 @@ ShopScene::ShopScene(SDL_Window* sdlWindow_) {
 	shopMap = nullptr;
 	player = nullptr;
 	//testAnimation = nullptr;
-	btPlay = nullptr;
 }
 
 ShopScene::~ShopScene() {
@@ -29,9 +28,6 @@ bool ShopScene::OnCreate() {
 
 	shopMap = new Map("xml/TM_Shop_Collision.xml", "textures/SuperTileSetShop.png", renderer);
 	shopMap->onCreate();
-
-	btPlay = new Button(Vec3(100, 100, 0), "textures/bt_Play.png", renderer);
-	btPlay->onCreate();
 
 	std::cout << "Finished creating the shop scene!\n";
 	return true;
@@ -63,15 +59,12 @@ void ShopScene::Render() {
 	player->Render(renderer);
 	//testAnimation->Render(renderer);
 
-	btPlay->Render(renderer);
-
 	SDL_RenderPresent(renderer);
 }
 
 void ShopScene::HandleEvents()
 {
 	player->HandleEvents();
-	btPlay->HandleEvents();
 	//Test for event
 	//if (InputManager::getInstance()->IsKeyUp(SDLK_p))
 	//	EventHandler::GetInstance()->Broadcast(ScreamEvent());

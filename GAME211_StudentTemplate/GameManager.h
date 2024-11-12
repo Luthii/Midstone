@@ -17,49 +17,47 @@
 
 class GameManager {
 private:
-	/// These are called "forward declarations" The idea is that a pointer is 
-	/// really just an unsigned int, so to create a pointer to it you really only
-	/// need to tell the compiler that there is a class called Window and I need
-	/// a pointer to it, thus the "class Window*" means trust me, there is a class 
-	/// called Window, I just need a pointer to it.
-
-	/// If that was too much for your brain, just #include "Window.h" and declare
-	/// Window *ptr and don't use the word "class"  This is a second semester C++
-	/// topic anyway
-	class Window *windowPtr;
-	class Timer *timer;
+//------------ PRIVATE VARIABLES --------------------
+	Window *windowPtr;
+	Timer *timer;
 	bool isRunning;
-	class Scene *currentScene;
+	Scene *currentScene;
 	Scene* mainMenuScene;
 	Scene* shopScene;
 	Player* player;
 	Enemy* enemy;
 
-	//// This might be unfamiliar
- //   class PlayerBody *player;
-
+//------------ PRIVATE METHODS --------------------
 	void handleEvents();
 	void LoadScene(int i);
 	bool ValidateCurrentScene();
 
+//------------ SINGLETON SETUP --------------------
+	//only instance of GameManager
+	static GameManager* instance;
+	//default constructor is private - Singleton
+	GameManager();
+
 
 public:
-	GameManager();
+	//"delete" the methods that allow the class to be copied
+	GameManager(const GameManager& obj) = delete;
+	GameManager& operator=(GameManager const&) = delete;
+
+	static GameManager* getInstance() {
+		if (instance == NULL)
+			instance = new GameManager();
+
+		return instance;
+	}
+
+
 	~GameManager();
 	bool OnCreate();
 	void OnDestroy();
-
-
-	// These might be unfamiliar
-	float getSceneHeight();
-	float getSceneWidth();
-	//Matrix4 getProjectionMatrix();
-    //PlayerBody* getPlayer(){ return player; }
-	void RenderPlayer(float scale = 1.0f);
-	SDL_Renderer* getRenderer();
-
 	void Run();
-    
+	SDL_Renderer* getRenderer();
+	void QuitGame(const Event& event) { isRunning = false; }
 };
 #endif
 

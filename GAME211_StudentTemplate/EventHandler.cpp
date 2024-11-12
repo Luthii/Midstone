@@ -6,7 +6,7 @@ bool EventHandler::Subscribe(const Event::EventType& eventType, Listener&& liste
 {
 	if (listenerMap.find(eventType) == listenerMap.end()) {
 		if (listenerMap.insert({ eventType, std::vector<functionPair>() }).second == false) {
-			std::cout << "Unable to subscribe event. \n";
+			std::cout << "Unable to subscribe event. Event type: " << eventType << ", function ID: " << functionID <<  "\n";
 			return false;
 		}
 	}
@@ -32,6 +32,8 @@ bool EventHandler::Unsubscribe(const Event::EventType& eventType, const char* fu
 			listenersList.erase(listenerFunction);
 		}
 	}
+
+	return true;
 }
 
 void EventHandler::Broadcast(const Event& event) const

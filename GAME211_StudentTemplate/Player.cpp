@@ -21,6 +21,7 @@ Player::~Player() {
 //in this case, test for colision
 void Player::TestCollision()
 {
+	//Vec3 collisionBoxPosition = Vec3(position.x + collisionBox.topLeftCorner.x, )
 
 	if (VMath::mag(velocity) != 0) {
 		MATH::Vec3 vecAuxAdjancent; //test side
@@ -32,14 +33,18 @@ void Player::TestCollision()
 		if (velocity.x > 0.0f)
 		{
 			//we have to use the speed because the object will move speed pixels
-			vecAuxAdjancent = position + Vec3(TILE_RENDER_SIZE + speed, 0.0f, 0.0f);
-			vecAuxDiagonal = position + Vec3(TILE_RENDER_SIZE + speed, (TILE_RENDER_SIZE - 1), 0.0f);
+			vecAuxAdjancent = position + Vec3(collisionBox.bottomRightCorner.x + speed, collisionBox.topLeftCorner.y, 0.0f);
+			vecAuxDiagonal = position + Vec3(collisionBox.bottomRightCorner.x + speed, collisionBox.bottomRightCorner.y, 0.0f);
+			//vecAuxAdjancent = position + Vec3(TILE_RENDER_SIZE + speed, 0.0f, 0.0f);
+			//vecAuxDiagonal = position + Vec3(TILE_RENDER_SIZE + speed, (TILE_RENDER_SIZE - 1), 0.0f);
 		}
 		//object going left -> -x
 		else if (velocity.x < 0.0f)
 		{
-			vecAuxAdjancent = position + Vec3(-speed, 0.0f, 0.0f);
-			vecAuxDiagonal = position + Vec3(-speed, (TILE_RENDER_SIZE - 1), 0.0f);
+			vecAuxAdjancent = position + Vec3(collisionBox.topLeftCorner.x - speed, collisionBox.topLeftCorner.y, 0.0f);
+			vecAuxDiagonal = position + Vec3(collisionBox.topLeftCorner.x - speed, collisionBox.bottomRightCorner.y, 0.0f);
+			//vecAuxAdjancent = position + Vec3(-speed, 0.0f, 0.0f);
+			//vecAuxDiagonal = position + Vec3(-speed, (TILE_RENDER_SIZE - 1), 0.0f);
 		}
 
 		tileValueAdjacent = collisionLayer->at(vecAuxAdjancent.y / TILE_RENDER_SIZE).at(vecAuxAdjancent.x / TILE_RENDER_SIZE);
@@ -58,14 +63,18 @@ void Player::TestCollision()
 		//object going righ -> +y (down the screen)
 		if (velocity.y > 0.0f)
 		{
-			vecAuxAdjancent = position + Vec3(0.0f, TILE_RENDER_SIZE + speed, 0.0f);
-			vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), TILE_RENDER_SIZE + speed, 0.0f);
+			vecAuxAdjancent = position + Vec3(collisionBox.topLeftCorner.x, collisionBox.bottomRightCorner.y + speed, 0.0f);
+			vecAuxDiagonal = position + Vec3(collisionBox.bottomRightCorner.x, collisionBox.bottomRightCorner.y + speed, 0.0f);
+			//vecAuxAdjancent = position + Vec3(0.0f, TILE_RENDER_SIZE + speed, 0.0f);
+			//vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), TILE_RENDER_SIZE + speed, 0.0f);
 		}
 		//object going left -> -y (up on the screen)
 		else if (velocity.y < 0.0f)
 		{
-			vecAuxAdjancent = position + Vec3(0.0f, -speed, 0.0f);
-			vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), -speed, 0.0f);
+			vecAuxAdjancent = position + Vec3(collisionBox.topLeftCorner.x, collisionBox.topLeftCorner.y -speed, 0.0f);
+			vecAuxDiagonal = position + Vec3(collisionBox.bottomRightCorner.x, collisionBox.topLeftCorner.y - speed, 0.0f);
+			//vecAuxAdjancent = position + Vec3(0.0f, -speed, 0.0f);
+			//vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), -speed, 0.0f);
 		}
 
 		tileValueAdjacent = collisionLayer->at(vecAuxAdjancent.y / TILE_RENDER_SIZE).at(vecAuxAdjancent.x / TILE_RENDER_SIZE);
@@ -92,7 +101,7 @@ bool Player::Interact()
 	TILE playerTile;
 	playerTile.x = position.y / TILE_RENDER_SIZE;
 	playerTile.y = position.x / TILE_RENDER_SIZE;
-	std::cout << "Player tile coordinates: " << playerTile.x << "," << playerTile.y << "\n";
+	//std::cout << "Player tile coordinates: " << playerTile.x << "," << playerTile.y << "\n";
 	MATH::Vec3 vecAuxAdjancent; //test side
 	MATH::Vec3 vecAuxDiagonal; //test bottom or up
 	int tileValueAdjacent = -1;
@@ -159,8 +168,8 @@ bool Player::Interact()
 		//std::cout << "Tile ID: " << tileID << std::endl;
 		//priority to the top collision - if no object in the top corner, test the one below it
 		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
-			tileCoords.x = vecAuxDiagonal.y / TILE_RENDER_SIZE;
-			tileCoords.y = vecAuxDiagonal.x / TILE_RENDER_SIZE;
+			tileCoords.x = static_cast<int>(vecAuxDiagonal.y / TILE_RENDER_SIZE);
+			tileCoords.y = static_cast<int>(vecAuxDiagonal.x / TILE_RENDER_SIZE);
 			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
 			//std::cout << "Tile ID: " << tileID << std::endl;
 
@@ -170,7 +179,7 @@ bool Player::Interact()
 		}
 	}
 
-	std::cout << "Tile coordinates: " << tileCoords.x << "," << tileCoords.y << "\n";
+	//std::cout << "Tile coordinates: " << tileCoords.x << "," << tileCoords.y << "\n";
 	CheckObjectInteractionList(tileCoords, tileID);
 
 	return true;
@@ -189,13 +198,13 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		if (interactedObjects.find(key) != interactedObjects.end()) {
 			//the object was found
 			interactedObjects.at(key)->numberInteractions++;
-			std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber << std::endl;
+			//std::cout << "Object interacted with already on the list! ID: " << interactedObjects.at(key)->objNumber << std::endl;
 		}
 		else {
 			//first interaction. Creates a new object on the map
 			ObjectScene* newObj = new ObjectScene{ 1, objectID };
 			interactedObjects.insert(std::pair<TILE, ObjectScene*>(key, newObj));
-			std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber << std::endl;
+			//std::cout << "Object interacted with NEW! ID: " << interactedObjects.at(key)->objNumber << std::endl;
 		}
 
 		//if the object being interacted with reached the number of interactions necessary to be deleted, remove from map
@@ -288,7 +297,5 @@ void Player::HandleEvents()
 	//if (InputManager::getInstance()->IsKeyUp(SDLK_l))
 	//	EventHandler::GetInstance()->Unsubscribe(ScreamEvent::eventType, "Player5");
 
-
-	std::cout << position.x << ", " << position.y << ", " << position.z << std::endl;
 
 }

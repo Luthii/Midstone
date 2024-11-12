@@ -37,7 +37,7 @@ bool GameManager::OnCreate() {
     mainMenuScene = new MainMenuScene(windowPtr->GetSDL_Window());
     mainMenuScene->OnCreate();
 
-    currentScene = mainMenuScene;
+    currentScene = shopScene;
     // need to create Player before validating scene
     if (!ValidateCurrentScene()) {
         std::cerr << "Error creating the default scene." << std::endl;
@@ -68,6 +68,8 @@ bool GameManager::OnCreate() {
     enemy->onCreate();
     shopScene->setPlayer(player);
 
+    EventHandler::GetInstance()->Subscribe(QuitEvent::eventType, std::bind(&GameManager::QuitGame, this, std::placeholders::_1), "GameManager");
+
 	return true;
 }
 
@@ -77,7 +79,7 @@ void GameManager::Run() {
     
 	timer->Start();
     
-	while (!InputManager::getInstance()->IsQuitGame()) {
+	while (isRunning) {
         
         handleEvents();
 		timer->UpdateFrameTicks();
@@ -93,6 +95,9 @@ void GameManager::handleEvents()
 {
     InputManager::getInstance()->Update();
     currentScene->HandleEvents();
+
+    if (InputManager::getInstance()->IsKeyUp(SDLK_0))
+        EventHandler::GetInstance()->Broadcast(QuitEvent());
 }
 
 GameManager::~GameManager() {}

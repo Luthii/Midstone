@@ -7,19 +7,20 @@
 //create the InputManager/EventHandler singleton
 InputManager* InputManager::instance = nullptr;
 EventHandler* EventHandler::instance = nullptr;
+GameManager* GameManager::instance = nullptr;
+
 
 
 int main(int argc, char* args[]) { /// Standard C-style entry point, you need to use it
 
-	GameManager *ptr = new GameManager();
-	bool status  = ptr->OnCreate();
+	//GameManager::getInstance();
+	bool status = GameManager::getInstance()->OnCreate();
 	if (status == true) {
-		ptr->Run();
+		GameManager::getInstance()->Run();
 	} else if (status == false) {
 		std::cerr << "Fatal error occured. Cannot start this program" << std::endl;
 	}
-	ptr->OnDestroy();
-	delete ptr;
+	GameManager::getInstance()->OnDestroy();
 	return 0;
 
 }

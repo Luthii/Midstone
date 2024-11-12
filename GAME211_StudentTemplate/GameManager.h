@@ -58,6 +58,7 @@ public:
 	void Run();
 	SDL_Renderer* getRenderer();
 	void QuitGame(const Event& event) { isRunning = false; }
+	void ChangeScene(const Event& event);
 };
 #endif
 

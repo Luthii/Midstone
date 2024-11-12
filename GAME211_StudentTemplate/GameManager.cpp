@@ -69,6 +69,7 @@ bool GameManager::OnCreate() {
     shopScene->setPlayer(player);
 
     EventHandler::GetInstance()->Subscribe(QuitEvent::eventType, std::bind(&GameManager::QuitGame, this, std::placeholders::_1), "GameManager");
+    EventHandler::GetInstance()->Subscribe(ChangeSceneEvent::eventType, std::bind(&GameManager::ChangeScene, this, std::placeholders::_1), "GameManager");
 
 	return true;
 }
@@ -98,6 +99,12 @@ void GameManager::handleEvents()
 
     if (InputManager::getInstance()->IsKeyUp(SDLK_0))
         EventHandler::GetInstance()->Broadcast(QuitEvent());
+
+    if (InputManager::getInstance()->IsKeyUp(SDLK_1))
+        EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::MAIN_MENU));
+
+    if (InputManager::getInstance()->IsKeyUp(SDLK_2))
+        EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::SHOP_SCENE));
 }
 
 GameManager::~GameManager() {}
@@ -119,6 +126,21 @@ SDL_Renderer* GameManager::getRenderer()
     SDL_Window* window = currentScene->getWindow();
     SDL_Renderer* renderer = SDL_GetRenderer(window);
     return renderer;
+}
+
+void GameManager::ChangeScene(const Event& event)
+{
+    const ChangeSceneEvent* changeSceneEvent = dynamic_cast<const ChangeSceneEvent*>(&event);
+    switch (changeSceneEvent->sceneChange) {
+    case SCENES::MAIN_MENU:
+        currentScene = mainMenuScene;
+        break;
+    case SCENES::SHOP_SCENE:
+        currentScene = shopScene;
+        break;
+    default:
+        break;
+    }
 }
 
 

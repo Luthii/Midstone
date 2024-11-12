@@ -29,10 +29,10 @@ public:
 	EventType getType() const { return eventType; }
 };
 
-class ChangeScene : public Event {
+class ChangeSceneEvent : public Event {
 public:
-	ChangeScene(SCENES sceneChange_) { sceneChange = sceneChange_; }
-	~ChangeScene() {}
+	ChangeSceneEvent(SCENES sceneChange_) { sceneChange = sceneChange_; }
+	~ChangeSceneEvent() {}
 
 	static constexpr EventType eventType = "ChangeScene";
 	EventType getType() const { return eventType; }

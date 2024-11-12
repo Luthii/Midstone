@@ -24,6 +24,7 @@ public:
 	virtual SDL_Window* getWindow() = 0;
 	virtual SDL_Renderer* getRenderer() = 0;
 	virtual void setPlayer(Player* player_) = 0;
+	virtual void ResetScene() = 0;
 };
 
 #endif

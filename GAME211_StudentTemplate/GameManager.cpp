@@ -141,6 +141,8 @@ void GameManager::ChangeScene(const Event& event)
     default:
         break;
     }
+
+    currentScene->ResetScene();
 }
 
 

@@ -22,6 +22,7 @@ public:
 	SDL_Window* getWindow() { return window; }
 	SDL_Renderer* getRenderer() { return renderer; }
 	virtual void setPlayer(Player* player_) { player = player_; }
+	void ResetScene() {}
 
 };
 

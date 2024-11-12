@@ -81,3 +81,9 @@ void ShopScene::setPlayer(Player* player_)
 	//testAnimation->onCreate();
 }
 
+void ShopScene::ResetScene()
+{
+	player->setPosition(shopMap->getSpawnPosition());
+	Camera::UpdateCenterCoordinates(player->getPosition().x, player->getPosition().y);
+}
+

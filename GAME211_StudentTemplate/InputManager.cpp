@@ -33,6 +33,7 @@ void InputManager::Update()
 			keyDown[event.key.keysym.sym] = false;
 			break;
 		case SDL_QUIT:
+			EventHandler::GetInstance()->Broadcast(QuitEvent());
 			quitGame = true;
 			break;
 		}

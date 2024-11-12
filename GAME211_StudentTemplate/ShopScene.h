@@ -29,5 +29,6 @@ public:
 	void setPlayer(Player* player_);
 	SDL_Window* getWindow() { return window; }
 	SDL_Renderer* getRenderer() { return renderer; }
+	void ResetScene();
 };
 

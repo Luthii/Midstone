@@ -7,6 +7,7 @@
 #include <SDL.h>
 
 //project includes
+#include "EventHandler.h"
 
 #define N_KEYS 320
 

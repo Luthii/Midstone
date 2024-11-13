@@ -18,6 +18,7 @@ private:
 	bool keyDown[N_KEYS];
 	bool keyUp[N_KEYS];
 	bool quitGame = false;
+	bool lockInput = false;
 
 	static InputManager* instance;
 	
@@ -50,6 +51,8 @@ public:
 	//bool IsKeyPressed(const int key) const;
 	void QuitGame() { quitGame = true; }
 	bool IsQuitGame() { return quitGame; }
+	void LockInput(/*const Event& event*/) { lockInput = true; cleanKeyBoard(); }
+	void UnlockInput(/*const Event& event*/) { lockInput = false; }
 	
 };
 

@@ -7,6 +7,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -17,6 +18,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -27,6 +29,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -37,6 +40,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 		<Animation>
@@ -47,6 +51,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -57,6 +62,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -67,6 +73,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -77,6 +84,7 @@
 		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>1</loop>
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -87,6 +95,7 @@
 		<h>32</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>0</loop>
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -97,6 +106,7 @@
 		<h>48</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -104,9 +114,10 @@
 		<x>0</x>
 		<y>13</y>
 		<w>16</w>
-		<h>48</h>
+		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>0</loop>
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 	<Animation>
@@ -114,9 +125,10 @@
 		<x>0</x>
 		<y>14</y>
 		<w>16</w>
-		<h>48</h>
+		<h>16</h>
 		<anchor_x>0</anchor_x>
 		<anchor_y>0</anchor_y>
+		<loop>0</loop>
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 

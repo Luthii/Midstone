@@ -11,6 +11,10 @@ void InputManager::cleanKeyBoard()
 
 void InputManager::Update()
 {
+	//no inputs available!
+	if (lockInput)
+		return;
+
     SDL_Event event;
 	cleanKeyBoard();
 	//SDL_PumpEvents();

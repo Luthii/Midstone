@@ -38,3 +38,12 @@ public:
 	EventType getType() const { return eventType; }
 	SCENES sceneChange;
 };
+
+class LockInputEvent : public Event {
+public:
+	LockInputEvent() {}
+	~LockInputEvent() {}
+
+	static constexpr EventType eventType = "LockInputEvent";
+	EventType getType() const { return eventType; }
+};

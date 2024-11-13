@@ -187,6 +187,7 @@ bool Player::Interact()
 
 void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 {
+	std::string animationName;
 	//if the code reached here, it means that there is a collidiable object and this object exist in the OBJECT MAP
 	//1. lets test if this object is an object that should give an interaction, for example, the anvil should open a craft window
 	switch (OBJECT_MAP.at(objectID).type) {
@@ -194,6 +195,21 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		std::cout << "You interacted with the anvil!! In the future you will be able to craft objectes in the future! :)\n";
 			break;
 	default:
+		animationName = "pickaxe_";
+		if (orientation.x > 0) {//player is going right - priorize side movement
+			animationName += "right";
+		}
+		else if (orientation.x < 0) {
+			animationName += "left";
+		}
+		else if (orientation.y > 0) {
+			animationName += "down";
+		}
+		else if (orientation.y < 0) {
+			animationName += "up";
+		}
+		playerAnimation->ChangeAnimation(animationName);
+		//interacting = true;
 		//interactedObjects.find(key);
 		if (interactedObjects.find(key) != interactedObjects.end()) {
 			//the object was found
@@ -258,7 +274,8 @@ void Player::Update(float deltaTime) {
 		animationName += "up";
 	}
 
-	playerAnimation->ChangeAnimation(animationName);
+	//if(!interacting)
+		playerAnimation->ChangeAnimation(animationName);
 	playerAnimation->Update(deltaTime);
 }
 

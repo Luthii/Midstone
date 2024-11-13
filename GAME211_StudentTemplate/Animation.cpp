@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include "Animation.h"
 using namespace tinyxml2;
 
@@ -29,6 +31,7 @@ Animation::Animation(std::string fileName)
 		animInfo.height = std::stoi(animData->FirstChildElement("h")->GetText());
 		animInfo.anchor_x = std::stoi(animData->FirstChildElement("anchor_x")->GetText());
 		animInfo.anchor_y = std::stoi(animData->FirstChildElement("anchor_y")->GetText());
+		animInfo.loop = std::stoi(animData->FirstChildElement("loop")->GetText());
 		animInfo.numberSprites = std::stoi(animData->FirstChildElement("number_of_sprites")->GetText());
 
 		animation.push_back(animInfo);
@@ -56,8 +59,19 @@ void Animation::Update(float deltaTime)
 		currentFrame++;
 
 		//if we hit the end of the sprite animation, reset to the first one
-		if (currentFrame >= currentAnimation.numberSprites)
+		if (currentFrame >= currentAnimation.numberSprites) {
+			if(!currentAnimation.loop)
+			{
+				std::string newAnimationName = "idle_" + currentAnimation.name.substr(currentAnimation.name.find("_") + 1);
+				//std::cout << newAnimationName << std::endl;
+				lockState = false;
+				InputManager::getInstance()->UnlockInput();
+				ChangeAnimation(newAnimationName);
+				
+			}
 			currentFrame = 0;
+		}
+			
 
 		//clips the tile map texture. It defines the tile to be rendered.
 		//updates the date if the frame has changed
@@ -73,9 +87,19 @@ void Animation::Update(float deltaTime)
 
 void Animation::ChangeAnimation(std::string animationName)
 {
+	if (lockState)
+		return;
+
+	if (animationName == currentAnimation.name)
+		return;
+
 	for (AnimationInfo animationInfo : animation) {
 		if (animationInfo.name == animationName) {
 			currentAnimation = animationInfo;
+			lockState = !animationInfo.loop;
+			if (lockState)
+				InputManager::getInstance()->LockInput();
+			currentFrame = 0;
 			break;
 		}
 	}

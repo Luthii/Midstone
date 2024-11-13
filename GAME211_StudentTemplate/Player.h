@@ -14,6 +14,7 @@ private:
 	std::map<OBJECT_TYPE, ObjectLoot*> playerBag;
 	Animation* playerAnimation;
 	CollisionBox collisionBox;
+	bool interacting = false;
 
 	void TestCollision();
 	bool Interact();

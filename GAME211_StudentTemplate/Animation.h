@@ -12,6 +12,7 @@
 //Project includes
 #include "DataCollection.h"
 #include "Camera.h"
+#include "InputManager.h"
 
 #define FRAMES_PER_SECONDS 24
 #define DELTA_FRAME 0.1f
@@ -24,6 +25,7 @@ struct AnimationInfo {
 	int anchor_x;
 	int anchor_y;
 	unsigned int numberSprites;
+	bool loop;
 };
 
 class Animation
@@ -34,6 +36,7 @@ private:
 	AnimationInfo currentAnimation;
 	int currentFrame = 0;
 	float elapsedTime = 0.0f;
+	bool lockState = false;
 	//initiates with the animation of the charlie walk sprite sheet
 
 

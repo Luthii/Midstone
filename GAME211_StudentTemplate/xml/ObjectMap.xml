@@ -1,16 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <Objects>
-	<object>
+	<Object>
+		<!--ANVIL_RIGHT-->
+		<id>5861</id>
+		<type>ANVIL</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>12</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--ANVIL_LEFT-->
 		<id>5862</id>
 		<type>ANVIL</type>
 		<loot>UNDEFINED</loot>
 		<loot_quantity>0</loot_quantity>
-		<num_interaction>0</num_interaction>
-		<colision_box>
-			<top_x></top_x>
-			<top_y></top_y>
-			<bottom_x></bottom_x>
-			<bottom_y></bottom_y>
-		</colision_box>
-
-	</object>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>10</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--IRON_BOTTOM-->
+		<id>5837</id>
+		<type>IRON</type>
+		<loot>IRON_ORE</loot>
+		<loot_quantity>3</loot_quantity>
+		<num_interaction>9</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--IRON_TOP-->
+		<id>5775</id>
+		<type>IRON</type>
+		<loot>IRON_ORE</loot>
+		<loot_quantity>3</loot_quantity>
+		<num_interaction>9</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>4</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--IRON_ORE-->
+		<id>5230</id>
+		<type>IRON_ORE</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>2</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>13</botton_y>
+		</collision_box>
+	</Object>
 </Objects>

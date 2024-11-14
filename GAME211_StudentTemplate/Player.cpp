@@ -294,6 +294,9 @@ void Player::Render(SDL_Renderer* sceneRender) {
 
 void Player::HandleEvents()
 {
+	if (playerAnimation->getLockState())
+		return;
+
     //key Down event -> movent character and play walking animation
     if (InputManager::getInstance()->IsKeyDown(SDLK_w))
         velocity.y = -1.0f;

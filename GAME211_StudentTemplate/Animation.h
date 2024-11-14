@@ -47,4 +47,5 @@ public:
 	SDL_Rect getCurrentFrameSprite() const { return currentFrameSprite; }
 	AnimationInfo getCurrentAnimationInfo() const { return currentAnimation; }
 	void ChangeAnimation(std::string animationName);
+	bool getLockState() { return lockState; }
 };

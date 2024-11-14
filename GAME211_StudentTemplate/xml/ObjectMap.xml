@@ -1,0 +1,16 @@
+<Objects>
+	<object>
+		<id>5862</id>
+		<type>ANVIL</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>0</num_interaction>
+		<colision_box>
+			<top_x></top_x>
+			<top_y></top_y>
+			<bottom_x></bottom_x>
+			<bottom_y></bottom_y>
+		</colision_box>
+
+	</object>
+</Objects>

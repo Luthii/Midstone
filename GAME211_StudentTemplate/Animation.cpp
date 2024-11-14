@@ -65,7 +65,7 @@ void Animation::Update(float deltaTime)
 				std::string newAnimationName = "idle_" + currentAnimation.name.substr(currentAnimation.name.find("_") + 1);
 				//std::cout << newAnimationName << std::endl;
 				lockState = false;
-				InputManager::getInstance()->UnlockInput();
+				//InputManager::getInstance()->UnlockInput();
 				ChangeAnimation(newAnimationName);
 				
 			}
@@ -98,7 +98,7 @@ void Animation::ChangeAnimation(std::string animationName)
 			currentAnimation = animationInfo;
 			lockState = !animationInfo.loop;
 			if (lockState)
-				InputManager::getInstance()->LockInput();
+				//InputManager::getInstance()->LockInput();
 			currentFrame = 0;
 			break;
 		}

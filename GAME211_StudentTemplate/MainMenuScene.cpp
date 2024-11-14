@@ -21,10 +21,10 @@ bool MainMenuScene::OnCreate() {
 	/// Turn on the SDL imaging subsystem
 	IMG_Init(IMG_INIT_PNG);
 
-	btPlay = new Button(Vec3(100, 100, 0), "textures/bt_Play.png", renderer);
+	btPlay = new Button(Vec3(100, 100, 0), "Play", renderer);
 	btPlay->onCreate();
 
-	btQuit = new Button(Vec3(500, 100, 0), "textures/bt_Quit.png", renderer);
+	btQuit = new Button(Vec3(500, 100, 0), "Quit", renderer);
 	btQuit->onCreate();
 
 	std::cout << "Finished creating the main menu scene!\n";
@@ -58,4 +58,5 @@ void MainMenuScene::Render() {
 
 void MainMenuScene::HandleEvents() {
 	btQuit->HandleEvents();
+	btPlay->HandleEvents();
 }

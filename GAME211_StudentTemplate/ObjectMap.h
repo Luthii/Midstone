@@ -1,7 +1,11 @@
 #pragma once
 
+#include <string>
+#include "tinyxml2.h"
 #include <map>
 #include "Object.h"
+
+using namespace tinyxml2;
 
 //struct Object {
 //	unsigned int number;
@@ -17,17 +21,54 @@ static const Object iron_ore{ 5230, OBJECT_TYPE::IRON_ORE, OBJECT_TYPE::UNDEFINE
 
 
 //this is a variable declaration with initialization
-static const std::map<unsigned int, Object> OBJECT_MAP{
+static std::map<unsigned int, Object> OBJECT_MAP{
 	{anvilLeft.number, anvilLeft},
 	{anvilRight.number, anvilRight},
 	{iron.number, iron}
 };
 
+static OBJECT_TYPE getObjectType(std::string str) {
+
+	// creates a search value that represents the type map find function
+	auto search = TypeMap.find(str);
+
+	// if our search finds something before it ends return the assoiciated OBJECT_TYPE value
+	if (search != TypeMap.end())
+		return search->second;
+	else  // else return undefined
+		return OBJECT_TYPE::UNDEFINED;
+};
 
 
-//this is a function declaration
-void LoadObjectMap() {
-	//put your code here
-	// ude the OBJEC_MAP variable
-	//OBJECT_MAP.inset(std::pair<unsigned int, Object>(object.name, object));
+static void LoadObjectsMap(std::string fileName) {
+	XMLDocument ObjMapXML;
+
+	if (ObjMapXML.LoadFile(fileName.c_str()) != XML_SUCCESS) {
+		std::cerr << "Can't open the xml file: " << fileName.c_str() << "\n";
+		return;
+	}
+
+	XMLNode* root = ObjMapXML.FirstChild();
+
+	XMLElement* ObjData = root->FirstChildElement("Object");
+
+	Object ObjInfo;
+
+	while (ObjData != nullptr) {
+		ObjInfo.number = std::stoi(ObjData->FirstChildElement("id")->GetText());
+		ObjInfo.type = getObjectType(ObjData->FirstChildElement("type")->GetText());
+		ObjInfo.loot = getObjectType(ObjData->FirstChildElement("loot")->GetText());
+		ObjInfo.lootQuantity = std::stoi(ObjData->FirstChildElement("loot_quantity")->GetText());
+		ObjInfo.interactionNumber = std::stoi(ObjData->FirstChildElement("num_interaction")->GetText());
+		//collision box
+		//	XMLElement* box = ObjData->FirstChildElement("collision_box");
+		//	ObjInfo.collisionBox.srcX = std::stoi(box->FirstChildElement("top_x")->GetText());
+		//	ObjInfo.collisionBox.srcY = std::stoi(box->FirstChildElement("top_y")->GetText());
+		//	ObjInfo.collisionBox.destX = std::stoi(box->FirstChildElement("bottom_x")->GetText());
+		//	ObjInfo.collisionBox.destY = std::stoi(box->FirstChildElement("bottom_y")->GetText());
+
+		OBJECT_MAP.insert(std::pair<unsigned int, Object>(ObjInfo.number, ObjInfo));
+
+		ObjData = ObjData->NextSiblingElement("Animation");
+	}
 };

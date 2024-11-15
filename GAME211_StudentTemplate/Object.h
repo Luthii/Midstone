@@ -1,5 +1,7 @@
 #pragma once
 
+#include <unordered_map>
+
 //third party includes
 
 // DEFINITION OF OBJECT TYPES
@@ -9,7 +11,13 @@ enum class OBJECT_TYPE {
 	ANVIL,
 	// MINES ITEMS
 	IRON,
-	IRON_ORE
+	IRON_ORE,
+};
+
+static std::unordered_map<std::string, OBJECT_TYPE>TypeMap = {
+	{"ANVIL", OBJECT_TYPE::ANVIL},
+	{"IRON", OBJECT_TYPE::IRON},
+	{"IRON_ORE", OBJECT_TYPE::IRON_ORE},
 };
 
 //DEFINITION OF THE OBJECT STRUCT
@@ -22,6 +30,7 @@ struct Object {
 	OBJECT_TYPE loot;
 	unsigned int lootQuantity;
 	unsigned int interactionNumber;
+	
 };
 
 //definition of the struct that will be used to keep track of the objects interacted with on the scene

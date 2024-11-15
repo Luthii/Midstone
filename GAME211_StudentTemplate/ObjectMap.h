@@ -15,8 +15,19 @@ static const Object anvilRight{5863, OBJECT_TYPE::ANVIL, OBJECT_TYPE::UNDEFINED,
 static const Object iron{5713, OBJECT_TYPE::IRON, OBJECT_TYPE::IRON_ORE, 3, 9};
 static const Object iron_ore{ 5230, OBJECT_TYPE::IRON_ORE, OBJECT_TYPE::UNDEFINED, 0, 2 };
 
+
+//this is a variable declaration with initialization
 static const std::map<unsigned int, Object> OBJECT_MAP{
 	{anvilLeft.number, anvilLeft},
 	{anvilRight.number, anvilRight},
 	{iron.number, iron}
+};
+
+
+
+//this is a function declaration
+void LoadObjectMap() {
+	//put your code here
+	// ude the OBJEC_MAP variable
+	//OBJECT_MAP.inset(std::pair<unsigned int, Object>(object.name, object));
 };

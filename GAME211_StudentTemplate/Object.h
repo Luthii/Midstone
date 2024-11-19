@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DataCollection.h"
 #include <unordered_map>
 
 //third party includes
@@ -30,6 +31,7 @@ struct Object {
 	OBJECT_TYPE loot;
 	unsigned int lootQuantity;
 	unsigned int interactionNumber;
+	COLLISION_BOX collisionBox;
 	
 };
 

@@ -1,5 +1,4 @@
 #pragma once
-#include "ObjectMap.h"
 
 const int TILE_SIZE = 16;
 const int TILE_SCALE = 2;
@@ -19,7 +18,7 @@ struct TILE {
 	int y = -1;
 };
 
-struct CollisionBox {
+struct COLLISION_BOX {
 	TILE topLeftCorner;
 	TILE bottomRightCorner;
 };

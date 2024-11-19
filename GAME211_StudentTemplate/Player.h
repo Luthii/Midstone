@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Object.h"
+#include "ObjectMap.h"
 #include "Map.h"
 #include "Character.h"
 #include "EventHandler.h"
@@ -13,7 +13,7 @@ private:
 	std::map<TILE, ObjectScene*, TILE_Comparator> interactedObjects;
 	std::map<OBJECT_TYPE, ObjectLoot*> playerBag;
 	Animation* playerAnimation;
-	CollisionBox collisionBox;
+	COLLISION_BOX collisionBox;
 	bool interacting = false;
 
 	void TestCollision();

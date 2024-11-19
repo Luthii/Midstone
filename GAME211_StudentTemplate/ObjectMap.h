@@ -1,8 +1,11 @@
 #pragma once
 
 #include <string>
-#include "tinyxml2.h"
+#include <iostream>
 #include <map>
+
+#include "tinyxml2.h"
+
 #include "Object.h"
 
 using namespace tinyxml2;
@@ -61,11 +64,11 @@ static void LoadObjectsMap(std::string fileName) {
 		ObjInfo.lootQuantity = std::stoi(ObjData->FirstChildElement("loot_quantity")->GetText());
 		ObjInfo.interactionNumber = std::stoi(ObjData->FirstChildElement("num_interaction")->GetText());
 		//collision box
-		//	XMLElement* box = ObjData->FirstChildElement("collision_box");
-		//	ObjInfo.collisionBox.srcX = std::stoi(box->FirstChildElement("top_x")->GetText());
-		//	ObjInfo.collisionBox.srcY = std::stoi(box->FirstChildElement("top_y")->GetText());
-		//	ObjInfo.collisionBox.destX = std::stoi(box->FirstChildElement("bottom_x")->GetText());
-		//	ObjInfo.collisionBox.destY = std::stoi(box->FirstChildElement("bottom_y")->GetText());
+		XMLElement* box = ObjData->FirstChildElement("collision_box");
+		ObjInfo.collisionBox.topLeftCorner.x = std::stoi(box->FirstChildElement("top_x")->GetText());
+		ObjInfo.collisionBox.topLeftCorner.y = std::stoi(box->FirstChildElement("top_y")->GetText());
+		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("bottom_x")->GetText());
+		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("bottom_y")->GetText());
 
 		OBJECT_MAP.insert(std::pair<unsigned int, Object>(ObjInfo.number, ObjInfo));
 

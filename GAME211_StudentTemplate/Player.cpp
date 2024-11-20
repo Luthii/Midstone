@@ -92,6 +92,7 @@ bool Player::Interact()
 {
 	//std::cout << "Player orientation: ";
 	//orientation.print();
+	std::cout << "OBJECT_MAP size: " << OBJECT_MAP.size() << std::endl;
 
 	if (VMath::mag(orientation) == 0)
 		return false;
@@ -130,13 +131,13 @@ bool Player::Interact()
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
 		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
 		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-		//std::cout << "Tile ID: " << tileID << std::endl;
+		std::cout << "Tile ID: " << tileID << std::endl;
 		//priority to the top collision - if no object in the top corner, test the one below it
 		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
 			tileCoords.x = vecAuxDiagonal.y / TILE_RENDER_SIZE;
 			tileCoords.y = vecAuxDiagonal.x / TILE_RENDER_SIZE;
 			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-			//std::cout << "Tile ID: " << tileID << std::endl;
+			std::cout << "Tile ID: " << tileID << std::endl;
 
 			//no objects on the MAP or in the collision layer
 			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)
@@ -165,13 +166,13 @@ bool Player::Interact()
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
 		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
 		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-		//std::cout << "Tile ID: " << tileID << std::endl;
+		std::cout << "Tile ID: " << tileID << std::endl;
 		//priority to the top collision - if no object in the top corner, test the one below it
 		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
 			tileCoords.x = static_cast<int>(vecAuxDiagonal.y / TILE_RENDER_SIZE);
 			tileCoords.y = static_cast<int>(vecAuxDiagonal.x / TILE_RENDER_SIZE);
 			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-			//std::cout << "Tile ID: " << tileID << std::endl;
+			std::cout << "Tile ID: " << tileID << std::endl;
 
 			//no objects on the MAP or in the collision layer
 			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)

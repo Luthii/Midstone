@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <Objects>
 	<Object>
 		<!--ANVIL_RIGHT-->
@@ -31,7 +29,7 @@
 	</Object>
 	<Object>
 		<!--IRON_BOTTOM-->
-		<id>5837</id>
+		<id>5713</id>
 		<type>IRON</type>
 		<loot>IRON_ORE</loot>
 		<loot_quantity>3</loot_quantity>
@@ -41,20 +39,6 @@
 			<top_y>0</top_y>
 			<bottom_x>16</bottom_x>
 			<botton_y>16</botton_y>
-		</collision_box>
-	</Object>
-	<Object>
-		<!--IRON_TOP-->
-		<id>5775</id>
-		<type>IRON</type>
-		<loot>IRON_ORE</loot>
-		<loot_quantity>3</loot_quantity>
-		<num_interaction>9</num_interaction>
-		<collision_box>
-			<top_x>0</top_x>
-			<top_y>0</top_y>
-			<bottom_x>16</bottom_x>
-			<botton_y>4</botton_y>
 		</collision_box>
 	</Object>
 	<Object>

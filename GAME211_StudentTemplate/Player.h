@@ -6,6 +6,8 @@
 #include "EventHandler.h"
 #include "Animation.h"
 
+extern std::map<unsigned int, Object> OBJECT_MAP;
+
 class Player : public Character
 {
 private:

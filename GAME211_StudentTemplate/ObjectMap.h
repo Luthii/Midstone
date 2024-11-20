@@ -24,11 +24,11 @@ static const Object iron_ore{ 5230, OBJECT_TYPE::IRON_ORE, OBJECT_TYPE::UNDEFINE
 
 
 //this is a variable declaration with initialization
-static std::map<unsigned int, Object> OBJECT_MAP{
-	{anvilLeft.number, anvilLeft},
-	{anvilRight.number, anvilRight},
-	{iron.number, iron}
-};
+extern std::map<unsigned int, Object> OBJECT_MAP;// {
+//	{anvilLeft.number, anvilLeft},
+//	{anvilRight.number, anvilRight},
+//	{iron.number, iron}
+//};
 
 static OBJECT_TYPE getObjectType(std::string str) {
 
@@ -43,15 +43,20 @@ static OBJECT_TYPE getObjectType(std::string str) {
 };
 
 
-static void LoadObjectsMap(std::string fileName) {
+static bool LoadObjectsMap(std::string fileName) {
 	XMLDocument ObjMapXML;
 
 	if (ObjMapXML.LoadFile(fileName.c_str()) != XML_SUCCESS) {
 		std::cerr << "Can't open the xml file: " << fileName.c_str() << "\n";
-		return;
+		return false;
 	}
 
 	XMLNode* root = ObjMapXML.FirstChild();
+	if (root == NULL) {
+		std::cout << "TinyXML2 error: " << tinyxml2::XML_ERROR_FILE_READ_ERROR << std::endl;
+		return false;
+	}
+	std::cout << "Root: " << root->FirstChild()->Value() << std::endl;
 
 	XMLElement* ObjData = root->FirstChildElement("Object");
 
@@ -68,10 +73,14 @@ static void LoadObjectsMap(std::string fileName) {
 		ObjInfo.collisionBox.topLeftCorner.x = std::stoi(box->FirstChildElement("top_x")->GetText());
 		ObjInfo.collisionBox.topLeftCorner.y = std::stoi(box->FirstChildElement("top_y")->GetText());
 		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("bottom_x")->GetText());
-		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("bottom_y")->GetText());
+		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("botton_y")->GetText());
 
 		OBJECT_MAP.insert(std::pair<unsigned int, Object>(ObjInfo.number, ObjInfo));
 
-		ObjData = ObjData->NextSiblingElement("Animation");
+		ObjData = ObjData->NextSiblingElement("Object");
 	}
+
+	std::cout << "Object Map Created! \n";
+
+	return true;
 };

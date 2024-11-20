@@ -3,15 +3,22 @@
 #include "InputManager.h"
 #include "EventHandler.h"
 #include "GameManager.h"
+#include "ObjectMap.h"
 
 //create the InputManager/EventHandler singleton
 InputManager* InputManager::instance = nullptr;
 EventHandler* EventHandler::instance = nullptr;
 GameManager* GameManager::instance = nullptr;
+std::map<unsigned int, Object> OBJECT_MAP;
 
 
 
 int main(int argc, char* args[]) { /// Standard C-style entry point, you need to use it
+
+	if (!LoadObjectsMap("xml/ObjectMap.xml"))
+		return 1;
+
+	std::cout << "OBJECT_MAP size: " << OBJECT_MAP.size() << std::endl;
 
 	//GameManager::getInstance();
 	bool status = GameManager::getInstance()->OnCreate();

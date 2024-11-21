@@ -23,6 +23,14 @@ Player::~Player() {
 void Player::TestCollision()
 {
 	//Vec3 collisionBoxPosition = Vec3(position.x + collisionBox.topLeftCorner.x, )
+	float xMultiplier = 1;
+	float yMultiplier = 1;
+
+	if (position.x < 0)
+		xMultiplier = -1;
+
+	if (position.y < 0)
+		yMultiplier = -1;
 
 	if (VMath::mag(velocity) != 0) {
 		MATH::Vec3 vecAuxAdjancent; //test side
@@ -34,16 +42,16 @@ void Player::TestCollision()
 		if (velocity.x > 0.0f)
 		{
 			//we have to use the speed because the object will move speed pixels
-			vecAuxAdjancent = position + Vec3(collisionBox.bottomRightCorner.x + speed, collisionBox.topLeftCorner.y, 0.0f);
-			vecAuxDiagonal = position + Vec3(collisionBox.bottomRightCorner.x + speed, collisionBox.bottomRightCorner.y, 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier*collisionBox.bottomRightCorner.x) + speed, (yMultiplier*collisionBox.topLeftCorner.y), 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier*collisionBox.bottomRightCorner.x) + speed, (yMultiplier*collisionBox.bottomRightCorner.y), 0.0f);
 			//vecAuxAdjancent = position + Vec3(TILE_RENDER_SIZE + speed, 0.0f, 0.0f);
 			//vecAuxDiagonal = position + Vec3(TILE_RENDER_SIZE + speed, (TILE_RENDER_SIZE - 1), 0.0f);
 		}
 		//object going left -> -x
 		else if (velocity.x < 0.0f)
 		{
-			vecAuxAdjancent = position + Vec3(collisionBox.topLeftCorner.x - speed, collisionBox.topLeftCorner.y, 0.0f);
-			vecAuxDiagonal = position + Vec3(collisionBox.topLeftCorner.x - speed, collisionBox.bottomRightCorner.y, 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier*collisionBox.topLeftCorner.x) - speed, (yMultiplier*collisionBox.topLeftCorner.y), 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier*collisionBox.topLeftCorner.x) - speed, (yMultiplier*collisionBox.bottomRightCorner.y), 0.0f);
 			//vecAuxAdjancent = position + Vec3(-speed, 0.0f, 0.0f);
 			//vecAuxDiagonal = position + Vec3(-speed, (TILE_RENDER_SIZE - 1), 0.0f);
 		}
@@ -64,16 +72,16 @@ void Player::TestCollision()
 		//object going righ -> +y (down the screen)
 		if (velocity.y > 0.0f)
 		{
-			vecAuxAdjancent = position + Vec3(collisionBox.topLeftCorner.x, collisionBox.bottomRightCorner.y + speed, 0.0f);
-			vecAuxDiagonal = position + Vec3(collisionBox.bottomRightCorner.x, collisionBox.bottomRightCorner.y + speed, 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier*collisionBox.topLeftCorner.x), (yMultiplier*collisionBox.bottomRightCorner.y) + speed, 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier*collisionBox.bottomRightCorner.x), (yMultiplier*collisionBox.bottomRightCorner.y) + speed, 0.0f);
 			//vecAuxAdjancent = position + Vec3(0.0f, TILE_RENDER_SIZE + speed, 0.0f);
 			//vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), TILE_RENDER_SIZE + speed, 0.0f);
 		}
 		//object going left -> -y (up on the screen)
 		else if (velocity.y < 0.0f)
 		{
-			vecAuxAdjancent = position + Vec3(collisionBox.topLeftCorner.x, collisionBox.topLeftCorner.y -speed, 0.0f);
-			vecAuxDiagonal = position + Vec3(collisionBox.bottomRightCorner.x, collisionBox.topLeftCorner.y - speed, 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier*collisionBox.topLeftCorner.x), (yMultiplier*collisionBox.topLeftCorner.y) -speed, 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier*collisionBox.bottomRightCorner.x), (yMultiplier*collisionBox.topLeftCorner.y) - speed, 0.0f);
 			//vecAuxAdjancent = position + Vec3(0.0f, -speed, 0.0f);
 			//vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), -speed, 0.0f);
 		}
@@ -91,9 +99,15 @@ void Player::TestCollision()
 
 bool Player::Interact()
 {
-	//std::cout << "Player orientation: ";
-	//orientation.print();
-	//std::cout << "OBJECT_MAP size: " << OBJECT_MAP.size() << std::endl;
+	float xMultiplier = 1;
+	float yMultiplier = 1;
+
+	if (position.x < 0)
+		xMultiplier = -1;
+
+	if (position.y < 0)
+		yMultiplier = -1;
+
 
 	if (VMath::mag(orientation) == 0)
 		return false;
@@ -118,15 +132,15 @@ bool Player::Interact()
 		{
 			//std::cout << "Interaction on +X\n";
 			//we have to use the speed because the object will move speed pixels
-			vecAuxAdjancent = position + Vec3(TILE_RENDER_SIZE + speed, 0.0f, 0.0f);
-			vecAuxDiagonal = position + Vec3(TILE_RENDER_SIZE + speed, (TILE_RENDER_SIZE - 1), 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier * collisionBox.bottomRightCorner.x) + speed, (yMultiplier * collisionBox.topLeftCorner.y), 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier * collisionBox.bottomRightCorner.x) + speed, (yMultiplier * collisionBox.bottomRightCorner.y), 0.0f);
 		}
 		//object going left -> -x
 		else if (orientation.x < 0.0f)
 		{
 			//std::cout << "Interaction on -X\n";
-			vecAuxAdjancent = position + Vec3(-speed, 0.0f, 0.0f);
-			vecAuxDiagonal = position + Vec3(-speed, (TILE_RENDER_SIZE - 1), 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier * collisionBox.topLeftCorner.x) - speed, (yMultiplier * collisionBox.topLeftCorner.y), 0.0f);;
+			vecAuxDiagonal = position + Vec3((xMultiplier * collisionBox.topLeftCorner.x) - speed, (yMultiplier * collisionBox.bottomRightCorner.y), 0.0f);
 		}
 
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
@@ -153,15 +167,15 @@ bool Player::Interact()
 		{
 			//std::cout << "Interaction on +Y\n";
 			//we have to use the speed because the object will move speed pixels
-			vecAuxAdjancent = position + Vec3(0.0f, TILE_RENDER_SIZE + speed, 0.0f);
-			vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), TILE_RENDER_SIZE + speed, 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier * collisionBox.topLeftCorner.x), (yMultiplier * collisionBox.bottomRightCorner.y) + speed, 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier * collisionBox.bottomRightCorner.x), (yMultiplier * collisionBox.bottomRightCorner.y) + speed, 0.0f);
 		}
 		//object going left -> -x
 		else if (orientation.y < 0.0f)
 		{
 			//std::cout << "Interaction on -Y\n";
-			vecAuxAdjancent = position + Vec3(0.0f, -speed, 0.0f);
-			vecAuxDiagonal = position + Vec3((TILE_RENDER_SIZE - 1), -speed, 0.0f);
+			vecAuxAdjancent = position + Vec3((xMultiplier * collisionBox.topLeftCorner.x), (yMultiplier * collisionBox.topLeftCorner.y) - speed, 0.0f);
+			vecAuxDiagonal = position + Vec3((xMultiplier * collisionBox.bottomRightCorner.x), (yMultiplier * collisionBox.topLeftCorner.y) - speed, 0.0f);
 		}
 
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;

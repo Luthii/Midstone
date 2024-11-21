@@ -35,6 +35,8 @@
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ObjectMap.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Play_Button.cpp" />
+    <ClCompile Include="Quit_Button.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
@@ -59,6 +61,8 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectMap.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Play_Button.h" />
+    <ClInclude Include="Quit_Button.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShopScene.h" />
     <ClInclude Include="Timer.h" />

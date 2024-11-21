@@ -52,6 +52,13 @@ bool Button::onCreate()
         return false;
     }
 
+    filePath = "textures/bt_" + name + "_Highlighted.png";
+    if ((texBTHighlighted = LoadTexture(filePath)) == nullptr) {
+
+        std::cerr << "Erro creating the entity." << std::endl;
+        return false;
+    }
+
     currentTexture = texBTNotPressed;
 
     return true;

@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 #include "Button.h"
+#include "Play_Button.h"
+#include "Quit_Button.h"
 
 class MainMenuScene : public Scene {
 private:
@@ -10,6 +12,8 @@ private:
 
 	Button* btPlay;
 	Button* btQuit;
+	Button* selectedButton = nullptr;
+
 
 public:
 	MainMenuScene(SDL_Window* sdl_Window);

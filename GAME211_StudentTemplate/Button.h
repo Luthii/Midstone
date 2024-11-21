@@ -9,10 +9,16 @@ protected:
 	SDL_Texture* texBTNotPressed;
 	SDL_Texture* texBTPressed;
 	SDL_Texture* currentTexture;
+	SDL_Texture* texBTHighlighted;
 	std::string name;
 	SDL_Renderer* sceneRenderer;
 
 	SDL_Texture* LoadTexture(std::string filePath);
+
+	bool isSelected = false;
+
+	Button* prev = nullptr;
+	Button* next = nullptr;
 
 public:
 	//ALL entities must have a texture(needs a render to be created) and a position on the scene,
@@ -23,29 +29,22 @@ public:
 
 	virtual bool onCreate();
 
-	//to be called in order in the game loop
-	/*virtual void HandleEvents() = 0;
-	virtual void Update(float deltaTime) = 0;*/
 	virtual void Render(SDL_Renderer* sceneRenderer);
-
-	//proteced members setters and getters
-	//virtual void setTexture(SDL_Texture* texture_) { texture = texture_; }
-	//virtual SDL_Texture* getTexture() { return texture; }
 	virtual void setPosition(Vec3 newPosition) { position = newPosition; }
 	virtual Vec3 getPosition() { return position; }
 
-	
+	void SelectButton() { isSelected = true; currentTexture = texBTHighlighted; }
+	void UnSelectedButton() { isSelected = false; currentTexture = texBTNotPressed; }
 
-//public:
-//	Button(Vec3 position_, std::string textFilePath_, SDL_Renderer* sceneRender_) :
-//		Entity( position_, textFilePath_, sceneRender_ ){}
-//
-//	~Button(){}
-//
+	void SetNext(Button* _next) { next = _next; }
+	void SetPrev(Button* _prev) { prev = _prev; }
+
+	Button* GetNext() { return next; }
+	Button* GetPrev() { return prev; }
+	
+	virtual void OnButtonPressed() = 0;
+	
 	void HandleEvents();
-//	void Update(float deltaTime);
-//	void Render(SDL_Renderer* sceneRenderer);
-//
-//
+
 };
 //

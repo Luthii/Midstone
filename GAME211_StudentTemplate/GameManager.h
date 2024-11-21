@@ -4,16 +4,16 @@
 #include <iostream>
 
 //project includes
-#include "DataCollection.h"
+//#include "DataCollection.h"
 #include "Window.h"
 #include "Timer.h"
 #include "Scene.h"
 #include "ShopScene.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "ShopScene.h"
+//#include "Player.h"
 #include "MainMenuScene.h"
+#include "ObjectMap.h"
 
+class Player;
 
 class GameManager {
 private:
@@ -25,7 +25,6 @@ private:
 	Scene* mainMenuScene;
 	Scene* shopScene;
 	Player* player;
-	Enemy* enemy;
 
 //------------ PRIVATE METHODS --------------------
 	void handleEvents();
@@ -39,6 +38,10 @@ private:
 
 
 public:
+	// ----------------- VARIABLES --------------
+	ObjectMapClass OBJECT_MAP;
+
+	// ----------------- METHODS --------------
 	//"delete" the methods that allow the class to be copied
 	GameManager(const GameManager& obj) = delete;
 	GameManager& operator=(GameManager const&) = delete;

@@ -33,6 +33,7 @@
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="ObjectMap.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ShopScene.cpp" />
     <ClCompile Include="Timer.cpp" />

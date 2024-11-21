@@ -1,5 +1,6 @@
 #include "VMath.h"
 #include "Player.h"
+#include "GameManager.h"
 
 Player::~Player() {
 	std::cerr << "Calling Player destructor..." << std::endl;
@@ -92,7 +93,7 @@ bool Player::Interact()
 {
 	//std::cout << "Player orientation: ";
 	//orientation.print();
-	std::cout << "OBJECT_MAP size: " << OBJECT_MAP.size() << std::endl;
+	//std::cout << "OBJECT_MAP size: " << OBJECT_MAP.size() << std::endl;
 
 	if (VMath::mag(orientation) == 0)
 		return false;
@@ -131,16 +132,16 @@ bool Player::Interact()
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
 		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
 		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-		std::cout << "Tile ID: " << tileID << std::endl;
+		///std::cout << "Tile ID: " << tileID << std::endl;
 		//priority to the top collision - if no object in the top corner, test the one below it
-		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
+		if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0) {
 			tileCoords.x = vecAuxDiagonal.y / TILE_RENDER_SIZE;
 			tileCoords.y = vecAuxDiagonal.x / TILE_RENDER_SIZE;
 			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-			std::cout << "Tile ID: " << tileID << std::endl;
+			//std::cout << "Tile ID: " << tileID << std::endl;
 
 			//no objects on the MAP or in the collision layer
-			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)
+			if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0)
 				return false;
 		}
 	}
@@ -166,16 +167,16 @@ bool Player::Interact()
 		tileCoords.x = vecAuxAdjancent.y / TILE_RENDER_SIZE;
 		tileCoords.y = vecAuxAdjancent.x / TILE_RENDER_SIZE;
 		tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-		std::cout << "Tile ID: " << tileID << std::endl;
+		//std::cout << "Tile ID: " << tileID << std::endl;
 		//priority to the top collision - if no object in the top corner, test the one below it
-		if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0) {
+		if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0) {
 			tileCoords.x = static_cast<int>(vecAuxDiagonal.y / TILE_RENDER_SIZE);
 			tileCoords.y = static_cast<int>(vecAuxDiagonal.x / TILE_RENDER_SIZE);
 			tileID = unsigned(collisionLayer->at(tileCoords.x).at(tileCoords.y));
-			std::cout << "Tile ID: " << tileID << std::endl;
+			//std::cout << "Tile ID: " << tileID << std::endl;
 
 			//no objects on the MAP or in the collision layer
-			if (OBJECT_MAP.find(tileID) == OBJECT_MAP.end() || tileID == 0)
+			if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0)
 				return false;
 		}
 	}
@@ -189,9 +190,8 @@ bool Player::Interact()
 void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 {
 	std::string animationName;
-	//if the code reached here, it means that there is a collidiable object and this object exist in the OBJECT MAP
-	//1. lets test if this object is an object that should give an interaction, for example, the anvil should open a craft window
-	switch (OBJECT_MAP.at(objectID).type) {
+	Object interactionObj = GameManager::getInstance()->OBJECT_MAP.at(objectID);
+	switch (interactionObj.type) {
 	case OBJECT_TYPE::ANVIL:
 		std::cout << "You interacted with the anvil!! In the future you will be able to craft objectes in the future! :)\n";
 			break;
@@ -225,10 +225,10 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		}
 
 		//if the object being interacted with reached the number of interactions necessary to be deleted, remove from map
-		if (interactedObjects.at(key)->numberInteractions >= OBJECT_MAP.at(objectID).interactionNumber)
+		if (interactedObjects.at(key)->numberInteractions >= interactionObj.interactionNumber)
 		{
 			(*collisionLayer)[key.x][key.y] = 0;
-			AddItemBag(OBJECT_MAP.at(objectID).loot, OBJECT_MAP.at(objectID).lootQuantity);
+			AddItemBag(interactionObj.loot, interactionObj.lootQuantity);
 			interactedObjects.erase(key);
 		}
 

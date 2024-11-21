@@ -10,77 +10,30 @@
 
 using namespace tinyxml2;
 
-//struct Object {
-//	unsigned int number;
-//	OBJECT_TYPE type;
-//	OBJECT_TYPE loot;
-//	unsigned int lootQuantity;
-//	unsigned int interactionNumber;
-//};
-static const Object anvilLeft{5862, OBJECT_TYPE::ANVIL, OBJECT_TYPE::UNDEFINED, 0, 1};
-static const Object anvilRight{5863, OBJECT_TYPE::ANVIL, OBJECT_TYPE::UNDEFINED, 0, 1};
-static const Object iron{5713, OBJECT_TYPE::IRON, OBJECT_TYPE::IRON_ORE, 3, 9};
-static const Object iron_ore{ 5230, OBJECT_TYPE::IRON_ORE, OBJECT_TYPE::UNDEFINED, 0, 2 };
+class ObjectMapClass {
+private:
+	std::map<unsigned int, Object> OBJECT_MAP;
 
+	OBJECT_TYPE GetObjectType(std::string str);
 
-//this is a variable declaration with initialization
-extern std::map<unsigned int, Object> OBJECT_MAP;// {
-//	{anvilLeft.number, anvilLeft},
-//	{anvilRight.number, anvilRight},
-//	{iron.number, iron}
-//};
+	bool LoadObjectsMap(std::string fileName);
 
-static OBJECT_TYPE getObjectType(std::string str) {
+public:
+	ObjectMapClass() {}
+	~ObjectMapClass() {}
 
-	// creates a search value that represents the type map find function
-	auto search = TypeMap.find(str);
-
-	// if our search finds something before it ends return the assoiciated OBJECT_TYPE value
-	if (search != TypeMap.end())
-		return search->second;
-	else  // else return undefined
-		return OBJECT_TYPE::UNDEFINED;
-};
-
-
-static bool LoadObjectsMap(std::string fileName) {
-	XMLDocument ObjMapXML;
-
-	if (ObjMapXML.LoadFile(fileName.c_str()) != XML_SUCCESS) {
-		std::cerr << "Can't open the xml file: " << fileName.c_str() << "\n";
-		return false;
+	bool OnCreate() {
+		return LoadObjectsMap("xml/ObjectMap.xml");
 	}
 
-	XMLNode* root = ObjMapXML.FirstChild();
-	if (root == NULL) {
-		std::cout << "TinyXML2 error: " << tinyxml2::XML_ERROR_FILE_READ_ERROR << std::endl;
-		return false;
-	}
-	std::cout << "Root: " << root->FirstChild()->Value() << std::endl;
-
-	XMLElement* ObjData = root->FirstChildElement("Object");
-
-	Object ObjInfo;
-
-	while (ObjData != nullptr) {
-		ObjInfo.number = std::stoi(ObjData->FirstChildElement("id")->GetText());
-		ObjInfo.type = getObjectType(ObjData->FirstChildElement("type")->GetText());
-		ObjInfo.loot = getObjectType(ObjData->FirstChildElement("loot")->GetText());
-		ObjInfo.lootQuantity = std::stoi(ObjData->FirstChildElement("loot_quantity")->GetText());
-		ObjInfo.interactionNumber = std::stoi(ObjData->FirstChildElement("num_interaction")->GetText());
-		//collision box
-		XMLElement* box = ObjData->FirstChildElement("collision_box");
-		ObjInfo.collisionBox.topLeftCorner.x = std::stoi(box->FirstChildElement("top_x")->GetText());
-		ObjInfo.collisionBox.topLeftCorner.y = std::stoi(box->FirstChildElement("top_y")->GetText());
-		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("bottom_x")->GetText());
-		ObjInfo.collisionBox.bottomRightCorner.y = std::stoi(box->FirstChildElement("botton_y")->GetText());
-
-		OBJECT_MAP.insert(std::pair<unsigned int, Object>(ObjInfo.number, ObjInfo));
-
-		ObjData = ObjData->NextSiblingElement("Object");
+	std::map<unsigned int, Object>::iterator find(unsigned int key) {
+		return OBJECT_MAP.find(key);
 	}
 
-	std::cout << "Object Map Created! \n";
-
-	return true;
+	std::map<unsigned int, Object>::iterator end() {
+		return OBJECT_MAP.end();
+	}
+	Object& at(unsigned int key) {
+		return OBJECT_MAP.at(key);
+	}
 };

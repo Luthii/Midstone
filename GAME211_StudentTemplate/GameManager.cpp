@@ -30,6 +30,11 @@ bool GameManager::OnCreate() {
 		return false;
 	}
 
+    if (!OBJECT_MAP.OnCreate()) {
+        OnDestroy();
+        return false;
+   }
+
     // select scene for specific assignment
     shopScene = new ShopScene(windowPtr->GetSDL_Window());
     if (!shopScene->OnCreate()) {
@@ -62,16 +67,6 @@ bool GameManager::OnCreate() {
     }
     currentScene->setPlayer(player);
       
-    //// create an Enemy
-    enemy = new Enemy(
-        Vec3(50.0f, 30.0f, 0.0f),       //position
-        Vec3(0.0f, 0.0f, 0.0f),         //velocity
-        1.0f,                           //speed
-        20,                             //damage
-        "textures/cactus.png",          //texture file path
-        currentScene->getRenderer()     //scene renderer
-    );
-    enemy->onCreate();
     shopScene->setPlayer(player);
 
     EventHandler::GetInstance()->Subscribe(QuitEvent::eventType, std::bind(&GameManager::QuitGame, this, std::placeholders::_1), "GameManager");

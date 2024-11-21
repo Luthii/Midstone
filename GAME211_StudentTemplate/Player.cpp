@@ -290,7 +290,7 @@ void Player::Update(float deltaTime) {
 	}
 
 	//if(!interacting)
-		playerAnimation->ChangeAnimation(animationName);
+	playerAnimation->ChangeAnimation(animationName);
 	playerAnimation->Update(deltaTime);
 }
 

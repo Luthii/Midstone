@@ -100,6 +100,11 @@ void Animation::ChangeAnimation(std::string animationName)
 			if (lockState)
 				//InputManager::getInstance()->LockInput();
 			currentFrame = 0;
+			elapsedTime = 0.0f;
+			currentFrameSprite.x = currentAnimation.beginTile.x + (currentFrame * currentAnimation.width);
+			currentFrameSprite.y = currentAnimation.beginTile.y * TILE_SIZE;
+			currentFrameSprite.w = currentAnimation.width;
+			currentFrameSprite.h = currentAnimation.height;
 			break;
 		}
 	}

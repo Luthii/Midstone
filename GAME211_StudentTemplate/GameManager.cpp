@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "MinesScene.h"
 //#include "Scene1.h"
 
 
@@ -9,6 +10,7 @@ GameManager::GameManager() {
 	currentScene = nullptr;
     shopScene = nullptr;
     shopScene = nullptr;
+    minesScene = nullptr;
     //player = nullptr;
 }
  
@@ -46,6 +48,13 @@ bool GameManager::OnCreate() {
     mainMenuScene = new MainMenuScene(windowPtr->GetSDL_Window());
     if (!mainMenuScene->OnCreate()) {
         std::cerr << "Error creating the Main Menu scene." << std::endl;
+        OnDestroy();
+        return false;
+    }
+
+    minesScene = new MinesScene(windowPtr->GetSDL_Window());
+    if (!minesScene->OnCreate()) {
+        std::cerr << "Error creating the Shop scene." << std::endl;
         OnDestroy();
         return false;
     }

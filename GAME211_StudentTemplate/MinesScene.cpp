@@ -23,39 +23,31 @@ bool MinesScene::OnCreate() {
 	srand(time(0));
 	key = rand() % 3;
 
+	std::cout << key << "\n";
+
 	switch (key)
 	{
 		// When the player chooses to enter the mines, they are placed in one of our three mine floors
 	case (0):
 		minesMap = new Map("xml/TM_MinesLevel1.xml", "textures/SuperTileSetShop.png", renderer);
 		minesMap->onCreate();
-		break;
+		return 1;
 	case (1):
 		minesMap = new Map("xml/TM_MinesLevel2.xml", "textures/SuperTileSetShop.png", renderer);
 		minesMap->onCreate();
-		break;
+		return 1;
 	case(2):
 		minesMap = new Map("xml/TM_MinesLevel3.xml", "textures/SuperTileSetShop.png", renderer);
 		minesMap->onCreate();
-		break;
+		return 1;
 	}
+	return 0;
 }
 
 void MinesScene::OnDestroy() {
-
-	delete window;
-	
-	// destroy renderer and delete var
-	SDL_DestroyRenderer(renderer);
-	delete renderer;
-
-	// destroy the tile map and delete the var
 	minesMap->onDestroy();
+	//delete testAnimation;
 	delete minesMap;
-	
-	// destroy the player and delete the var
-	//player->OnDestroy();
-	delete player;
 }
 
 void MinesScene::Update(const float deltaTime) {

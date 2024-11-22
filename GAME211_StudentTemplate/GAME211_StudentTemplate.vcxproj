@@ -32,6 +32,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MinesScene.cpp" />
+    <ClCompile Include="MinesScene.h" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ObjectMap.cpp" />
     <ClCompile Include="Player.cpp" />

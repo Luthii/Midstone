@@ -9,6 +9,7 @@
 #include "Timer.h"
 #include "Scene.h"
 #include "ShopScene.h"
+#include "MinesScene.h"
 //#include "Player.h"
 #include "MainMenuScene.h"
 #include "ObjectMap.h"
@@ -24,6 +25,7 @@ private:
 	Scene *currentScene;
 	Scene* mainMenuScene;
 	Scene* shopScene;
+	Scene* minesScene;
 	Player* player;
 
 //------------ PRIVATE METHODS --------------------

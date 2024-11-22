@@ -14,13 +14,13 @@ private:
 	SDL_Window* window;		// an SDL window with a SDL renderer
 	SDL_Renderer* renderer;	// the renderer associated with SDL window
 
-	Map* shopMap;
+	Map* minesMap;
 	Player* player;
 	//Animation* testAnimation;
 
 public:
 	MinesScene(SDL_Window* sdlWindow);
-	MinesScene();
+	~MinesScene();
 	bool OnCreate();
 	void OnDestroy();
 	void Update(const float time);

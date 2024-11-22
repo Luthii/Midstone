@@ -29,15 +29,15 @@ bool MinesScene::OnCreate() {
 	{
 		// When the player chooses to enter the mines, they are placed in one of our three mine floors
 	case (0):
-		minesMap = new Map("xml/TM_MinesLevel1.xml", "textures/SuperTileSetShop.png", renderer);
+		minesMap = new Map("xml/TM_MinesLevel1.xml", "textures/minesSpriteSheet.png", renderer);
 		minesMap->onCreate();
 		return 1;
 	case (1):
-		minesMap = new Map("xml/TM_MinesLevel2.xml", "textures/SuperTileSetShop.png", renderer);
+		minesMap = new Map("xml/TM_MinesLevel2.xml", "textures/minesSpriteSheet.png", renderer);
 		minesMap->onCreate();
 		return 1;
 	case(2):
-		minesMap = new Map("xml/TM_MinesLevel3.xml", "textures/SuperTileSetShop.png", renderer);
+		minesMap = new Map("xml/TM_MinesLevel3.xml", "textures/minesSpriteSheet.png", renderer);
 		minesMap->onCreate();
 		return 1;
 	}

@@ -68,7 +68,7 @@ bool Map::ReadXMLTileMap()
 	root->ToElement()->QueryIntAttribute("height", &mapHeight);
 
 //------------------------------------------------------
-// CHANGE THIS TO READ FROM THE FILE
+
 	spawnPosition.x = 5 * TILE_RENDER_SIZE;
 	spawnPosition.y = 36 * TILE_RENDER_SIZE;
 

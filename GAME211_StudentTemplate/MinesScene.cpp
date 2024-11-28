@@ -81,6 +81,9 @@ void MinesScene::setPlayer(Player* player_) {
 }
 
 void MinesScene::ResetScene() {
+	// set the map collision
+	player->setCollisionLayer(minesMap->getCollisionLayer());
+
 	// set the player to the spawn point
 	player->setPosition(minesMap->getSpawnPosition());
 	

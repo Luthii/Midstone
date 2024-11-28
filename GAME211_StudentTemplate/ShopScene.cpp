@@ -73,16 +73,11 @@ void ShopScene::HandleEvents()
 void ShopScene::setPlayer(Player* player_)
 {
 	player = player_;
-	player->setCollisionLayer(shopMap->getCollisionLayer());
-	player->setPosition(shopMap->getSpawnPosition());
-	Camera::UpdateCenterCoordinates(player->getPosition().x, player->getPosition().y);
-
-	//testAnimation = new Animation(renderer, player->getPosition());
-	//testAnimation->onCreate();
 }
 
 void ShopScene::ResetScene()
 {
+	player->setCollisionLayer(shopMap->getCollisionLayer());
 	player->setPosition(shopMap->getSpawnPosition());
 	Camera::UpdateCenterCoordinates(player->getPosition().x, player->getPosition().y);
 }

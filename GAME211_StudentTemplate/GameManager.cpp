@@ -75,8 +75,6 @@ bool GameManager::OnCreate() {
         return false;
     }
     currentScene->setPlayer(player);
-      
-    shopScene->setPlayer(player);
 
     EventHandler::GetInstance()->Subscribe(QuitEvent::eventType, std::bind(&GameManager::QuitGame, this, std::placeholders::_1), "GameManager");
     EventHandler::GetInstance()->Subscribe(ChangeSceneEvent::eventType, std::bind(&GameManager::ChangeScene, this, std::placeholders::_1), "GameManager");
@@ -148,6 +146,9 @@ void GameManager::ChangeScene(const Event& event)
     case SCENES::SHOP_SCENE:
         currentScene = shopScene;
         break;
+    case SCENES::MINES_SCENE:
+        currentScene = minesScene;
+        break;
     default:
         break;
     }
@@ -167,8 +168,13 @@ void GameManager::LoadScene( int i )
         case 1:
             currentScene = new ShopScene( windowPtr->GetSDL_Window());
             break;
+        case 2:
+            currentScene = new MinesScene(windowPtr->GetSDL_Window());
+            break;
         default:
             currentScene = new ShopScene( windowPtr->GetSDL_Window());
             break;
+            
     }
+    currentScene->setPlayer(player);
 }

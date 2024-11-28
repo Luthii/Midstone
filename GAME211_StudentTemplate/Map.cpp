@@ -68,9 +68,13 @@ bool Map::ReadXMLTileMap()
 	root->ToElement()->QueryIntAttribute("height", &mapHeight);
 
 //------------------------------------------------------
+	
+	// set the spawn point using an element found in the related xml file
+	XMLElement* spawnNode;
+	spawnNode = root->FirstChildElement("spawn");
 
-	spawnPosition.x = 5 * TILE_RENDER_SIZE;
-	spawnPosition.y = 36 * TILE_RENDER_SIZE;
+	spawnPosition.x = std::stoi(spawnNode->Attribute("x")) * TILE_RENDER_SIZE;
+	spawnPosition.y = std::stoi(spawnNode->Attribute("y")) * TILE_RENDER_SIZE;
 
 	
 	//Start to read the nodes with the tag "layer"

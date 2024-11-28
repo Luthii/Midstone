@@ -48,7 +48,7 @@ void ShopScene::Update(const float deltaTime) {
 
 void ShopScene::Render() {
 	//clear window with the bracl color
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(renderer, 46, 34, 47, 0);
 	//clear render
 	SDL_RenderClear(renderer);
 

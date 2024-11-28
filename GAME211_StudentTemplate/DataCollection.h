@@ -10,7 +10,8 @@ const int SCREEN_HEIGHT = 600;
 
 enum SCENES {
 	MAIN_MENU,
-	SHOP_SCENE
+	SHOP_SCENE,
+	MINES_SCENE
 };
 
 struct TILE {

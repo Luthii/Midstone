@@ -22,7 +22,7 @@ bool MinesScene::OnCreate() {
 	int key;
 	srand(time(0));
 	key = rand() % 3;
-
+		
 	std::cout << key << "\n";
 
 	switch (key)
@@ -58,8 +58,8 @@ void MinesScene::Update(const float deltaTime) {
 }
 
 void MinesScene::Render() {
-	// set the bg colour to black
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	// match the bg colour to the scene
+	SDL_SetRenderDrawColor(renderer, 46, 34, 47, 0);
 
 	// clear renderer
 	SDL_RenderClear(renderer);

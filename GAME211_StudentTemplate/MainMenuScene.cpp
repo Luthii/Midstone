@@ -86,6 +86,12 @@ void MainMenuScene::HandleEvents() {
 
 	if (InputManager::getInstance()->IsKeyDown(SDLK_SPACE)) {
 		selectedButton->OnButtonPressed();
+
+		/*if (!(selectedButton->OnButtonPress() == nullptr)) {
+			selectedButton->UnSelectedButton();
+			selectedButton = selectedButton->GetNext();
+			selectedButton->SelectButton();
+		}*/
 	}
 
 }

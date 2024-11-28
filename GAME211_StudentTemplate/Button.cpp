@@ -64,18 +64,6 @@ bool Button::onCreate()
     return true;
 }
 
-//void Button::Render(SDL_Renderer* sceneRenderer)
-//{
-//    SDL_Rect rect;
-//    MATH::Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
-//
-//    rect.x = static_cast<int>(screenCoordinates.x);
-//    rect.y = static_cast<int>(screenCoordinates.y);
-//    rect.w = TILE_RENDER_SIZE;
-//    rect.h = TILE_RENDER_SIZE;
-//
-//    SDL_RenderCopyEx(sceneRenderer, texBTNotPressed, nullptr, &rect, 0.0, nullptr, SDL_FLIP_NONE);
-//}
 
 
 void Button::HandleEvents() {
@@ -94,13 +82,7 @@ void Button::HandleEvents() {
 
 
 }
-//
-//void Button::Update(float deltaTime) {
-//	
-//
-//
-//}
-//
+
 void Button::Render(SDL_Renderer* sceneRenderer) {
 	SDL_Rect rect;
 	SDL_Point size;

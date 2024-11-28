@@ -14,6 +14,8 @@ private:
 	Button* btQuit;
 	Button* selectedButton = nullptr;
 
+	SDL_Texture* background;
+
 
 public:
 	MainMenuScene(SDL_Window* sdl_Window);

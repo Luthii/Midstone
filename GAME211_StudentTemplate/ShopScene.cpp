@@ -26,7 +26,7 @@ bool ShopScene::OnCreate() {
 	//SDL_RenderSetLogicalSize(renderer, 640, 400);
 
 
-	shopMap = new Map("xml/TM_Shop_Collision.xml", "textures/SuperTileSetShop.png", renderer);
+	shopMap = new Map("xml/TM_FinalShopMap.xml", "textures/SuperTileSetShop.png", renderer);
 	shopMap->onCreate();
 
 	std::cout << "Finished creating the shop scene!\n";

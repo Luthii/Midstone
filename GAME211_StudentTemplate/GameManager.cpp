@@ -59,7 +59,7 @@ bool GameManager::OnCreate() {
         return false;
     }
     
-    currentScene = minesScene;
+    currentScene = shopScene;
     
     //// create player
     player = new Player(

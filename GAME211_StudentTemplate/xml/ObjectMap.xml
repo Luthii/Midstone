@@ -28,7 +28,7 @@
 		</collision_box>
 	</Object>
 	<Object>
-		<!--IRON_BOTTOM-->
+		<!--IRON-->
 		<id>667</id>
 		<type>IRON</type>
 		<loot>IRON_ORE</loot>

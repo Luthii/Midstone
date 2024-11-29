@@ -73,6 +73,12 @@ bool Map::ReadXMLTileMap()
 	XMLElement* spawnNode;
 	spawnNode = root->FirstChildElement("spawn");
 
+	// These values reset on any change to the tiled map
+	// shop : <spawn x="9" y="10"/>
+	// mines 1 : <spawn x="6" y="5"/>
+	// mines 2 : <spawn x="5" y="19"/>
+	// mines 3 : <spawn x="6" y="3"/>
+
 	spawnPosition.x = std::stoi(spawnNode->Attribute("x")) * TILE_RENDER_SIZE;
 	spawnPosition.y = std::stoi(spawnNode->Attribute("y")) * TILE_RENDER_SIZE;
 

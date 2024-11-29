@@ -78,16 +78,12 @@ void MinesScene::HandleEvents() {
 
 void MinesScene::setPlayer(Player* player_) {
 	player = player_;
-	// set up collisions
-	player->setCollisionLayer(minesMap->getCollisionLayer());
-	// set the player to the spawn point
-	player->setPosition(minesMap->getSpawnPosition());
-
-	// center the camera on the player
-	Camera::UpdateCenterCoordinates(player->getPosition().x, player->getPosition().y);
 }
 
 void MinesScene::ResetScene() {
+	// set the map collision
+	player->setCollisionLayer(minesMap->getCollisionLayer());
+
 	// set the player to the spawn point
 	player->setPosition(minesMap->getSpawnPosition());
 	

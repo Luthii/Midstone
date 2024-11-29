@@ -36,7 +36,7 @@ bool GameManager::OnCreate() {
         OnDestroy();
         return false;
    }
-
+    
     // select scene for specific assignment
     shopScene = new ShopScene(windowPtr->GetSDL_Window());
     if (!shopScene->OnCreate()) {
@@ -58,8 +58,8 @@ bool GameManager::OnCreate() {
         OnDestroy();
         return false;
     }
-
-    currentScene = minesScene;
+    
+    currentScene = shopScene;
     
     //// create player
     player = new Player(
@@ -74,7 +74,12 @@ bool GameManager::OnCreate() {
         OnDestroy();
         return false;
     }
-    currentScene->setPlayer(player);
+    
+    shopScene->setPlayer(player);
+    minesScene->setPlayer(player);
+    mainMenuScene->setPlayer(player);
+
+    currentScene->ResetScene();
 
     EventHandler::GetInstance()->Subscribe(QuitEvent::eventType, std::bind(&GameManager::QuitGame, this, std::placeholders::_1), "GameManager");
     EventHandler::GetInstance()->Subscribe(ChangeSceneEvent::eventType, std::bind(&GameManager::ChangeScene, this, std::placeholders::_1), "GameManager");
@@ -113,6 +118,9 @@ void GameManager::handleEvents()
 
     if (InputManager::getInstance()->IsKeyUp(SDLK_2))
         EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::SHOP_SCENE));
+
+    if (InputManager::getInstance()->IsKeyUp(SDLK_3))
+        EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::MINES_SCENE));
 }
 
 GameManager::~GameManager() {}
@@ -157,24 +165,24 @@ void GameManager::ChangeScene(const Event& event)
 }
 
 
-void GameManager::LoadScene( int i )
-{
-    // cleanup of current scene before loading another one
-    currentScene->OnDestroy();
-    delete currentScene;
-
-    switch ( i )
-    {
-        case 1:
-            currentScene = new ShopScene( windowPtr->GetSDL_Window());
-            break;
-        case 2:
-            currentScene = new MinesScene(windowPtr->GetSDL_Window());
-            break;
-        default:
-            currentScene = new ShopScene( windowPtr->GetSDL_Window());
-            break;
-            
-    }
-    currentScene->setPlayer(player);
-}
+//void GameManager::LoadScene( int i )
+//{
+//    // cleanup of current scene before loading another one
+//    currentScene->OnDestroy();
+//    delete currentScene;
+//
+//    switch ( i )
+//    {
+//        case 1:
+//            currentScene = new ShopScene( windowPtr->GetSDL_Window());
+//            break;
+//        case 2:
+//            currentScene = new MinesScene(windowPtr->GetSDL_Window());
+//            break;
+//        default:
+//            currentScene = new ShopScene( windowPtr->GetSDL_Window());
+//            break;
+//            
+//    }
+//    currentScene->setPlayer(player);
+//}

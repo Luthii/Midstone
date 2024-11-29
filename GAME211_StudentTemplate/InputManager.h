@@ -37,8 +37,6 @@ public:
 	InputManager(const InputManager& obj) = delete;
 	InputManager& operator=(InputManager const&) = delete;
 
-	void Update();
-
 	static InputManager* getInstance() {
 		if (instance == NULL)
 			instance = new InputManager();
@@ -46,6 +44,7 @@ public:
 		return instance;
 	}
 
+	void Update();
 	bool IsKeyDown(const int key) const { return keyDown[key]; }
 	bool IsKeyUp(const int key) const { return keyUp[key]; }
 	//bool IsKeyPressed(const int key) const;

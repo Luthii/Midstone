@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TM_Shop.tmx",
+    "activeFile": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop_Collision.xml",
     "expandedProjectPaths": [
         "."
     ],
@@ -25,8 +25,8 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 170.99999999999997,
-                "y": 387.66666666666663
+                "x": 283.66666666666663,
+                "y": 386.33333333333337
             }
         },
         "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml/Mines.tsx": {
@@ -56,6 +56,14 @@
                 "y": 392.3611111111111
             }
         },
+        "Shop_Map.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 12,
+            "viewCenter": {
+                "x": 262.99999999999994,
+                "y": 316.99999999999994
+            }
+        },
         "SuperTileSet.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1.1215,
@@ -69,16 +77,24 @@
             "scale": 1.4229,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 122.98826340572069,
-                "y": 327.85157073582116
+                "x": 204.86330733010047,
+                "y": 325.04041042940474
             }
         },
         "testTileMap.tmx": {
             "scale": 0.8465725806451613,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 445.9156942129078,
-                "y": 288.2210050011907
+                "x": 308.89259347463684,
+                "y": 287.63038818766375
+            }
+        },
+        "testTileMap.xml": {
+            "scale": 1.0304435483870968,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 384.78575621209154,
+                "y": 296.4742711798083
             }
         }
     },
@@ -94,18 +110,24 @@
     "openFiles": [
         "SuperTileSetShop.tsx",
         "SuperTileSet.tsx",
-        "TM_Shop.tmx"
+        "TM_Shop.tmx",
+        "Shop_Map.tmx",
+        "testTileMap.xml",
+        "testTileMap.tmx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop_Collision.xml"
     ],
     "project": "testTileMap.tiled-project",
     "recentFiles": [
         "SuperTileSetShop.tsx",
         "SuperTileSet.tsx",
         "TM_Shop.tmx",
+        "Shop_Map.tmx",
+        "testTileMap.xml",
+        "testTileMap.tmx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop_Collision.xml",
         "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml/Mines_Test.tmx",
         "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel1.xml",
         "C:/Users/cjhou/Downloads/New Map.tmx",
-        "testTileMap.tmx",
-        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop_Collision.xml",
         "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",

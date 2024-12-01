@@ -1,5 +1,4 @@
 #include "GameManager.h"
-#include "MinesScene.h"
 //#include "Scene1.h"
 
 
@@ -10,7 +9,9 @@ GameManager::GameManager() {
 	currentScene = nullptr;
     shopScene = nullptr;
     shopScene = nullptr;
-    minesScene = nullptr;
+    minesScene1 = nullptr;
+    minesScene2 = nullptr;
+    minesScene3 = nullptr;
     //player = nullptr;
 }
  
@@ -52,13 +53,27 @@ bool GameManager::OnCreate() {
         return false;
     }
 
-    minesScene = new MinesScene(windowPtr->GetSDL_Window());
-    if (!minesScene->OnCreate()) {
+    minesScene1 = new MinesScene1(windowPtr->GetSDL_Window());
+    if (!minesScene1->OnCreate()) {
         std::cerr << "Error creating the Shop scene." << std::endl;
         OnDestroy();
         return false;
     }
     
+    minesScene2 = new MinesScene2(windowPtr->GetSDL_Window());
+    if (!minesScene2->OnCreate()) {
+        std::cerr << "Error creating the Shop scene." << std::endl;
+        OnDestroy();
+        return false;
+    }
+
+    minesScene3 = new MinesScene3(windowPtr->GetSDL_Window());
+    if (!minesScene3->OnCreate()) {
+        std::cerr << "Error creating the Shop scene." << std::endl;
+        OnDestroy();
+        return false;
+    }
+
     currentScene = shopScene;
     
     //// create player
@@ -66,7 +81,7 @@ bool GameManager::OnCreate() {
         Vec3(50.0f, 30.0f, 0.0f),		//position
         Vec3(0.0f, 0.0f, 0.0f),			//velocity
         3.0f,							//speed
-        "textures/player_spritesheet.png",	//texture file path
+        "textures/player_spritesheet2.png",	//texture file path
         currentScene->getRenderer() 	//scene renderer
     );
     if (!player->onCreate()) {
@@ -76,7 +91,9 @@ bool GameManager::OnCreate() {
     }
     
     shopScene->setPlayer(player);
-    minesScene->setPlayer(player);
+    minesScene1->setPlayer(player);
+    minesScene2->setPlayer(player);
+    minesScene3->setPlayer(player);
     mainMenuScene->setPlayer(player);
 
     currentScene->ResetScene();
@@ -120,7 +137,7 @@ void GameManager::handleEvents()
         EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::SHOP_SCENE));
 
     if (InputManager::getInstance()->IsKeyUp(SDLK_3))
-        EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::MINES_SCENE));
+        EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::MINES_SCENE1));
 }
 
 GameManager::~GameManager() {}
@@ -154,8 +171,14 @@ void GameManager::ChangeScene(const Event& event)
     case SCENES::SHOP_SCENE:
         currentScene = shopScene;
         break;
-    case SCENES::MINES_SCENE:
-        currentScene = minesScene;
+    case SCENES::MINES_SCENE1:
+        currentScene = minesScene1;
+        break;
+    case SCENES::MINES_SCENE2:
+        currentScene = minesScene2;
+        break;
+    case SCENES::MINES_SCENE3:
+        currentScene = minesScene3;
         break;
     default:
         break;

@@ -81,10 +81,13 @@
     <ClCompile Include="Quit_Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MinesScene.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="MinesScene1.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MinesScene.cpp">
+    <ClCompile Include="MinesScene2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MinesScene3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -162,6 +165,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Quit_Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinesScene1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinesScene2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinesScene3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

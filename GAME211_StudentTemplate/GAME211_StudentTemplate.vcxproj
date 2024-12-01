@@ -32,8 +32,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MinesScene.cpp" />
-    <ClCompile Include="MinesScene.h" />
+    <ClCompile Include="MinesScene1.cpp" />
+    <ClCompile Include="MinesScene2.cpp" />
+    <ClCompile Include="MinesScene3.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ObjectMap.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -59,6 +60,9 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MinesScene1.h" />
+    <ClInclude Include="MinesScene2.h" />
+    <ClInclude Include="MinesScene3.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectMap.h" />

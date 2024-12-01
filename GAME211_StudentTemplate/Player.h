@@ -20,9 +20,11 @@ private:
 	Animation* playerAnimation;
 	COLLISION_BOX collisionBox;
 	bool interacting = false;
+	int mineLevel;
 
 	void TestCollision();
 	bool Interact();
+	void Attack();
 	void CheckObjectInteractionList(TILE key, unsigned int objectID);
 	void AddItemBag(OBJECT_TYPE objType, unsigned int quantity);
 

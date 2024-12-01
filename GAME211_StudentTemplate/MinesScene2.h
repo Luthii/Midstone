@@ -9,7 +9,7 @@
 #include "Animation.h"
 #include "Button.h"
 
-class MinesScene : public Scene {
+class MinesScene2 : public Scene {
 private:
 	SDL_Window* window;		// an SDL window with a SDL renderer
 	SDL_Renderer* renderer;	// the renderer associated with SDL window
@@ -19,8 +19,8 @@ private:
 	//Animation* testAnimation;
 
 public:
-	MinesScene(SDL_Window* sdlWindow);
-	~MinesScene();
+	MinesScene2(SDL_Window* sdlWindow);
+	~MinesScene2();
 	bool OnCreate();
 	void OnDestroy();
 	void Update(const float time);

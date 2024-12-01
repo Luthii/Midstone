@@ -88,7 +88,7 @@
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
-		<name>pickaxe_up</name>
+		<name>interact_up</name>
 		<x>0</x>
 		<y>8</y>
 		<w>16</w>
@@ -99,7 +99,7 @@
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 	<Animation>
-		<name>pickaxe_down</name>
+		<name>interact_down</name>
 		<x>0</x>
 		<y>10</y>
 		<w>16</w>
@@ -110,7 +110,7 @@
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 	<Animation>
-		<name>pickaxe_left</name>
+		<name>interact_left</name>
 		<x>0</x>
 		<y>13</y>
 		<w>16</w>
@@ -121,7 +121,7 @@
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
 	<Animation>
-		<name>pickaxe_right</name>
+		<name>interact_right</name>
 		<x>0</x>
 		<y>14</y>
 		<w>16</w>
@@ -131,5 +131,92 @@
 		<loop>0</loop>
 		<number_of_sprites>10</number_of_sprites>
 	</Animation>
-
+	<Animation>
+		<name>attack_up</name>
+		<x>0</x>
+		<y>15</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>attack_down</name>
+		<x>0</x>
+		<y>18</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>attack_left</name>
+		<x>0</x>
+		<y>21</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>attack_right</name>
+		<x>0</x>
+		<y>24</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>pickaxe_up</name>
+		<x>0</x>
+		<y>27</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>pickaxe_down</name>
+		<x>0</x>
+		<y>30</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>pickaxe_left</name>
+		<x>0</x>
+		<y>33</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
+	<Animation>
+		<name>pickaxe_right</name>
+		<x>0</x>
+		<y>36</y>
+		<w>48</w>
+		<h>48</h>
+		<anchor_x>-16</anchor_x>
+		<anchor_y>-16</anchor_y>
+		<loop>0</loop>
+		<number_of_sprites>9</number_of_sprites>
+	</Animation>
 </Animations>

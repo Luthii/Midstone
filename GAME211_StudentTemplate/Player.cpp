@@ -206,10 +206,7 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 	std::string animationName;
 	Object interactionObj = GameManager::getInstance()->OBJECT_MAP.at(objectID);
 	switch (interactionObj.type) {
-	case OBJECT_TYPE::ANVIL:
-		std::cout << "You interacted with the anvil!! In the future you will be able to craft objectes in the future! :)\n";
-			break;
-	default:
+	case OBJECT_TYPE::IRON:
 		animationName = "pickaxe_";
 		if (orientation.x > 0) {//player is going right - priorize side movement
 			animationName += "right";
@@ -247,6 +244,51 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		}
 
 		break;
+		// scene switching in game.
+	case OBJECT_TYPE::DOOR:
+		EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE1));
+		mineLevel = 1;
+		break;
+	case OBJECT_TYPE::EXIT:
+		EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SHOP_SCENE));
+		break;
+	case OBJECT_TYPE::LADDER:
+		if (mineLevel == 1) {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE2));
+			mineLevel = 2;
+		}
+		else {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE3));
+			mineLevel = 3;
+		}
+		break;
+	case OBJECT_TYPE::HATCH:
+		if (mineLevel == 2) {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE1));
+			mineLevel = 1;
+		}
+		else {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE2));
+			mineLevel = 2;
+		}
+		break;
+	default:
+		animationName = "interact_";
+		if (orientation.x > 0) {//player is going right - priorize side movement
+			animationName += "right";
+		}
+		else if (orientation.x < 0) {
+			animationName += "left";
+		}
+		else if (orientation.y > 0) {
+			animationName += "down";
+		}
+		else if (orientation.y < 0) {
+			animationName += "up";
+		}
+		playerAnimation->ChangeAnimation(animationName);
+
+		break;
 	}
 
 }
@@ -262,6 +304,26 @@ void Player::AddItemBag(OBJECT_TYPE objType, unsigned int quantity) {
 		ObjectLoot* newObj = new ObjectLoot{ quantity };
 		playerBag.insert(std::pair<OBJECT_TYPE, ObjectLoot*>(objType, newObj));
 	}
+}
+
+void Player::Attack() {
+
+	velocity = Vec3(0.0f, 0.0f, 0.0f);
+	std::string animationName = "attack_";
+
+	if (orientation.x > 0) {//player is going right - priorize side movement
+		animationName += "right";
+	}
+	else if (orientation.x < 0) {
+		animationName += "left";
+	}
+	else if (orientation.y > 0) {
+		animationName += "down";
+	}
+	else if (orientation.y < 0) {
+		animationName += "up";
+	}
+	playerAnimation->ChangeAnimation(animationName);
 }
 
 void Player::Update(float deltaTime) {
@@ -344,13 +406,17 @@ void Player::HandleEvents()
 	TestCollision();
 
 	// changed from ->IsKeyDown to ->IsKeyUp
-	if (InputManager::getInstance()->IsKeyUp(SDLK_SPACE)) {
+	if (InputManager::getInstance()->IsKeyUp(SDLK_e)) {
 		//std::cout << "\n-------------------------------------------------------\n";
 		//std::cout << "Space bar pressed\n";
 		Interact();
 		//std::cout << "\n-------------------------------------------------------\n";
 	}
 
+	if (InputManager::getInstance()->IsKeyUp(SDLK_SPACE)) { 
+		std::cout << "attacked";
+		Attack();
+	}
 
 	//Test for event
 	//if (InputManager::getInstance()->IsKeyUp(SDLK_l))

@@ -36,7 +36,7 @@ public:
 		collisionBox.topLeftCorner.y = 6;
 		collisionBox.bottomRightCorner.x = 14 * TILE_SCALE;
 		collisionBox.bottomRightCorner.y = 16 * TILE_SCALE;
-		characterAnimation = new Animation("xml/enemy_animation.xml");
+		characterAnimation = new Animation("xml/player_animation.xml");
 		std::cout << "Player created!\n";
 	}
 

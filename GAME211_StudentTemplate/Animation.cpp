@@ -60,7 +60,15 @@ void Animation::Update(float deltaTime)
 
 		//if we hit the end of the sprite animation, reset to the first one
 		if (currentFrame >= currentAnimation.numberSprites) {
-			if(!currentAnimation.loop)
+			if (!currentAnimation.loop && currentAnimation.name == "die")
+			{
+				std::string newAnimationName = "dead";
+				//std::cout << newAnimationName << std::endl;
+				lockState = false;
+				ChangeAnimation(newAnimationName);
+
+			}
+			else if(!currentAnimation.loop)
 			{
 				std::string newAnimationName = "idle_" + currentAnimation.name.substr(currentAnimation.name.find("_") + 1);
 				//std::cout << newAnimationName << std::endl;
@@ -68,6 +76,14 @@ void Animation::Update(float deltaTime)
 				//InputManager::getInstance()->UnlockInput();
 				ChangeAnimation(newAnimationName);
 				
+			}
+			if (!currentAnimation.loop && currentAnimation.name == "anvil")
+			{
+				std::string newAnimationName = "anviled";
+				//std::cout << newAnimationName << std::endl;
+				lockState = false;
+				ChangeAnimation(newAnimationName);
+
 			}
 			currentFrame = 0;
 		}

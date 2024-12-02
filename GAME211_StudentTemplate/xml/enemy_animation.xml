@@ -88,53 +88,9 @@
 		<number_of_sprites>6</number_of_sprites>
 	</Animation>
 	<Animation>
-		<name>interact_up</name>
-		<x>0</x>
-		<y>8</y>
-		<w>16</w>
-		<h>32</h>
-		<anchor_x>0</anchor_x>
-		<anchor_y>0</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>10</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>interact_down</name>
-		<x>0</x>
-		<y>10</y>
-		<w>16</w>
-		<h>48</h>
-		<anchor_x>0</anchor_x>
-		<anchor_y>-16</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>10</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>interact_left</name>
-		<x>0</x>
-		<y>13</y>
-		<w>16</w>
-		<h>16</h>
-		<anchor_x>0</anchor_x>
-		<anchor_y>0</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>10</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>interact_right</name>
-		<x>0</x>
-		<y>14</y>
-		<w>16</w>
-		<h>16</h>
-		<anchor_x>0</anchor_x>
-		<anchor_y>0</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>10</number_of_sprites>
-	</Animation>
-	<Animation>
 		<name>attack_up</name>
 		<x>0</x>
-		<y>15</y>
+		<y>8</y>
 		<w>48</w>
 		<h>48</h>
 		<anchor_x>-16</anchor_x>
@@ -145,7 +101,7 @@
 	<Animation>
 		<name>attack_down</name>
 		<x>0</x>
-		<y>18</y>
+		<y>11</y>
 		<w>48</w>
 		<h>48</h>
 		<anchor_x>-16</anchor_x>
@@ -156,7 +112,7 @@
 	<Animation>
 		<name>attack_left</name>
 		<x>0</x>
-		<y>21</y>
+		<y>14</y>
 		<w>48</w>
 		<h>48</h>
 		<anchor_x>-16</anchor_x>
@@ -167,51 +123,7 @@
 	<Animation>
 		<name>attack_right</name>
 		<x>0</x>
-		<y>24</y>
-		<w>48</w>
-		<h>48</h>
-		<anchor_x>-16</anchor_x>
-		<anchor_y>-16</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>9</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>pickaxe_up</name>
-		<x>0</x>
-		<y>27</y>
-		<w>48</w>
-		<h>48</h>
-		<anchor_x>-16</anchor_x>
-		<anchor_y>-16</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>9</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>pickaxe_down</name>
-		<x>0</x>
-		<y>30</y>
-		<w>48</w>
-		<h>48</h>
-		<anchor_x>-16</anchor_x>
-		<anchor_y>-16</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>9</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>pickaxe_left</name>
-		<x>0</x>
-		<y>33</y>
-		<w>48</w>
-		<h>48</h>
-		<anchor_x>-16</anchor_x>
-		<anchor_y>-16</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>9</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>pickaxe_right</name>
-		<x>0</x>
-		<y>36</y>
+		<y>17</y>
 		<w>48</w>
 		<h>48</h>
 		<anchor_x>-16</anchor_x>
@@ -222,7 +134,7 @@
 	<Animation>
 		<name>hurt_up</name>
 		<x>0</x>
-		<y>39</y>
+		<y>20</y>
 		<w>16</w>
 		<h>16</h>
 		<anchor_x>0</anchor_x>
@@ -233,7 +145,7 @@
 	<Animation>
 		<name>hurt_down</name>
 		<x>0</x>
-		<y>40</y>
+		<y>21</y>
 		<w>16</w>
 		<h>16</h>
 		<anchor_x>0</anchor_x>
@@ -244,7 +156,7 @@
 	<Animation>
 		<name>hurt_left</name>
 		<x>0</x>
-		<y>41</y>
+		<y>22</y>
 		<w>16</w>
 		<h>16</h>
 		<anchor_x>0</anchor_x>
@@ -255,7 +167,7 @@
 	<Animation>
 		<name>hurt_right</name>
 		<x>0</x>
-		<y>42</y>
+		<y>23</y>
 		<w>16</w>
 		<h>16</h>
 		<anchor_x>0</anchor_x>
@@ -266,7 +178,7 @@
 	<Animation>
 		<name>die</name>
 		<x>0</x>
-		<y>43</y>
+		<y>24</y>
 		<w>16</w>
 		<h>16</h>
 		<anchor_x>0</anchor_x>
@@ -277,32 +189,10 @@
 	<Animation>
 		<name>dead</name>
 		<x>0</x>
-		<y>44</y>
+		<y>25</y>
 		<w>16</w>
 		<h>16</h>
 		<anchor_x>0</anchor_x>
-		<anchor_y>0</anchor_y>
-		<loop>1</loop>
-		<number_of_sprites>1</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>anvil</name>
-		<x>0</x>
-		<y>45</y>
-		<w>32</w>
-		<h>70</h>
-		<anchor_x>-16</anchor_x>
-		<anchor_y>-48</anchor_y>
-		<loop>0</loop>
-		<number_of_sprites>8</number_of_sprites>
-	</Animation>
-	<Animation>
-		<name>anviled</name>
-		<x>0</x>
-		<y>50</y>
-		<w>32</w>
-		<h>16</h>
-		<anchor_x>-16</anchor_x>
 		<anchor_y>0</anchor_y>
 		<loop>1</loop>
 		<number_of_sprites>1</number_of_sprites>

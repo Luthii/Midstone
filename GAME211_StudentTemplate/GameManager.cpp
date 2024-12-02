@@ -78,10 +78,11 @@ bool GameManager::OnCreate() {
     
     //// create player
     player = new Player(
+        "Player",                       //Character Tag
         Vec3(50.0f, 30.0f, 0.0f),		//position
         Vec3(0.0f, 0.0f, 0.0f),			//velocity
         3.0f,							//speed
-        "textures/player_spritesheet2.png",	//texture file path
+        "textures/SS_FinalPlayer.png",	//texture file path
         currentScene->getRenderer() 	//scene renderer
     );
     if (!player->onCreate()) {

@@ -36,7 +36,7 @@ public:
 //ALL entities must have a texture(needs a render to be created) and a position on the scene,
 //	so there is no default constructor with no paramenters
 	Entity(Vec3 position_, std::string texFilePath_, SDL_Renderer* sceneRenderer_) :
-		position{ position_ }, texFilePath{ texFilePath_ }, sceneRenderer{ sceneRenderer_ } {}
+		position { position_ }, texFilePath{ texFilePath_ }, sceneRenderer{ sceneRenderer_ } {}
 	virtual ~Entity();
 
 	virtual bool onCreate();

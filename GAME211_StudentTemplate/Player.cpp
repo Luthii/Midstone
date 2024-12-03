@@ -156,6 +156,7 @@ bool Player::Interact()
 
 			//no objects on the MAP or in the collision layer
 			if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0)
+				Attack();
 				return false;
 		}
 	}
@@ -191,6 +192,7 @@ bool Player::Interact()
 
 			//no objects on the MAP or in the collision layer
 			if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0)
+				Attack();
 				return false;
 		}
 	}
@@ -292,20 +294,21 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		characterAnimation->ChangeAnimation(animationName);
 		break;
 	default:
-		animationName = "interact_";
-		if (orientation.x > 0) {//player is going right - priorize side movement
-			animationName += "right";
-		}
-		else if (orientation.x < 0) {
-			animationName += "left";
-		}
-		else if (orientation.y > 0) {
-			animationName += "down";
-		}
-		else if (orientation.y < 0) {
-			animationName += "up";
-		}
-		characterAnimation->ChangeAnimation(animationName);
+		Attack();
+		//animationName = "interact_";
+		//if (orientation.x > 0) {//player is going right - priorize side movement
+		//	animationName += "right";
+		//}
+		//else if (orientation.x < 0) {
+		//	animationName += "left";
+		//}
+		//else if (orientation.y > 0) {
+		//	animationName += "down";
+		//}
+		//else if (orientation.y < 0) {
+		//	animationName += "up";
+		//}
+		//characterAnimation->ChangeAnimation(animationName);
 
 		break;
 	}
@@ -446,7 +449,8 @@ void Player::HandleEvents()
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDLK_SPACE)) {  
-		Attack();
+		Interact();
+		//Attack();
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDLK_h)) {

@@ -155,7 +155,7 @@
 	</Object>
 	<Object>
 		<!--IRON-->
-		<id>666</id>
+		<id>350</id>
 		<type>IRON</type>
 		<loot>IRON_ORE</loot>
 		<loot_quantity>3</loot_quantity>

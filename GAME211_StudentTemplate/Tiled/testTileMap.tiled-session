@@ -3,15 +3,51 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "TM_Shop.tmx",
+    "activeFile": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel1.xml",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/Mines.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/Mines_Test.xml": {
+            "scale": 1.047375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.12411982336795,
+                "y": 400.0477383936031
+            }
+        },
         "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/SuperTileSetShop.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1
+        },
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel1.xml": {
+            "scale": 1.5813541666666666,
+            "selectedLayer": 8,
+            "viewCenter": {
+                "x": 184.33568276134645,
+                "y": 236.5061590145577
+            }
+        },
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel2.xml": {
+            "scale": 1.2488541666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.62056885478358,
+                "y": 240.2202018516974
+            }
+        },
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel3.xml": {
+            "scale": 1.2488541666666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.62056885478358,
+                "y": 240.2202018516974
+            }
         },
         "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml": {
             "scale": 3,
@@ -28,6 +64,10 @@
                 "x": 170.99999999999997,
                 "y": 387.66666666666663
             }
+        },
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/minesSpriteSheet.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 2
         },
         "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml/Mines.tsx": {
             "scaleInDock": 1
@@ -59,18 +99,18 @@
         "SuperTileSet.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1.1215,
-            "scaleInEditor": 1
+            "scaleInEditor": 2
         },
         "SuperTileSetShop.tsx": {
-            "scaleInDock": 1.3145,
+            "scaleInDock": 2,
             "scaleInEditor": 2
         },
         "TM_Shop.tmx": {
             "scale": 1.4229,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 122.98826340572069,
-                "y": 327.85157073582116
+                "x": 49.54670040059034,
+                "y": 326.0945955443109
             }
         },
         "testTileMap.tmx": {
@@ -82,7 +122,7 @@
             }
         }
     },
-    "last.exportedFilePath": "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml",
+    "last.exportedFilePath": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml",
     "last.externalTilesetPath": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/Tiled",
     "last.imagePath": "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/textures",
     "map.height": 50,
@@ -94,19 +134,25 @@
     "openFiles": [
         "SuperTileSetShop.tsx",
         "SuperTileSet.tsx",
-        "TM_Shop.tmx"
+        "TM_Shop.tmx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/Mines.tsx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/minesSpriteSheet.tsx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel1.xml"
     ],
     "project": "testTileMap.tiled-project",
     "recentFiles": [
         "SuperTileSetShop.tsx",
         "SuperTileSet.tsx",
         "TM_Shop.tmx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/Mines.tsx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/minesSpriteSheet.tsx",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel1.xml",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel3.xml",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel2.xml",
+        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/Mines_Test.xml",
         "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml/Mines_Test.tmx",
         "C:/Users/cjhou/Documents/Game Programming/Semester 3/Midstone/GAME211_StudentTemplate/xml/TM_MinesLevel1.xml",
-        "C:/Users/cjhou/Downloads/New Map.tmx",
-        "testTileMap.tmx",
-        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop_Collision.xml",
-        "C:/Users/carol/OneDrive/Documents/GitHub/Midstone/GAME211_StudentTemplate/xml/TM_Shop.xml"
+        "C:/Users/cjhou/Downloads/New Map.tmx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",

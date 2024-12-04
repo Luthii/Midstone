@@ -10,7 +10,7 @@ GameManager::GameManager() {
 	currentScene = nullptr;
     shopScene = nullptr;
     shopScene = nullptr;
-    minesScene = nullptr;
+   // minesScene = nullptr;
     //player = nullptr;
 }
  
@@ -52,12 +52,12 @@ bool GameManager::OnCreate() {
         return false;
     }
 
-    minesScene = new MinesScene(windowPtr->GetSDL_Window());
-    if (!minesScene->OnCreate()) {
-        std::cerr << "Error creating the Shop scene." << std::endl;
-        OnDestroy();
-        return false;
-    }
+    //minesScene = new MinesScene(windowPtr->GetSDL_Window());
+    //if (!minesScene->OnCreate()) {
+    //    std::cerr << "Error creating the Shop scene." << std::endl;
+    //    OnDestroy();
+    //    return false;
+    //}
     
     currentScene = shopScene;
     
@@ -76,7 +76,7 @@ bool GameManager::OnCreate() {
     }
     
     shopScene->setPlayer(player);
-    minesScene->setPlayer(player);
+  ///  minesScene->setPlayer(player);
     mainMenuScene->setPlayer(player);
 
     currentScene->ResetScene();
@@ -154,9 +154,9 @@ void GameManager::ChangeScene(const Event& event)
     case SCENES::SHOP_SCENE:
         currentScene = shopScene;
         break;
-    case SCENES::MINES_SCENE:
+   /* case SCENES::MINES_SCENE:
         currentScene = minesScene;
-        break;
+        break;*/
     default:
         break;
     }

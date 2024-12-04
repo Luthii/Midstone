@@ -68,17 +68,19 @@ bool Button::onCreate()
 
 void Button::HandleEvents() {
 
-	if (InputManager::getInstance()->IsKeyDown(SDLK_7)) {
-		std::cout << "button pressed" << std::endl;
-        currentTexture = texBTPressed;
-	}
-	if (InputManager::getInstance()->IsKeyUp(SDLK_7)) {
+    if (isSelected = true) {
+        if (InputManager::getInstance()->IsKeyDown(SDLK_SPACE)) {
+            std::cout << "button pressed" << std::endl;
+            currentTexture = texBTPressed;
 
-		std::cout << "button pressed" << std::endl;
-        currentTexture = texBTNotPressed;
-		//InputManager::getInstance()->QuitGame();
-	}
+        }
+        if (InputManager::getInstance()->IsKeyUp(SDLK_SPACE)) {
 
+            std::cout << "button pressed" << std::endl;
+            currentTexture = texBTNotPressed;
+
+        }
+    }
 
 
 }

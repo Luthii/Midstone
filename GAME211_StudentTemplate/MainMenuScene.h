@@ -14,7 +14,7 @@ private:
 	Button* btQuit;
 	Button* selectedButton = nullptr;
 
-	SDL_Texture* background;
+	//SDL_Texture* background;
 
 
 public:

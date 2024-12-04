@@ -11,6 +11,5 @@ public:
 	virtual void OnButtonPressed() {
 		EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SCENES::SHOP_SCENE));
 
-
 	}
 };

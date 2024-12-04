@@ -1,6 +1,6 @@
 <Objects>
 	<Object>
-		<!--ANVIL_RIGHT-->
+		<!--ANVIL_LEFT-->
 		<id>5861</id>
 		<type>ANVIL</type>
 		<loot>UNDEFINED</loot>
@@ -14,7 +14,7 @@
 		</collision_box>
 	</Object>
 	<Object>
-		<!--ANVIL_LEFT-->
+		<!--ANVIL_RIGHT-->
 		<id>5862</id>
 		<type>ANVIL</type>
 		<loot>UNDEFINED</loot>
@@ -28,8 +28,134 @@
 		</collision_box>
 	</Object>
 	<Object>
+		<!--QUENCH_LEFT-->
+		<id>5922</id>
+		<type>QUENCH</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--QUENCH_RIGHT-->
+		<id>5923</id>
+		<type>QUENCH</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--FORGE_LEFT-->
+		<id>5306</id>
+		<type>FORGE</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--FORGE_RIGHT-->
+		<id>5307</id>
+		<type>FORGE</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--STORAGE_LEFT-->
+		<id>5344</id>
+		<type>STORAGE</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--STORAGE_RIGHT-->
+		<id>5345</id>
+		<type>STORAGE</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--GRINDSTONE-->
+		<id>5518</id>
+		<type>GRINDSTONE</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--BED-->
+		<id>5767</id>
+		<type>BED</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--DOOR-->
+		<id>5859</id>
+		<type>DOOR</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
 		<!--IRON-->
-		<id>667</id>
+		<id>350</id>
 		<type>IRON</type>
 		<loot>IRON_ORE</loot>
 		<loot_quantity>3</loot_quantity>
@@ -53,6 +179,48 @@
 			<top_y>0</top_y>
 			<bottom_x>16</bottom_x>
 			<botton_y>13</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--EXIT-->
+		<id>296</id>
+		<type>EXIT</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--LADDER-ASC-->
+		<id>14</id>
+		<type>LADDER</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
+		</collision_box>
+	</Object>
+	<Object>
+		<!--LADDER-DSC-->
+		<id>130</id>
+		<type>HATCH</type>
+		<loot>UNDEFINED</loot>
+		<loot_quantity>0</loot_quantity>
+		<num_interaction>1</num_interaction>
+		<collision_box>
+			<top_x>0</top_x>
+			<top_y>0</top_y>
+			<bottom_x>16</bottom_x>
+			<botton_y>16</botton_y>
 		</collision_box>
 	</Object>
 </Objects>

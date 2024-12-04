@@ -9,7 +9,9 @@
 #include "Timer.h"
 #include "Scene.h"
 #include "ShopScene.h"
-//#include "MinesScene.h"
+#include "MinesScene1.h"
+#include "MinesScene2.h"
+#include "MinesScene3.h"
 //#include "Player.h"
 #include "MainMenuScene.h"
 #include "ObjectMap.h"
@@ -25,12 +27,13 @@ private:
 	Scene *currentScene;
 	Scene* mainMenuScene;
 	Scene* shopScene;
-	//Scene* minesScene;
+	Scene* minesScene1;
+	Scene* minesScene2;
+	Scene* minesScene3;
 	Player* player;
 
 //------------ PRIVATE METHODS --------------------
 	void handleEvents();
-	void LoadScene(int i);
 
 //------------ SINGLETON SETUP --------------------
 	//only instance of GameManager

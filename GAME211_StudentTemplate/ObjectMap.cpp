@@ -33,7 +33,7 @@ bool ObjectMapClass::LoadObjectsMap(std::string fileName)
 	Object ObjInfo;
 
 	while (ObjData != nullptr) {
-		ObjInfo.number = std::stoi(ObjData->FirstChildElement("id")->GetText());
+		ObjInfo.number = std::stoi(ObjData->FirstChildElement("id")->GetText()) + 1;
 		ObjInfo.type = GetObjectType(ObjData->FirstChildElement("type")->GetText());
 		ObjInfo.loot = GetObjectType(ObjData->FirstChildElement("loot")->GetText());
 		ObjInfo.lootQuantity = std::stoi(ObjData->FirstChildElement("loot_quantity")->GetText());

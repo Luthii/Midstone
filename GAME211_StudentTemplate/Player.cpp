@@ -156,6 +156,7 @@ bool Player::Interact()
 
 			//no objects on the MAP or in the collision layer
 			if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0)
+				Attack();
 				return false;
 		}
 	}
@@ -191,6 +192,7 @@ bool Player::Interact()
 
 			//no objects on the MAP or in the collision layer
 			if (GameManager::getInstance()->OBJECT_MAP.find(tileID) == GameManager::getInstance()->OBJECT_MAP.end() || tileID == 0)
+				Attack();
 				return false;
 		}
 	}
@@ -203,13 +205,11 @@ bool Player::Interact()
 
 void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 {
+	velocity = Vec3(0.0f, 0.0f, 0.0f);
 	std::string animationName;
 	Object interactionObj = GameManager::getInstance()->OBJECT_MAP.at(objectID);
 	switch (interactionObj.type) {
-	case OBJECT_TYPE::ANVIL:
-		std::cout << "You interacted with the anvil!! In the future you will be able to craft objectes in the future! :)\n";
-			break;
-	default:
+	case OBJECT_TYPE::IRON:
 		animationName = "pickaxe_";
 		if (orientation.x > 0) {//player is going right - priorize side movement
 			animationName += "right";
@@ -223,7 +223,7 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		else if (orientation.y < 0) {
 			animationName += "up";
 		}
-		playerAnimation->ChangeAnimation(animationName);
+		characterAnimation->ChangeAnimation(animationName);
 		//interacting = true;
 		//interactedObjects.find(key);
 		if (interactedObjects.find(key) != interactedObjects.end()) {
@@ -247,6 +247,70 @@ void Player::CheckObjectInteractionList(TILE key, unsigned int objectID)
 		}
 
 		break;
+		// scene switching in game.
+	case OBJECT_TYPE::DOOR: // enter the mines
+		EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE1));
+		mineLevel = 1;
+		break;
+	case OBJECT_TYPE::EXIT: // leave the mines
+		EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SHOP_SCENE));
+		break;
+	case OBJECT_TYPE::LADDER: // the way to the upper floor
+		if (mineLevel == 2) { 
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE1));
+			mineLevel = 1;
+		}
+		else {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE2));
+			mineLevel = 2;
+		}
+		break;
+	case OBJECT_TYPE::HATCH: // the way to the lower floor
+		if (mineLevel == 1) {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE2));
+			mineLevel = 2;
+		}
+		else {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(MINES_SCENE3));
+			mineLevel = 3;
+		}
+		break;
+		//Bed interaction, heals the player to full
+	case OBJECT_TYPE::BED:
+		setHealth(maxHealth);
+		animationName = "interact_";
+		if (orientation.x > 0) {//player is going right - priorize side movement
+			animationName += "right";
+		}
+		else if (orientation.x < 0) {
+			animationName += "left";
+		}
+		else if (orientation.y > 0) {
+			animationName += "down";
+		}
+		else if (orientation.y < 0) {
+			animationName += "up";
+		}
+		characterAnimation->ChangeAnimation(animationName);
+		break;
+	default:
+		Attack();
+		//animationName = "interact_";
+		//if (orientation.x > 0) {//player is going right - priorize side movement
+		//	animationName += "right";
+		//}
+		//else if (orientation.x < 0) {
+		//	animationName += "left";
+		//}
+		//else if (orientation.y > 0) {
+		//	animationName += "down";
+		//}
+		//else if (orientation.y < 0) {
+		//	animationName += "up";
+		//}
+		//characterAnimation->ChangeAnimation(animationName);
+
+		break;
 	}
 
 }
@@ -264,17 +328,10 @@ void Player::AddItemBag(OBJECT_TYPE objType, unsigned int quantity) {
 	}
 }
 
-void Player::Update(float deltaTime) {
-	position += velocity * speed;
+void Player::Attack() {
 
-	//set animation
-	std::string animationName;
-	if (VMath::mag(velocity) == 0) {//player is not moving - select idle animation
-		animationName = "idle_";
-	}
-	else { //player is moving - select walk animation
-		animationName = "walk_";
-	}
+	velocity = Vec3(0.0f, 0.0f, 0.0f);
+	std::string animationName = "attack_";
 
 	if (orientation.x > 0) {//player is going right - priorize side movement
 		animationName += "right";
@@ -288,19 +345,59 @@ void Player::Update(float deltaTime) {
 	else if (orientation.y < 0) {
 		animationName += "up";
 	}
+	characterAnimation->ChangeAnimation(animationName);
+}
 
-	//if(!interacting)
-	playerAnimation->ChangeAnimation(animationName);
-	playerAnimation->Update(deltaTime);
+void Player::Update(float deltaTime) {
+	if (tag == "dead") {
+		buffer += deltaTime;
+		if (buffer >= 3.0f) {
+			EventHandler::GetInstance()->Broadcast(ChangeSceneEvent(SHOP_SCENE));
+			tag = "Player";
+			buffer = 0.0f;
+		}
+	}
+	else if (tag == "anvil") {
+		characterAnimation->ChangeAnimation("anviled");
+	}
+	else {
+		position += velocity * speed;
+
+		//set animation
+		std::string animationName;
+		if (VMath::mag(velocity) == 0) {//player is not moving - select idle animation
+			animationName = "idle_";
+		}
+		else { //player is moving - select walk animation
+			animationName = "walk_";
+		}
+
+		if (orientation.x > 0) {//player is going right - priorize side movement
+			animationName += "right";
+		}
+		else if (orientation.x < 0) {
+			animationName += "left";
+		}
+		else if (orientation.y > 0) {
+			animationName += "down";
+		}
+		else if (orientation.y < 0) {
+			animationName += "up";
+		}
+
+		//if(!interacting)
+		characterAnimation->ChangeAnimation(animationName);
+	}
+	characterAnimation->Update(deltaTime);
 }
 
 void Player::Render(SDL_Renderer* sceneRender) {
 	SDL_Rect rect;
-	SDL_Rect clip = playerAnimation->getCurrentFrameSprite();
+	SDL_Rect clip = characterAnimation->getCurrentFrameSprite();
 	MATH::Vec3 screenCoordinates = Camera::ToScreenCoordinates(position);
 
-	rect.x = static_cast<int>(screenCoordinates.x + (playerAnimation->getCurrentAnimationInfo().anchor_x * TILE_SCALE));
-	rect.y = static_cast<int>(screenCoordinates.y + (playerAnimation->getCurrentAnimationInfo().anchor_y * TILE_SCALE));
+	rect.x = static_cast<int>(screenCoordinates.x + (characterAnimation->getCurrentAnimationInfo().anchor_x * TILE_SCALE));
+	rect.y = static_cast<int>(screenCoordinates.y + (characterAnimation->getCurrentAnimationInfo().anchor_y * TILE_SCALE));
 	rect.w = clip.w * TILE_SCALE;
 	rect.h = clip.h * TILE_SCALE;
 
@@ -309,7 +406,7 @@ void Player::Render(SDL_Renderer* sceneRender) {
 
 void Player::HandleEvents()
 {
-	if (playerAnimation->getLockState())
+	if (characterAnimation->getLockState())
 		return;
 
     //key Down event -> movent character and play walking animation
@@ -344,13 +441,27 @@ void Player::HandleEvents()
 	TestCollision();
 
 	// changed from ->IsKeyDown to ->IsKeyUp
-	if (InputManager::getInstance()->IsKeyUp(SDLK_SPACE)) {
+	if (InputManager::getInstance()->IsKeyUp(SDLK_e)) {
 		//std::cout << "\n-------------------------------------------------------\n";
-		//std::cout << "Space bar pressed\n";
+		//std::cout << "E pressed\n";
 		Interact();
 		//std::cout << "\n-------------------------------------------------------\n";
 	}
 
+	if (InputManager::getInstance()->IsKeyDown(SDLK_SPACE)) {  
+		Interact();
+		//Attack();
+	}
+
+	if (InputManager::getInstance()->IsKeyDown(SDLK_h)) {
+		TakeDamage(50);
+	}
+
+	if (InputManager::getInstance()->IsKeyDown(SDLK_BACKSPACE) && InputManager::getInstance()->IsKeyDown(SDLK_a)) {
+		velocity = Vec3(0.0f, 0.0f, 0.0f);
+		characterAnimation->ChangeAnimation("anvil");
+		tag = "anvil";
+	}
 
 	//Test for event
 	//if (InputManager::getInstance()->IsKeyUp(SDLK_l))

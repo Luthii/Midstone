@@ -74,7 +74,8 @@ bool Map::ReadXMLTileMap()
 	spawnNode = root->FirstChildElement("spawn");
 
 	// These values reset on any change to the tiled map
-	// shop : <spawn x="9" y="10"/>
+	// shop : <spawn x="9" y="10"/> (bed)
+	// shop : <spawn x="15" y="36" /> (door)
 	// mines 1 : <spawn x="6" y="5"/>
 	// mines 2 : <spawn x="5" y="19"/>
 	// mines 3 : <spawn x="6" y="3"/>
